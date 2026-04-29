@@ -145,12 +145,12 @@ const Resume = () => {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden"
+                    className={isMobile ? "overflow-hidden" : "overflow-visible"}
                   >
-                    <div className="flex flex-col gap-6 mt-4">
+                    <div className="flex flex-col gap-10 mt-8">
                       {/* Freelance - Product Designer */}
                       <div 
-                        className={`experience-item transition-all duration-300 rounded-xl p-4 -m-4 ${focusId === 0 ? 'relative z-50 bg-[#1C1C1C] shadow-2xl ring-1 ring-white/10' : ''}`}
+                        className={`experience-item transition-all duration-300 rounded-xl p-6 -m-6 ${focusId === 0 ? 'relative z-50 bg-[#1C1C1C] shadow-2xl ring-1 ring-white/10' : ''}`}
                         onMouseEnter={() => setFocusId(0)}
                         onMouseLeave={() => setFocusId(null)}
                       >
@@ -167,7 +167,7 @@ const Resume = () => {
 
                       {/* StreetCode Academy */}
                       <div 
-                        className={`experience-item transition-all duration-300 rounded-xl p-4 -m-4 ${focusId === 1 ? 'relative z-50 bg-[#1C1C1C] shadow-2xl ring-1 ring-white/10' : ''}`}
+                        className={`experience-item transition-all duration-300 rounded-xl p-6 -m-6 ${focusId === 1 ? 'relative z-50 bg-[#1C1C1C] shadow-2xl ring-1 ring-white/10' : ''}`}
                         onMouseEnter={() => setFocusId(1)}
                         onMouseLeave={() => setFocusId(null)}
                       >
@@ -183,7 +183,7 @@ const Resume = () => {
 
                       {/* Freelance - Graphic Designer */}
                       <div 
-                        className={`experience-item transition-all duration-300 rounded-xl p-4 -m-4 ${focusId === 2 ? 'relative z-50 bg-[#1C1C1C] shadow-2xl ring-1 ring-white/10' : ''}`}
+                        className={`experience-item transition-all duration-300 rounded-xl p-6 -m-6 ${focusId === 2 ? 'relative z-50 bg-[#1C1C1C] shadow-2xl ring-1 ring-white/10' : ''}`}
                         onMouseEnter={() => setFocusId(2)}
                         onMouseLeave={() => setFocusId(null)}
                       >
@@ -199,7 +199,7 @@ const Resume = () => {
 
                       {/* Tarana Wireless */}
                       <div 
-                        className={`experience-item transition-all duration-300 rounded-xl p-4 -m-4 ${focusId === 3 ? 'relative z-50 bg-[#1C1C1C] shadow-2xl ring-1 ring-white/10' : ''}`}
+                        className={`experience-item transition-all duration-300 rounded-xl p-6 -m-6 ${focusId === 3 ? 'relative z-50 bg-[#1C1C1C] shadow-2xl ring-1 ring-white/10' : ''}`}
                         onMouseEnter={() => setFocusId(3)}
                         onMouseLeave={() => setFocusId(null)}
                       >
