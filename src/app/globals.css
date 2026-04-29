@@ -1,26 +1,1729 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Colors - Monochromatic Dark */
+  --color-bg: #101010;
+  --color-bg-mesh: rgba(28, 28, 28, 0.4);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-card-bg: #1C1C1C;
+  /* 5% Lighter */
+  --color-card-bg-hover: #282828;
+  /* 10% Lighter */
+  --color-card-bg-accent: #343434;
+  /* 15% Lighter */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #AAAAAA;
+
+  --color-button-bg: #FFFFFF;
+  --color-button-text: #101010;
+
+  --color-border: #282828;
+  --color-border-subtle: #1C1C1C;
+
+  /* Status Colors */
+  --color-red: #FF5252;
+  --color-green: #4ADE80;
+
+  /* Spacing */
+  --spacing-nav-height: 66px;
+  --spacing-margin-x: 32px;
+
+  /* Typography */
+  --font-sans: var(--font-dm-sans);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Animations for Mesh Blobs */
+@keyframes meshDrift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(100px, 50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-50px, 100px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(50px, -50px) scale(1.05);
+  }
+}
+
+.animate-mesh-drift {
+  animation: meshDrift 20s infinite alternate ease-in-out;
+}
+
+/* Custom overlay scrollbar - inherited from legacy */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 14px;
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+/* Custom scrollbar for cards */
+.card-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.card-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.45);
+  border-radius: 9999px;
+  /* Use thick transparent borders to effectively 'shorten' the thumb visually */
+  border-top: 44px solid transparent;
+  border-bottom: 44px solid transparent;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  background-clip: padding-box;
+}
+
+.card-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.card-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.45) transparent;
+}
+
+/* Scroll lock hack class */
+body.body-fixed {
+  position: fixed;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Case Study Specific Styles
+   ========================================================================== */
+.cs-wrapper {
+  padding-bottom: 80px;
+}
+
+@media (max-width: 900px) {
+  .cs-wrapper {
+    padding-bottom: 50vh;
+  }
+}
+
+.cs-wrapper .cs-section:last-child {
+  margin-bottom: 0;
+}
+
+.cs-overlay-theme {
+  --color-bg: #1C1C1C;
+  --color-card-bg: #282828;
+  --color-card-bg-hover: #343434;
+  --color-card-bg-accent: #404040;
+  --color-border: #343434;
+  --color-border-subtle: #282828;
+}
+
+.cs-th-theme {
+  --color-accent: #3C88DB;
+}
+
+.cs-wd-theme {
+  --color-accent: #FE6603;
+}
+
+.cs-section {
+  padding: 0 81px;
+  margin-bottom: 120px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Typography Hierarchy */
+.cs-section-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.cs-section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 24px;
+}
+
+.cs-section-desc {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 32px;
+  line-height: normal;
+}
+
+/* Global Monochromatic SVG Icons for Case Studies */
+.cs-wrapper img[src$=".svg"] {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.cs-feedback-img,
+.cs-solution-img,
+.cs-hardware-img,
+.cs-impact-flowchart-img {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Card Common */
+.cs-card {
+  border-radius: 8px;
+  padding: 32px;
+}
+
+/* Status Card Modifiers */
+
+/* Status Card Modifiers */
+.cs-card-danger .cs-card-header h3,
+.cs-card-danger .cs-card-header svg {
+  color: var(--color-red);
+}
+
+.cs-card-success .cs-card-header h3,
+.cs-card-success .cs-card-header svg {
+  color: var(--color-green);
+}
+
+/* ---- Hero Section ---- */
+.cs-hero {
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.cs-hero-content {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+}
+
+.cs-hero-text {
+  flex: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cs-hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.cs-tag {
+  background-color: #262626;
+  color: var(--color-text-secondary);
+  padding: 4px 16px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 400;
+  border: 1px solid var(--color-border);
+}
+
+.cs-tool-hover {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  cursor: default;
+}
+
+.cs-tool-name {
+  transition: opacity 0.2s ease;
+}
+
+.cs-tool-hover:hover .cs-tool-name {
+  opacity: 0;
+}
+
+.cs-tool-logo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.cs-tool-hover:hover .cs-tool-logo {
+  opacity: 1;
+}
+
+.cs-tool-logo img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.cs-meta {
+  font-size: 20px;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.cs-title {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.cs-hero-image {
+  flex: 1.5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cs-hero-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ---- Metadata Grid ---- */
+.cs-metadata {
+  padding: 0 81px;
+  margin-bottom: 120px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cs-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-basis: 160px;
+}
+
+.cs-meta-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cs-meta-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  list-style: none;
+}
+
+.cs-meta-value li {
+  margin-bottom: 0;
+}
+
+/* ---- TLDR Section ---- */
+.cs-tldr {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cs-tldr-heading {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.cs-tldr-grid {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.cs-tldr-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  max-width: 450px;
+}
+
+.cs-tldr-col-right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 452px;
+}
+
+.cs-card-problem {
+  background-color: var(--color-card-bg);
+  padding: 16px 32px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid var(--color-border);
+}
+
+.cs-card-outcome {
+  background-color: var(--color-card-bg-hover);
+  padding: 24px 32px;
+  border-radius: 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  border: 1px solid var(--color-border);
+}
+
+.cs-card-solution {
+  background-color: var(--color-card-bg);
+  padding: 24px 32px;
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid var(--color-border);
+}
+
+.cs-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0px;
+}
+
+.cs-card-problem,
+.cs-card-outcome,
+.cs-card-solution {
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.cs-card-problem:hover,
+.cs-card-problem.is-active,
+.cs-card-outcome:hover,
+.cs-card-outcome.is-active,
+.cs-card-solution:hover,
+.cs-card-solution.is-active {
+  border-color: var(--color-accent);
+}
+
+.cs-card-problem:hover .cs-card-header h3,
+.cs-card-problem.is-active .cs-card-header h3,
+.cs-card-outcome:hover .cs-card-header h3,
+.cs-card-outcome.is-active .cs-card-header h3,
+.cs-card-solution:hover .cs-card-header h3,
+.cs-card-solution.is-active .cs-card-header h3,
+.cs-card-problem:hover .cs-card-header svg,
+.cs-card-problem.is-active .cs-card-header svg,
+.cs-card-outcome:hover .cs-card-header svg,
+.cs-card-outcome.is-active .cs-card-header svg,
+.cs-card-solution:hover .cs-card-header svg,
+.cs-card-solution.is-active .cs-card-header svg {
+  color: var(--color-accent);
+}
+
+
+.cs-card-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.cs-card-problem .cs-card-header h3,
+.cs-card-solution .cs-card-header h3,
+.cs-card-outcome .cs-card-header h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.0em;
+}
+
+.cs-card-header svg,
+.cs-card-header img {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  flex-shrink: 0 !important;
+}
+
+.cs-card-header img {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+.cs-card-header svg {
+  color: var(--color-text-secondary);
+  transition: color 0.3s ease;
+}
+
+.cs-card-text {
+  font-size: 16px;
+  color: var(--color-text-primary);
+  line-height: normal;
+  margin: 0;
+}
+
+.cs-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.cs-stat {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.cs-stat-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 56px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  min-width: 160px;
+  /* Ensure container is wide enough for 2 digits + arrow */
+}
+
+@media (max-width: 900px) {
+  .cs-stat-value {
+    font-size: 40px;
+    min-width: 120px;
+  }
+
+  .cs-stats-row {
+    gap: 24px;
+  }
+}
+
+.cs-stat-arrow {
+  display: inline-block;
+  font-size: 0.8em;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.cs-stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.cs-solution-image-container {
+  width: 100%;
+  margin-top: auto;
+}
+
+.cs-solution-img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+/* ---- Background ---- */
+.cs-bg-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 900px;
+}
+
+.cs-section-desc-light {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cs-bg-image-full {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cs-hardware-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---- Research ---- */
+.cs-research-grid {
+  display: flex;
+  gap: 8px;
+}
+
+.cs-research-card {
+  background-color: var(--color-card-bg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px;
+  gap: 16px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition: color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.cs-research-card svg {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.cs-research-card p {
+  font-size: 16px;
+  color: inherit;
+  line-height: 1.5;
+}
+
+.cs-research-card:hover,
+.cs-research-card.is-active {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ---- Audit ---- */
+.cs-audit-grid {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.cs-audit-card {
+  background-color: var(--color-card-bg);
+  flex: 1;
+  padding: 24px 32px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid var(--color-border);
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.cs-audit-card h3 {
+  color: var(--color-text-secondary);
+  transition: color 0.3s ease;
+}
+
+.cs-audit-card:hover,
+.cs-audit-card.is-active {
+  border-color: var(--color-accent);
+}
+
+.cs-audit-card:hover h3,
+.cs-audit-card.is-active h3 {
+  color: var(--color-accent);
+}
+
+.cs-audit-card .cs-card-header {
+  margin-bottom: 0px;
+  gap: 16px;
+}
+
+.cs-audit-card .cs-card-header img {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+.cs-audit-card .cs-card-header h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-red);
+  line-height: normal;
+}
+
+
+
+.cs-audit-card p {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: normal;
+  margin: 0;
+}
+
+.cs-audit-card strong {
+  font-weight: 600;
+  color: var(--color-text-secondary) !important;
+}
+
+.cs-lofi-card {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  border-radius: 8px;
+}
+
+.cs-lofi-card p {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.cs-lofi-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--color-text-secondary);
+
+}
+
+/* ---- Ideation ---- */
+.cs-ideation-content {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.cs-ideation-goals {
+  flex: 1;
+}
+
+.cs-goals-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--color-card-bg);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.cs-goals-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.cs-goals-card ol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.cs-goals-card li {
+  background-color: var(--color-card-bg-hover);
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: normal;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.cs-goals-card li:hover,
+.cs-goals-card li.is-active {
+  color: var(--color-text-primary);
+}
+
+.cs-ideation-process {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cs-ideation-process p {
+  font-size: 16px;
+  color: var(--color-text-primary);
+  line-height: normal;
+}
+
+.cs-lofi-sketches {
+  border: 1px solid var(--color-text-secondary);
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* ---- Testing ---- */
+.cs-testing-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cs-testing-success {
+  background-color: var(--color-card-bg);
+  padding: 16px;
+  border-radius: 8px;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+}
+
+.cs-testing-improve {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  padding: 16px;
+  border-radius: 8px;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.cs-testing-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cs-testing-item {
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background-color: var(--color-card-bg-hover);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.cs-testing-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cs-testing-text h4 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.cs-testing-text p {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: normal;
+  margin: 0;
+}
+
+.cs-workflow-item {
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.cs-workflow-item svg,
+.cs-workflow-item h4 {
+  transition: color 0.3s ease;
+}
+
+.cs-workflow-item:hover,
+.cs-workflow-item.is-active {
+  border-color: var(--color-accent);
+}
+
+.cs-workflow-item:hover svg,
+.cs-workflow-item.is-active svg,
+.cs-workflow-item:hover h4,
+.cs-workflow-item.is-active h4 {
+  color: var(--color-accent);
+}
+
+.cs-feedback-img {
+  width: 150px;
+  border-radius: 8px;
+}
+
+/* ---- Final Design ---- */
+.cs-final-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cs-final-card {
+  background-color: var(--color-card-bg);
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.cs-final-desc {
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: var(--color-text-secondary);
+  line-height: normal;
+}
+
+.cs-final-flows {
+  display: flex;
+  gap: 16px;
+}
+
+.cs-flow-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-flow-step img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.cs-flow-step p {
+  font-size: 16px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.cs-flow-step:hover p,
+.cs-flow-step.is-active p {
+  color: var(--color-accent);
+}
+
+.cs-final-hero-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Media Queries */
+@media (max-width: 900px) {
+
+  .cs-hero,
+  .cs-metadata,
+  .cs-section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .cs-hero {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .cs-hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .cs-title {
+    font-size: 32px;
+  }
+
+  .cs-hero-image {
+    width: 100%;
+  }
+
+  .cs-metadata {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .cs-meta-col {
+    flex-basis: auto;
+  }
+
+  .cs-tldr-grid {
+    flex-direction: column;
+  }
+
+  .cs-tldr-col-left,
+  .cs-tldr-col-right {
+    max-width: 100%;
+  }
+
+  .cs-bg-content-container {
+    gap: 24px;
+  }
+
+  .cs-research-grid,
+  .cs-audit-grid {
+    flex-direction: column;
+  }
+
+  .cs-ideation-content {
+    flex-direction: column;
+  }
+
+  .cs-testing-item {
+    flex-direction: column;
+  }
+
+  .cs-final-flows {
+    flex-direction: column;
+  }
+}
+
+/* ---- Impact & Outcome Section ---- */
+.cs-impact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.cs-impact-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.cs-impact-header .cs-section-subtitle {
+  margin-bottom: 0;
+}
+
+.cs-impact-header .cs-section-title {
+  margin-bottom: 0;
+}
+
+.cs-impact-top-block {
+  background-color: var(--color-card-bg);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  border: 1px solid var(--color-border);
+}
+
+.cs-impact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  max-width: 308px;
+}
+
+.cs-impact-card {
+  background-color: var(--color-card-bg-hover);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.cs-impact-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: normal;
+  transition: color 0.3s ease;
+}
+
+.cs-impact-card p {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: normal;
+  transition: color 0.3s ease;
+}
+
+.cs-impact-card:hover h3,
+.cs-impact-card.is-active h3 {
+  color: var(--color-accent);
+}
+
+.cs-impact-card:hover p,
+.cs-impact-card.is-active p {
+  color: var(--color-text-primary);
+}
+
+.cs-impact-card:hover,
+.cs-impact-card.is-active {
+  border-color: var(--color-accent);
+}
+
+.cs-impact-image-container {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+
+.cs-impact-image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: normal;
+  /* Optional trick if image carries white background, else remove */
+}
+
+/* Flowchart Block */
+.cs-impact-flowchart {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.cs-impact-flowchart-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 600px;
+}
+
+.cs-impact-flowchart-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Bottom Block */
+.cs-impact-bottom-block {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.cs-impact-outcome-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.cs-impact-outcome-text {
+  background-color: var(--color-card-bg-hover);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-impact-outcome-text p {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--color-text-primary);
+  line-height: normal;
+}
+
+.cs-impact-outcome-quotes {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.cs-impact-quote-box {
+  background-color: var(--color-card-bg-hover);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-height: 141px;
+}
+
+.cs-impact-quote {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin: 0;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.cs-impact-quote-author {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  margin: 0;
+  text-align: center;
+}
+
+.cs-impact-email {
+  width: 286px;
+  height: 141px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cs-impact-email img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .cs-impact-top-block {
+    flex-direction: column;
+  }
+
+  .cs-impact-cards {
+    max-width: 100%;
+  }
+
+  .cs-impact-outcome-quotes {
+    flex-direction: column;
+  }
+
+  .cs-impact-email {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ---- Takeaways Section ---- */
+.cs-takeaways {
+  margin-bottom: 0px !important;
+  /* Last section before footer */
+}
+
+.cs-takeaways-header {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.cs-takeaways-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  align-items: flex-start;
+}
+
+.cs-takeaway-card {
+  background-color: var(--color-card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--color-border);
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.cs-takeaway-card h3,
+.cs-takeaway-card svg {
+  transition: color 0.3s ease;
+}
+
+.cs-takeaway-card:hover,
+.cs-takeaway-card.is-active {
+  border-color: var(--color-accent);
+}
+
+.cs-takeaway-card:hover h3,
+.cs-takeaway-card.is-active h3,
+.cs-takeaway-card:hover svg,
+.cs-takeaway-card.is-active svg {
+  color: var(--color-accent);
+}
+
+.cs-takeaway-card:hover p,
+.cs-takeaway-card.is-active p {
+  color: var(--color-text-primary);
+}
+
+.cs-takeaway-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-takeaway-header h3 {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.cs-takeaway-card p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: normal;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.cs-takeaways .cs-section-subtitle {
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+.cs-takeaways .cs-section-title {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .cs-takeaways {
+    padding: 0 24px;
+  }
+}
+
+/* ==========================================================================
+   Case Study Overlay
+   ========================================================================== */
+html.overlay-open,
+body.overlay-open {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+body.body-fixed {
+  position: fixed;
+  width: 100%;
+}
+
+.cs-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  /* Above nav and mobile menu */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cs-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.cs-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  /* 15% opacity black */
+  cursor: pointer;
+}
+
+.cs-overlay-panel {
+  position: relative;
+  width: 90%;
+  max-width: 1071px;
+  /* Match main content width */
+  height: 90vh;
+  /* Leave some space top and bottom */
+  background-color: var(--color-bg);
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1.5' cy='1.5' r='1' fill='%23D1D5DB' fill-opacity='0.6'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-attachment: local;
+  border-radius: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  /* Hide overflow so rounded corners mask scrollbar */
+  transform: translateY(20px);
+  display: flex;
+  flex-direction: column;
+  padding: 32px 8px 32px 8px;
+}
+
+.cs-overlay.is-open .cs-overlay-panel {
+  transform: translateY(0);
+}
+
+.cs-overlay-header-mobile {
+  display: none;
+  /* Hidden on desktop */
+}
+
+/* Custom Scrollbar for Overlay Content */
+.cs-overlay-content {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.cs-overlay-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.cs-overlay-content::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.cs-overlay-content::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 20px;
+  border-top: 32px solid transparent;
+  border-bottom: 32px solid transparent;
+  border-right: 18px solid transparent;
+  border-left: 4px solid transparent;
+  background-clip: padding-box;
+}
+
+.cs-overlay-content::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+.text-danger {
+  color: var(--color-red) !important;
+}
+
+.text-success {
+  color: var(--color-green) !important;
+}
+
+/* Disable interactive hover for status-only danger cards */
+.cs-card-danger:hover {
+  border-color: var(--color-border) !important;
+  cursor: default !important;
+}
+
+.cs-card-danger:hover h3,
+.cs-card-danger:hover svg {
+  color: var(--color-red) !important;
+}
+
+/* Specific overrides for complex active states */
+.cs-impact-card.is-active p,
+.cs-takeaway-card.is-active p {
+  color: var(--color-text-primary) !important;
+}
+
+/* Ensure danger cards ignore the global active highlight */
+.cs-card-danger.is-active {
+  border-color: var(--color-border) !important;
+}
+
+.cs-card-danger.is-active h3,
+.cs-card-danger.is-active svg {
+  color: var(--color-red) !important;
+}
+
+/* ==========================================================================
+   Case Study Overlay - Mobile Sheet
+   ========================================================================== */
+@media (max-width: 900px) {
+  .cs-overlay {
+    align-items: flex-end;
+    /* Anchor to bottom */
+  }
+
+  .cs-overlay-panel {
+    width: 100%;
+    max-width: 100%;
+    height: 95vh;
+    border-radius: 32px 32px 0 0;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    padding: 8px;
+    /* Mobile padding reduced to 8px all around */
+  }
+
+  .cs-walkthrough-video>div {
+    opacity: 1 !important;
+  }
+
+  .cs-overlay.is-open .cs-overlay-panel {
+    transform: translateY(0);
+  }
+
+  /* When swiping down, we might apply a styling class */
+  .cs-overlay-panel.is-dragging {
+    transition: none;
+    /* Disable transition during drag for 1:1 movement */
+  }
+
+  .cs-overlay-header-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 56px;
+    padding: 0 24px;
+    background: linear-gradient(to bottom, var(--color-bg) 60%, rgba(252, 252, 253, 0) 100%);
+    border-radius: 32px 32px 0 0;
+  }
+
+  /* Absolute positioning for grabber to ensure center regardless of X button */
+  .cs-overlay-grabber {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    /* Longer grabber */
+    height: 5px;
+    background-color: var(--color-border);
+    border-radius: 10px;
+    cursor: grab;
+  }
+
+  /* X Close button positioned absolutely to the left */
+  .cs-overlay-close {
+    position: absolute;
+    top: 16px;
+    left: 24px;
+    background: #F2F2F7;
+    /* Apple-style light grey circle */
+    border: none;
+    color: #8E8E93;
+    /* Medium grey X */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .cs-overlay-close:active {
+    background-color: var(--color-border);
+    color: var(--color-text-primary);
+  }
+
+  .cs-overlay-content {
+    /* Adjust top padding to account for sticky header */
+    padding-top: 16px;
+  }
+}
+
+/* ==========================================================================
+   Project Border Glow Effect Animation
+   ========================================================================== */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+.project-border-glow {
+  --border-angle: 0turn;
+  animation: rotateGlow 6s linear infinite;
+
+  /* Outer gradient border with a solid inner background */
+  background-image:
+    linear-gradient(var(--color-card-bg-hover), var(--color-card-bg-hover)),
+    conic-gradient(from var(--border-angle),
+      rgba(255, 255, 255, 0.05) 0deg,
+      rgba(255, 255, 255, 0.05) 150deg,
+      rgba(255, 255, 255, 1) 180deg,
+      rgba(255, 255, 255, 0.05) 210deg,
+      rgba(255, 255, 255, 0.05) 330deg,
+      rgba(255, 255, 255, 1) 360deg);
+
+  /* First background is content, second is the glowing border */
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+
+  /* Make standard border transparent so our glowing gradient shines through */
+  border: 1px solid transparent !important;
+}
+
+@keyframes rotateGlow {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+/* ==========================================================================
+   Resume Component Styles
+   ========================================================================== */
+
+.resume-list {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.resume-list li {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+
+/* Interactive Version Tweaks */
+.interactive-version .experience-date {
+  color: var(--color-text-primary);
+  background-color: var(--color-card-bg-accent);
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.interactive-version .experience-item {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  padding: 12px;
+  margin: -12px;
+  border-radius: 8px;
+}
+
+.interactive-version .experience-item:hover {
+  background-color: var(--color-bg-mesh);
+  transform: translateX(4px);
+}
+
+
+/* Bento-style Resume Refinements */
+.resume-section-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  width: fit-content;
+  padding-bottom: 4px;
+  border-bottom: none;
+}
+
+.resume-list {
+  list-style: disc;
+  padding-left: 18px;
+}
+
+.resume-list li {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.resume-list li::marker {
+  color: var(--color-text-secondary);
+}
+
+.resume-text {
+  font-size: 17px;
+  color: #ffffff;
+}
+
+.experience-item {
+  position: relative;
+}
+
+.experience-date {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--color-text-secondary);
+  background-color: var(--color-card-bg-accent);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+@media (max-width: 450px) {
+  .work-section-container {
+    padding: 24px !important;
+  }
+
+  .project-card {
+    padding: 16px !important;
+  }
+
+  .project-card-content {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
 }

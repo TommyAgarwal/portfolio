@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tommy Agarwal — Product Designer</title>
+  <meta name="description" content="Impact-driven Product Designer rooted in technical reality." />
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- DM Sans & Caveat font families -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="./styles.css?v=1.8" />
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main Navigation">
+    <div class="nav-left">
+      <a href="#" class="logo-name" aria-label="Home">TOMMY AGARWAL</a>
+    </div>
+
+    <div class="nav-center">
+      <a href="#work" class="nav-link">WORK</a>
+      <a href="#about" class="nav-link">ABOUT</a>
+      <a href="#resume" class="nav-link">RESUME</a>
+    </div>
+
+    <div class="nav-right">
+      <a href="https://linkedin.com/in/tommyagarwal" target="_blank" rel="noopener noreferrer" class="btn-connect">
+        <!-- LinkedIn Vector Path Approximation -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path
+            d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z" />
+        </svg>
+        Let's Connect!
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger Button -->
+    <button class="mobile-menu-btn" aria-label="Toggle menu">
+      <span class="hamburger-line top"></span>
+      <span class="hamburger-line middle"></span>
+      <span class="hamburger-line bottom"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Full-Screen Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-nav-links">
+      <a href="#work" class="mobile-nav-link">WORK</a>
+      <a href="#about" class="mobile-nav-link">ABOUT</a>
+      <a href="#resume" class="mobile-nav-link">RESUME</a>
+    </div>
+    <a href="https://linkedin.com/in/tommyagarwal" target="_blank" rel="noopener noreferrer"
+      class="btn-connect mobile-btn-connect">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path
+          d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z" />
+      </svg>
+      Let's Connect!
+    </a>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <!-- Abstract Background Pattern (Placeholder for Vectors) -->
+    <div class="hero-bg-vectors">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-name">Tommy Agarwal</h1>
+      <p class="hero-value-prop">Impact-driven Product Designer rooted in technical reality</p>
+    </div>
+
+    <div class="hero-status-row">
+      <div class="status-pill open-to-work">
+        <span class="dot"></span>
+        Open to Work
+      </div>
+      <div class="status-pill location">
+        <svg class="map-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 21 21">
+          <path stroke="#638BDB" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10.5 11.375a2.625 2.625 0 1 0 0-5.25 2.625 2.625 0 0 0 0 5.25Z" />
+          <path stroke="#638BDB" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.5 8.75c0 6.125-7 11.375-7 11.375S3.5 14.875 3.5 8.75a7 7 0 1 1 14 0Z" />
+        </svg>
+        Palo Alto, CA
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area with side borders -->
+  <div class="main-content-wrapper">
+    <!-- Featured Projects -->
+    <main id="work" class="projects-section">
+      <h2 class="section-title">Featured Projects</h2>
+
+      <div class="projects-container">
+        <!-- Case Studies Row -->
+        <div class="case-studies-row">
+
+          <!-- Case Study 1 -->
+          <div class="case-study-card">
+            <div class="card-image-wrap">
+              <img src="assets/images/pos-thumbnail.png" alt="Tommy Hilfiger POS Redesign Thumbnail">
+            </div>
+            <div class="card-content">
+              <p class="card-meta">Tommy Hilfiger • Pitched June 2025</p>
+              <h3 class="card-title">Sales Associate → UX Lead: Redesigning Tommy Hilfiger's Checkout Experience</h3>
+              <div class="card-stats-row">
+                <div class="stat-box">
+                  <div class="stat-value">
+                    <span class="stat-arrow down">
+                      <svg class="icon-arrow-svg" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="currentColor" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="stat-number">50%</span>
+                  </div>
+                  <span class="stat-label">Transaction Time</span>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-value">
+                    <span class="stat-arrow down">
+                      <svg class="icon-arrow-svg" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="currentColor" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="stat-number">85%</span>
+                  </div>
+                  <span class="stat-label">Clicks in key flows</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 2 -->
+          <div class="case-study-card">
+            <div class="card-image-wrap">
+              <video src="assets/videos/artist-video.mov" autoplay muted loop playsinline></video>
+            </div>
+            <div class="card-content">
+              <p class="card-meta">Freelance • Shipped October 2025</p>
+              <h3 class="card-title">Boosting Grammy Artist’s Audience Engagement & Conversion via Web Design</h3>
+              <div class="card-stats-row">
+                <div class="stat-box">
+                  <div class="stat-value">
+                    <span class="stat-arrow up">
+                      <svg class="icon-arrow-svg" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="currentColor" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="stat-number">30%</span>
+                  </div>
+                  <span class="stat-label">Newsletter Subscribers</span>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-value">
+                    <span class="stat-arrow down">
+                      <svg class="icon-arrow-svg" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="currentColor" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="stat-number">96%</span>
+                  </div>
+                  <span class="stat-label">Annual Expenses</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- /.case-studies-row -->
+
+        <!-- Other Projects Grid (2 rows x 3 columns) -->
+        <div class="other-projects-grid">
+
+          <div class="other-project-card placeholder-other-1">
+            <div class="card-pill">Bridgegood AI for Social Good Design-a-thon</div>
+          </div>
+
+          <div class="other-project-card placeholder-other-2">
+            <div class="card-pill">StreetCode Academy: Design and Tech</div>
+          </div>
+
+          <div class="other-project-card placeholder-other-3">
+            <div class="card-pill">Web & Brand Design for Dance Teacher</div>
+          </div>
+
+          <div class="other-project-card placeholder-other-4">
+            <div class="card-pill">Amazon Music x UC Berkeley Design-a-thon</div>
+          </div>
+
+          <div class="other-project-card placeholder-other-5">
+            <div class="card-pill">FSU Design-a-thon</div>
+          </div>
+
+          <div class="other-project-card placeholder-other-6">
+            <div class="card-pill">This Design Portfolio</div>
+          </div>
+
+        </div> <!-- /.other-projects-grid -->
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p class="footer-greeting">Thanks for stopping by!</p>
+      <h2 class="footer-cta">
+        Like what you saw? <a href="https://www.linkedin.com/in/tommyagarwal/" target="_blank" rel="noopener noreferrer"
+          class="footer-link">Let's get in touch️</a>
+      </h2>
+      <p class="footer-copyright">&copy; 2026 Tommy Agarwal. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Case Study Overlay -->
+  <div class="cs-overlay" id="csOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="cs-overlay-backdrop" id="csOverlayBackdrop"></div>
+    <div class="cs-overlay-panel" id="csOverlayPanel">
+      <div class="cs-overlay-header-mobile">
+        <div class="cs-overlay-grabber"></div>
+        <button class="cs-overlay-close" id="csOverlayCloseBtn" aria-label="Close Case Study">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="cs-overlay-content" id="csOverlayContent">
+        <!-- Fetched content will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.querySelector(".mobile-menu-btn");
+      const overlay = document.querySelector(".mobile-menu-overlay");
+      const mobileLinks = document.querySelectorAll(".mobile-nav-link, .mobile-btn-connect");
+
+      const toggleMenu = () => {
+        document.body.classList.toggle("menu-open");
+      };
+
+      // Toggle menu on button click
+      menuBtn.addEventListener("click", toggleMenu);
+
+      // Close menu when a link inside the overlay is clicked
+      mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          document.body.classList.remove("menu-open");
+        });
+      });
+
+      // Close menu when window is resized past mobile breakpoint
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) {
+          document.body.classList.remove("menu-open");
+        }
+      });
+    });
+  </script>
+  <script src="./js/overlay.js?v=1.9"></script>
+</body>
+
+</html>
