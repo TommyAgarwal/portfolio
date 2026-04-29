@@ -113,7 +113,7 @@ const Resume = () => {
                     className="overflow-hidden"
                   >
                     <p className="resume-text leading-relaxed text-lg md:text-xl text-text-secondary m-0">
-                      Self-starting product designer with a CS degree, dual UX certifications, and a proven track record freelancing on global campaigns. Combines design thinking with technical fluency to bridge the gap between UX & engineering. Passionate about solving complex problems through innovative technologies and intuitive user experiences.
+                      Self-starting product designer with a CS degree, dual UX certifications, and a proven track record freelancing on global campaigns. Combines design thinking with technical fluency to bridge the gap between UX & engineering. Driven to solve complex product challenges and create intuitive, high-impact solutions for users, businesses, and teams.
                     </p>
                   </motion.div>
                 )}
@@ -159,9 +159,9 @@ const Resume = () => {
                           <span className="experience-date text-xs font-bold text-text-secondary tracking-widest uppercase py-1.5 px-4 bg-card-bg-accent rounded-full h-fit">MAY 2025 - PRESENT</span>
                         </div>
                         <ul className="resume-list space-y-4">
-                          <li>Delivered end-to-end web design projects for local artists, from research and wireframing to responsive prototypes, leveraging AI no-code tools to accelerate development and help clients launch faster.</li>
-                          <li>Redesigned Tommy Hilfiger’s POS and checkout system, cutting transaction time by 50% which led management to explore broader adoption of the redesign.</li>
-                          <li>Co-led a team at the Amazon Music design-a-thon, resolving team conflict to align on a shared vision and producing user flows, wireframes, and a final pitch presented to Amazon design leads.</li>
+                          <li>Launched custom websites for artists and small businesses using AI-driven workflows, driving outcomes such as 30% subscriber growth and 96% operating cost reduction.</li>
+                          <li>Redesigned Tommy Hilfiger’s POS checkout flow, cutting transaction time by 50% and prompting management to explore wider implementation.</li>
+                          <li>Co-led teams at design-a-thons hosted by Amazon, Stanford, FSU, and Bridgegood Academy, delivering polished solutions for real social and business challenges.</li>
                         </ul>
                       </div>
 
@@ -344,7 +344,7 @@ const Resume = () => {
                     className="overflow-hidden"
                   >
                     <p className="text-lg leading-relaxed text-text-primary font-medium m-0">
-                      UX/UI Design, Wireframing, User Flows, Competitive Analysis, Prototyping, User Research, Cross-functional Collaboration, Prompt Engineering
+                      UX/UI Design, Rapid Prototyping, Agentic Workflows, Cross-functional Collaboration, User Flows, Competitive Analysis, User Research, Wireframing
                     </p>
                   </motion.div>
                 )}
@@ -375,25 +375,25 @@ const Resume = () => {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden"
+                    className="overflow-visible"
                   >
-                    <div className="flex flex-wrap gap-x-1 gap-y-3 text-lg leading-relaxed text-text-primary font-medium m-0">
+                    <div className="flex flex-wrap gap-x-1 gap-y-3 text-lg leading-relaxed text-text-primary font-medium m-0 pt-2">
                       {[
                         { name: 'Figma', logo: 'figmalogo.png' },
+                        { name: 'Antigravity', logo: 'antigravitylogo.png' },
+                        { name: 'Cursor', logo: 'cursorlogo.png' },
+                        { name: 'Claude Code', logo: 'claudelogo.png' },
                         { name: 'Adobe Photoshop', logo: 'photoshoplogo.png' },
                         { name: 'Adobe XD', logo: 'adobexdlogo.png' },
+                        { name: 'Stitch', logo: 'googlestitchlogo.png' },
+                        { name: 'Figma Make', logo: 'figmamakelogo.svg' },
+                        { name: 'ChatGPT', logo: 'chatgptlogo.png' },
+                        { name: 'Lovable', logo: 'lovablelogo.png' },
                         { name: 'Replit', logo: 'replitlogo.png' },
                         { name: 'Python', logo: 'pythonlogo.png' },
                         { name: 'Java', logo: 'javalogo.png' },
                         { name: 'HTML', logo: 'htmllogo.png' },
-                        { name: 'CSS', logo: 'csslogo.png' },
-                        { name: 'ChatGPT', logo: 'chatgptlogo.png' },
-                        { name: 'Stitch', logo: 'googlestitchlogo.png' },
-                        { name: 'Figma Make', logo: 'figmamakelogo.svg' },
-                        { name: 'Lovable', logo: 'lovablelogo.png' },
-                        { name: 'Antigravity', logo: 'antigravitylogo.png' },
-                        { name: 'Cursor', logo: 'cursorlogo.png' },
-                        { name: 'Claude Code', logo: 'claudelogo.png' }
+                        { name: 'CSS', logo: 'csslogo.png' }
                       ].map((tool, index, array) => (
                         <div key={tool.name} className="whitespace-nowrap flex items-center">
                           <div className="group relative inline-flex items-center h-8">
