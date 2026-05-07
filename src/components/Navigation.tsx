@@ -1,160 +1,150 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
-import { Calendar, FileArrowDown, LinkedinLogo } from "@phosphor-icons/react";
+import { usePathname } from "next/navigation";
+import { Copy, Check, List, X } from "@phosphor-icons/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navigation() {
-    const [isProfileOpen, setIsProfileOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("");
-    const [currentTime, setCurrentTime] = useState("");
-    const overlayRef = useRef<HTMLDivElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
+    const pathname = usePathname();
+    const [copied, setCopied] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const email = "tommyagarwalwork@gmail.com";
 
-    // Active Section Tracking
+    const handleCopy = () => {
+        navigator.clipboard.writeText(email);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    // Close menu when route changes
     useEffect(() => {
-        const handleScroll = () => {
-            const sections = ["work", "resume", "about"];
-            const current = sections.find(section => {
-                const el = document.getElementById(section);
-                if (el) {
-                    const rect = el.getBoundingClientRect();
-                    return rect.top >= -100 && rect.top <= 400;
-                }
-                return false;
-            });
-            if (current) setActiveSection(current);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+        setIsMenuOpen(false);
+    }, [pathname]);
 
-    // Click outside to close
+    // Prevent scroll when menu is open
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                overlayRef.current &&
-                !overlayRef.current.contains(event.target as Node) &&
-                buttonRef.current &&
-                !buttonRef.current.contains(event.target as Node)
-            ) {
-                setIsProfileOpen(false);
-            }
-        };
-
-        if (isProfileOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
+        if (isMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
         }
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [isProfileOpen]);
+    }, [isMenuOpen]);
 
-    // Live PST Time
-    useEffect(() => {
-        const updateTime = () => {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString("en-US", {
-                timeZone: "America/Los_Angeles",
-                hour: "numeric",
-                minute: "2-digit",
-                hour12: true
-            });
-            setCurrentTime(`${timeString} PST`);
-        };
+    const navLinks = [
+        { name: "WORK", href: "/" },
+        { name: "ABOUT", href: "/about" },
+        { name: "RESUME", href: "/resume" },
+    ];
 
-        updateTime();
-        const interval = setInterval(updateTime, 1000); // Check every second to switch exactly on the minute
-        return () => clearInterval(interval);
-    }, []);
+    const EmailButton = ({ className = "" }: { className?: string }) => (
+        <button 
+            onClick={handleCopy}
+            className={`relative bg-black flex items-center gap-2 px-4 py-2 rounded-[6px] cursor-pointer transition-transform active:scale-95 ${className}`}
+        >
+            <span className="text-[14px] font-medium text-white whitespace-nowrap">
+                {email}
+            </span>
+            <div className="flex items-center justify-center w-4 h-4 text-white">
+                {copied ? (
+                    <Check size={14} weight="bold" className="text-green-400" />
+                ) : (
+                    <Copy size={14} className="opacity-60" />
+                )}
+            </div>
+            {copied && (
+                <div className="absolute -bottom-8 right-0 text-[11px] font-medium text-black whitespace-nowrap bg-white/80 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-black/5">
+                    Copied!
+                </div>
+            )}
+        </button>
+    );
 
     return (
-        <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[1001]">
-            {/* Popover */}
-            <div
-                ref={overlayRef}
-                className={`absolute bottom-[calc(100%+16px)] left-1/2 -translate-x-1/2 w-[340px] bg-card-bg-hover rounded-[32px] p-6 shadow-none border border-border origin-bottom flex flex-col items-center transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isProfileOpen ? "opacity-100 scale-100 translate-y-0 pointer-events-auto" : "opacity-0 scale-95 translate-y-2 pointer-events-none"}`}
-            >
-                <div className="w-[88px] h-[88px] bg-card-bg-accent rounded-full mb-4 shadow-inner flex items-center justify-center overflow-hidden border border-border">
-                    <img src="/assets/profile.png" alt="Tommy Agarwal" className="w-full h-full object-cover" />
-                </div>
-
-                <h3 className="text-[22px] font-bold text-text-primary mb-1 tracking-tight">Tommy Agarwal</h3>
-                <p className="text-[15px] font-medium text-text-secondary mb-6">Product Designer</p>
-
-                <div className="flex items-center gap-4 text-[13px] font-medium text-text-secondary mb-8 px-5">
-                    <div className="flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-                        Palo Alto, CA
-                    </div>
-                    <div className="w-[1px] h-3.5 bg-text-secondary/20"></div>
-                    <div className="flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                        {currentTime || "Loading..."}
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-3 gap-3 w-full px-2">
-                    <div className="flex flex-col items-center gap-2">
-                        <a href="/assets/TommyAgarwalResume_NoContact.pdf" download className="w-full aspect-square flex items-center justify-center bg-card-bg hover:bg-card-bg-accent transition-colors rounded-[24px] shadow-sm border border-border cursor-pointer no-underline group">
-                            <div className="w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110">
-                                <FileArrowDown size={24} weight="regular" className="text-text-primary" />
-                            </div>
-                        </a>
-                        <span className="text-[12px] font-medium text-text-secondary">Resume</span>
+        <>
+            <nav className="fixed top-0 left-0 w-full z-[1001] bg-[#f5f5f5]/80 backdrop-blur-md border-b border-border">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-16 h-20 flex items-center justify-between relative">
+                    {/* Left: Name */}
+                    <div className="flex-1 flex justify-start">
+                        <Link href="/" className="text-lg md:text-xl font-bold text-black no-underline tracking-tight whitespace-nowrap z-[1002]">
+                            TOMMY AGARWAL
+                        </Link>
                     </div>
 
-                    {/* LinkedIn */}
-                    <div className="flex flex-col items-center gap-2">
-                        <a href="https://linkedin.com/in/tommyagarwal" target="_blank" rel="noopener noreferrer" className="w-full aspect-square flex items-center justify-center bg-card-bg hover:bg-card-bg-accent transition-colors rounded-[24px] shadow-sm border border-border cursor-pointer no-underline group">
-                            <div className="w-10 h-10 flex items-center justify-center transition-transform">
-                                <LinkedinLogo size={24} weight="regular" className="text-text-primary" />
-                            </div>
-                        </a>
-                        <span className="text-[12px] font-medium text-text-secondary">LinkedIn</span>
+                    {/* Middle: Nav Elements (Desktop) */}
+                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={`text-[15px] transition-all no-underline ${pathname === link.href ? "font-bold text-black" : "font-medium text-black/60 hover:text-black"}`}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
                     </div>
 
-                    {/* Calendar */}
-                    <div className="flex flex-col items-center gap-2">
-                        <a href="https://calendar.app.google/jhoVvB8SBXb7rbFi6" target="_blank" rel="noopener noreferrer" className="w-full aspect-square flex items-center justify-center bg-card-bg hover:bg-card-bg-accent transition-colors rounded-[24px] shadow-sm border border-border cursor-pointer no-underline group">
-                            <div className="w-10 h-10 flex items-center justify-center transition-transform">
-                                <Calendar size={24} weight="regular" className="text-text-primary" />
-                            </div>
-                        </a>
-                        <span className="text-[12px] font-medium text-text-secondary">Calendar</span>
+                    {/* Right: CTA Button (Desktop) & Mobile Toggle */}
+                    <div className="flex-1 flex justify-end items-center gap-4">
+                        <div className="hidden md:block">
+                            <EmailButton />
+                        </div>
+
+                        {/* Hamburger Button */}
+                        <button 
+                            className="md:hidden z-[1002] p-1 text-black cursor-pointer"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            {isMenuOpen ? <X size={28} weight="bold" /> : <List size={28} weight="bold" />}
+                        </button>
                     </div>
                 </div>
-            </div>
+            </nav>
 
-            {/* Nav Pill */}
-            <div className="bg-card-bg rounded-full shadow-none border border-border p-2 flex items-center gap-2">
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3, ease: "circOut" }}
+                        className="fixed inset-0 z-[1000] bg-[#f5f5f5] pt-32 px-6 md:hidden flex flex-col"
+                    >
+                        <div className="flex flex-col gap-8">
+                            {navLinks.map((link, i) => (
+                                <motion.div
+                                    key={link.name}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.1 + i * 0.1 }}
+                                >
+                                    <Link
+                                        href={link.href}
+                                        className={`text-4xl font-bold no-underline tracking-tight ${pathname === link.href ? "text-black" : "text-black/30 hover:text-black transition-colors"}`}
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </div>
 
-                {/* Links */}
-                <div className="flex items-center gap-1.5 px-3">
-                    <Link href="#work" className={`px-4 py-2.5 text-[15px] transition-all hover:bg-white/5 rounded-full no-underline ${activeSection === "work" ? "font-bold text-text-primary" : "font-medium text-text-secondary"}`}>
-                        Work
-                    </Link>
-                    <Link href="#resume" className={`px-4 py-2.5 text-[15px] transition-all hover:bg-white/5 rounded-full no-underline ${activeSection === "resume" ? "font-bold text-text-primary" : "font-medium text-text-secondary"}`}>
-                        Resume
-                    </Link>
-                    <Link href="#about" className={`px-4 py-2.5 text-[15px] transition-all hover:bg-white/5 rounded-full no-underline ${activeSection === "about" ? "font-bold text-text-primary" : "font-medium text-text-secondary"}`}>
-                        About
-                    </Link>
-                </div>
-
-                <div className="w-[1px] h-8 bg-border mx-1"></div>
-
-                {/* Profile Picture Trigger */}
-                <button
-                    ref={buttonRef}
-                    onClick={() => setIsProfileOpen(!isProfileOpen)}
-                    className="w-14 h-14 rounded-full bg-card-bg-accent shadow-inner transition-transform duration-200 hover:scale-[1.03] active:scale-95 flex items-center justify-center overflow-hidden cursor-pointer p-0 ml-1.5 focus:outline-none"
-                    aria-label="Toggle Profile Menu"
-                    aria-expanded={isProfileOpen}
-                >
-                    <img src="/assets/profile.png" alt="Profile" className="w-full h-full object-cover" />
-                </button>
-            </div>
-        </nav>
+                        {/* Mobile Email Button */}
+                        <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="mt-12"
+                        >
+                            <p className="text-black/40 text-[12px] font-bold mb-4 uppercase tracking-widest">Get in touch</p>
+                            <EmailButton className="w-fit" />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     );
 }

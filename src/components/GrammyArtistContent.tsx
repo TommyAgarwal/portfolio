@@ -45,11 +45,11 @@ export default function GrammyArtistContent() {
                     <div className="cs-hero-text">
                         <p className="cs-meta">Freelance • Shipped October 2025</p>
                         <h1 className="cs-title">
-                            Boosting Grammy Artist’s Audience Engagement and Conversion via Web Design
+                            Boosting Grammy Artist's audience conversion through a website redesign
                         </h1>
                     </div>
                     <div className="cs-hero-image">
-                        <img src="assets/images/WebDesignThumbnail.png" alt="Web Design Case Study" className="w-full h-full object-cover block" />
+                        <img src="assets/images/webdesign/grammyheroimage.png" alt="Web Design Case Study" className="w-full h-full object-cover block" />
                     </div>
                 </div>
                 <div className="cs-hero-tags">
@@ -81,7 +81,7 @@ export default function GrammyArtistContent() {
                             <div className="cs-tool-hover">
                                 <span className="cs-tool-name">Figma Make</span>
                                 <div className="cs-tool-logo">
-                                    <img src="/assets/images/ResumePhotos/toolslogo/figmamakelogo.svg" alt="Figma" />
+                                    <img src="/assets/images/logos/figmamakelogo.png" alt="Figma" />
                                 </div>
                             </div>
                         </li>
@@ -89,7 +89,7 @@ export default function GrammyArtistContent() {
                             <div className="cs-tool-hover">
                                 <span className="cs-tool-name">ChatGPT</span>
                                 <div className="cs-tool-logo">
-                                    <img src="/assets/images/ResumePhotos/toolslogo/chatgptlogo.png" alt="ChatGPT" />
+                                    <img src="/assets/images/logos/chatgptlogo.png" alt="ChatGPT" />
                                 </div>
                             </div>
                         </li>
