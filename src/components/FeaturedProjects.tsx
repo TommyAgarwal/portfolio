@@ -1,147 +1,176 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CaseStudyOverlay from "./CaseStudyOverlay";
 import TommyHilfigerContent from "./TommyHilfigerContent";
 import GrammyArtistContent from "./GrammyArtistContent";
+import BridgegoodContent from "./BridgegoodContent";
+import StreetcodeContent from "./StreetcodeContent";
 
 export default function FeaturedProjects() {
     const [activeProject, setActiveProject] = useState<string | null>(null);
+    const [isTommyHovered, setIsTommyHovered] = useState(false);
+    const [isGrammyHovered, setIsGrammyHovered] = useState(false);
+    const tommyVideoRef = useRef<HTMLVideoElement>(null);
+    const grammyVideoRef = useRef<HTMLVideoElement>(null);
 
-    // Deep linking logic: Open project based on URL hash
+    // Tommy Video Control
+    useEffect(() => {
+        if (tommyVideoRef.current) {
+            if (isTommyHovered) {
+                tommyVideoRef.current.play();
+            } else {
+                tommyVideoRef.current.pause();
+                tommyVideoRef.current.currentTime = 0;
+            }
+        }
+    }, [isTommyHovered]);
+
+    // Grammy Video Control
+    useEffect(() => {
+        if (grammyVideoRef.current) {
+            if (isGrammyHovered) {
+                grammyVideoRef.current.play();
+            } else {
+                grammyVideoRef.current.pause();
+                grammyVideoRef.current.currentTime = 0;
+            }
+        }
+    }, [isGrammyHovered]);
+
+    // Deep linking logic
     useEffect(() => {
         const handleHashChange = () => {
             const hash = window.location.hash.replace("#", "");
             if (hash === "tommy-hilfiger") setActiveProject("tommy-hilfiger");
             else if (hash === "grammy-artist") setActiveProject("grammy-artist");
+            else if (hash === "bridgegood") setActiveProject("bridgegood");
+            else if (hash === "streetcode") setActiveProject("streetcode");
             else if (!hash) setActiveProject(null);
         };
-
-        // Check on mount
         handleHashChange();
-
-        // Listen for back/forward buttons
         window.addEventListener("hashchange", handleHashChange);
         return () => window.removeEventListener("hashchange", handleHashChange);
     }, []);
 
     return (
-        <main id="work" className={`w-full flex flex-col items-start gap-6 relative ${activeProject ? 'z-[3000]' : 'z-10'}`}>
-        <div className={`w-full flex flex-col items-start gap-6 relative ${activeProject ? 'z-0' : 'z-10'}`}>
-                <h3 className="text-[20px] font-medium text-white/50 leading-none m-0">
-                    Featured Case Studies
-                </h3>
-                <div className="w-full flex flex-col lg:flex-row gap-6 relative">
-                    {/* Case Study 1 */}
-                    <div
-                        className="project-card flex-1 flex flex-col items-center gap-4 rounded-2xl p-6 group cursor-pointer project-border-glow"
-                        onClick={() => setActiveProject("tommy-hilfiger")}
-                    >
-                        <div className="w-full h-[400px] relative rounded-xl overflow-hidden mb-2">
-                            <img
-                                src="assets/images/pos-thumbnail.png"
-                                alt="Tommy Hilfiger POS Redesign Thumbnail"
-                                className="w-full h-full object-cover block"
-                            />
-                        </div>
-                        <div className="project-card-content flex flex-col items-center text-center gap-1 w-full px-6">
-                            <p className="text-base text-text-secondary font-normal">
-                                Tommy Hilfiger • Pitched June 2025
-                            </p>
-                            <h3 className="text-2xl font-medium leading-normal text-white mb-0 transition-colors duration-300 group-hover:text-[#3C88DB]">
-                                Sales Associate → UX Lead: Redesigning Tommy Hilfiger&apos;s Checkout Experience
-                            </h3>
-                            <div className="flex gap-[19.5px] w-full px-4 lg:px-8 xl:px-12 mt-4">
-                                <div className="flex-1 bg-card-bg-accent rounded-lg py-2 px-4 flex flex-col items-center justify-center gap-0 group-hover:bg-card-bg-accent transition-colors">
-                                    <div className="flex items-center gap-[3px] text-white text-xl font-medium">
-                                        <span className="flex items-center justify-center w-[14px] h-[14px] transition-transform duration-300 rotate-0">
-                                            <svg className="w-full h-full" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span>50%</span>
-                                    </div>
-                                    <span className="text-xs text-white font-normal text-center">
-                                        Transaction Time
-                                    </span>
-                                </div>
-                                <div className="flex-1 bg-card-bg-accent rounded-lg py-2 px-4 flex flex-col items-center justify-center gap-0 group-hover:bg-card-bg-accent transition-colors">
-                                    <div className="flex items-center gap-[3px] text-white text-xl font-medium">
-                                        <span className="flex items-center justify-center w-[14px] h-[14px] transition-transform duration-300 rotate-0">
-                                            <svg className="w-full h-full" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span>85%</span>
-                                    </div>
-                                    <span className="text-xs text-white font-normal text-center">
-                                        Clicks in key flows
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div className="max-w-[1440px] mx-auto w-full px-8 md:px-16 flex flex-col gap-12">
 
-                    {/* Case Study 2 */}
-                    <div 
-                        className="project-card flex-1 flex flex-col items-center gap-4 bg-card-bg-hover rounded-2xl p-6 group cursor-pointer border border-border"
-                        onClick={() => setActiveProject("grammy-artist")}
-                    >
-                        <div className="w-full h-[400px] relative rounded-xl overflow-hidden mb-2">
-                            <img
-                                src="assets/images/WebDesignThumbnail.png"
-                                alt="Web Design Case Study Thumbnail"
-                                className="w-full h-full object-cover block"
-                            />
-                        </div>
-                        <div className="project-card-content flex flex-col items-center text-center gap-1 w-full px-6">
-                            <p className="text-base text-text-secondary font-normal">
-                                Freelance • Shipped October 2025
-                            </p>
-                            <h3 className="text-2xl font-medium leading-normal text-white mb-0 transition-colors duration-300 group-hover:text-[#FE6603]">
-                                Boosting Grammy Artist’s Audience Engagement & Conversion via Web Design
-                            </h3>
-                            <div className="flex gap-[19.5px] w-full px-4 lg:px-8 xl:px-12 mt-4">
-                                <div className="flex-1 bg-card-bg-accent rounded-lg py-2 px-4 flex flex-col items-center justify-center gap-0 group-hover:bg-card-bg-accent transition-colors">
-                                    <div className="flex items-center gap-[3px] text-white text-xl font-medium">
-                                        <span className="flex items-center justify-center w-[14px] h-[14px] transition-transform duration-300 rotate-180">
-                                            <svg className="w-full h-full" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span>30%</span>
-                                    </div>
-                                    <span className="text-xs text-white font-normal text-center">
-                                        Newsletter Subscribers
-                                    </span>
-                                </div>
-                                <div className="flex-1 bg-card-bg-accent rounded-lg py-2 px-4 flex flex-col items-center justify-center gap-0 group-hover:bg-card-bg-accent transition-colors">
-                                    <div className="flex items-center gap-[3px] text-white text-xl font-medium">
-                                        <span className="flex items-center justify-center w-[14px] h-[14px] transition-transform duration-300 rotate-0">
-                                            <svg className="w-full h-full" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span>96%</span>
-                                    </div>
-                                    <span className="text-xs text-white font-normal text-center">
-                                        Annual Expenses
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+
+            {/* Stacked Main Case Studies */}
+            <div className="flex flex-col gap-12">
+                {/* Tommy Hilfiger */}
+                <div
+                    className="group cursor-pointer flex flex-col md:flex-row md:items-end relative rounded-[16px] overflow-hidden h-[680px] md:h-[421px] bg-[#C2DCF3]"
+                    onClick={() => setActiveProject("tommy-hilfiger")}
+                    onMouseEnter={() => setIsTommyHovered(true)}
+                    onMouseLeave={() => setIsTommyHovered(false)}
+                >
+                    <div className="flex flex-col gap-1 pt-12 pb-10 md:pb-0 md:pt-0 h-auto md:h-full items-start justify-start md:justify-center px-8 md:px-16 relative z-10 w-full md:w-[45%] transition-all duration-500 ease-in-out group-hover:scale-[0.89] group-hover:md:mr-[-5%] origin-left">
+                        <p className="text-[14px] md:text-[16px] text-black/60 font-medium uppercase tracking-wider">
+                            Tommy Hilfiger
+                        </p>
+                        <h2 className="text-[28px] md:text-[32px] font-normal text-black leading-[1.1] tracking-tight">
+                            Redesigned retail Point-of-Sale dashboard to increase transaction speed
+                        </h2>
+                    </div>
+                    <div className="mt-auto ml-8 md:ml-0 h-[352px] md:h-[90%] relative rounded-tl-[24px] md:rounded-t-none md:rounded-tl-[24px] flex-grow overflow-hidden shadow-2xl transition-all duration-500 ease-in-out">
+                        <video
+                            ref={tommyVideoRef}
+                            src="assets/videos/THVideoThumbnail.mp4"
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover rounded-tl-[24px]"
+                        />
+                    </div>
+                </div>
+
+                {/* Grammy Artist */}
+                <div
+                    className="group cursor-pointer flex flex-col md:flex-row md:items-end relative rounded-[16px] overflow-hidden h-[680px] md:h-[421px] bg-[#F5D3BD]"
+                    onClick={() => setActiveProject("grammy-artist")}
+                    onMouseEnter={() => setIsGrammyHovered(true)}
+                    onMouseLeave={() => setIsGrammyHovered(false)}
+                >
+                    <div className="flex flex-col gap-1 pt-12 pb-10 md:pb-0 md:pt-0 h-auto md:h-full items-start justify-start md:justify-center px-8 md:px-16 relative z-10 w-full md:w-[45%] transition-all duration-500 ease-in-out group-hover:scale-[0.89] group-hover:md:mr-[-5%] origin-left">
+                        <p className="text-[14px] md:text-[16px] text-black/60 font-medium uppercase tracking-wider">
+                            Freelance
+                        </p>
+                        <h2 className="text-[28px] md:text-[32px] font-normal text-black leading-[1.1] tracking-tight">
+                            Boosting Grammy Artist&apos;s audience conversion through a website redesign
+                        </h2>
+                    </div>
+                    <div className="mt-auto ml-8 md:ml-0 h-[352px] md:h-[90%] relative rounded-tl-[24px] md:rounded-t-none md:rounded-tl-[24px] flex-grow overflow-hidden shadow-2xl transition-all duration-500 ease-in-out">
+                        <video
+                            ref={grammyVideoRef}
+                            src="assets/videos/grammythumbnailflow.mov"
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover rounded-tl-[24px]"
+                        />
                     </div>
                 </div>
             </div>
 
-            <CaseStudyOverlay 
-                isOpen={activeProject !== null} 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                {/* Bridgegood */}
+                <div
+                    className="group cursor-pointer flex flex-col pt-8 px-8 rounded-[16px] overflow-hidden h-[500px] bg-white border border-border/50"
+                    onClick={() => setActiveProject("bridgegood")}
+                >
+                    <div className="flex flex-col gap-1 mb-6">
+                        <p className="text-[14px] md:text-[16px] text-black/60 font-medium uppercase tracking-wider">
+                            AI FOR SOCIAL GOOD HACKATHON
+                        </p>
+                        <h3 className="text-[24px] md:text-[32px] font-normal text-black leading-[1.2] tracking-tight">
+                            Gamified AI learning tool to help students with social anxiety
+                        </h3>
+                    </div>
+                    <div className="mt-auto h-[280px] relative rounded-t-[16px] overflow-hidden shadow-sm">
+                        <img
+                            src="assets/images/bridgegood/bridgegood-thumbnail.png"
+                            alt="Bridgegood AI for Social Good"
+                            className="w-full h-full object-cover rounded-t-[16px]"
+                        />
+                    </div>
+                </div>
+
+                {/* StreetCode */}
+                <div
+                    className="group cursor-pointer flex flex-col pt-8 px-8 rounded-[16px] overflow-hidden h-[500px] bg-white border border-border/50"
+                    onClick={() => setActiveProject("streetcode")}
+                >
+                    <div className="flex flex-col gap-1 mb-6">
+                        <p className="text-[14px] md:text-[16px] text-black/60 font-medium uppercase tracking-wider">
+                            STREETCODE ACADEMY
+                        </p>
+                        <h3 className="text-[24px] md:text-[32px] font-normal text-black leading-[1.2] tracking-tight">
+                            Directing development of a speech to ASL translation app for deaf/HoH communities
+                        </h3>
+                    </div>
+                    <div className="mt-auto h-[280px] relative rounded-t-[16px] overflow-hidden shadow-sm">
+                        <img
+                            src="assets/images/streetcode/streetcode-thumbnail.png"
+                            alt="StreetCode Academy ASL App"
+                            className="w-full h-full object-cover rounded-t-[16px]"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <CaseStudyOverlay
+                isOpen={activeProject !== null}
                 onClose={() => setActiveProject(null)}
                 projectId={activeProject || undefined}
             >
                 {activeProject === "tommy-hilfiger" && <TommyHilfigerContent />}
                 {activeProject === "grammy-artist" && <GrammyArtistContent />}
+                {activeProject === "bridgegood" && <BridgegoodContent />}
+                {activeProject === "streetcode" && <StreetcodeContent />}
             </CaseStudyOverlay>
-        </main>
+        </div>
     );
 }
+

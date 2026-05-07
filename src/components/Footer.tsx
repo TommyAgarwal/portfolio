@@ -1,6 +1,9 @@
+"use client";
+import { LinkedinLogo, EnvelopeSimple, CalendarBlank } from "@phosphor-icons/react";
+
 export default function Footer() {
     return (
-        <footer className="w-full border-t border-border bg-bg pt-16 pb-40 md:py-8 px-8 md:px-16 mt-20 relative overflow-hidden h-auto md:h-[136px] flex md:items-center">
+        <footer className="w-full border-t border-border bg-bg pt-16 pb-16 md:py-8 px-8 md:px-16 mt-20 relative overflow-hidden h-auto md:h-[136px] flex md:items-center">
             {/* Background Decor */}
             <div className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-card-bg-accent/5 rounded-full blur-[80px] -translate-y-1/2 pointer-events-none" />
 
@@ -26,8 +29,36 @@ export default function Footer() {
                 {/* 72px matches the navigation pill height (h-14 + p-2) */}
                 <div className="hidden md:block w-[480px] h-[72px] pointer-events-none" aria-hidden="true" />
 
-                {/* Right Section: Copyright */}
+                {/* Right Section: Copyright & Socials */}
                 <div className="flex-1 flex flex-col items-center md:items-end justify-end w-full">
+                    {/* Social Icons */}
+                    <div className="flex items-center gap-6 mb-4">
+                        <a 
+                            href="https://www.linkedin.com/in/tommyagarwal/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-text-primary transition-all duration-300"
+                            aria-label="LinkedIn"
+                        >
+                            <LinkedinLogo size={22} weight="regular" />
+                        </a>
+                        <a 
+                            href="mailto:tommyagarwalwork@gmail.com" 
+                            className="text-text-secondary hover:text-text-primary transition-all duration-300"
+                            aria-label="Email"
+                        >
+                            <EnvelopeSimple size={22} weight="regular" />
+                        </a>
+                        <a 
+                            href="https://calendar.app.google/FYbb8Ja6KmRCbH5M8" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-text-primary transition-all duration-300"
+                            aria-label="Calendar"
+                        >
+                            <CalendarBlank size={22} weight="regular" />
+                        </a>
+                    </div>
                     <p className="text-text-secondary/80 text-[14px] font-medium m-0">
                         &copy; {new Date().getFullYear()} Tommy Agarwal
                     </p>

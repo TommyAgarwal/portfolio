@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Host_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const hostGrotesk = Host_Grotesk({
+  variable: "--font-host-grotesk",
   subsets: ["latin"],
 });
 
@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description: "Impact-driven Product Designer rooted in technical reality.",
 };
 
-import MouseTrackingBackground from "@/components/MouseTrackingBackground";
 
 export default function RootLayout({
   children,
@@ -20,9 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={dmSans.variable}>
+    <html lang="en" className={hostGrotesk.variable}>
       <body className="antialiased font-sans bg-bg text-text-primary">
-        <MouseTrackingBackground />
         {children}
       </body>
     </html>

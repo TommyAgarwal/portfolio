@@ -1,21 +1,60 @@
+'use client';
+
+import React, { useState } from 'react';
+import ParticleBackground, { ParticleCategory } from './ParticleBackground';
+
 export default function Hero() {
+    const [activeCategory, setActiveCategory] = useState<ParticleCategory>('default');
+
     return (
-        <header className="w-full flex flex-col items-center justify-center text-center min-h-[70vh] px-4 md:px-8 pt-20 pb-10">
-            <div className="flex flex-col items-center max-w-5xl w-full px-12 py-6 md:px-24 md:py-12 rounded-[32px] bg-card-bg border border-border">
-                <h1 className="text-[56px] md:text-[80px] lg:text-[96px] font-medium text-text-primary tracking-tight leading-[1.2] mb-2 md:mb-4 py-1">
-                    Tommy Agarwal
-                </h1>
-                <p className="text-[18px] md:text-[20px] lg:text-[24px] text-text-secondary leading-relaxed max-w-[800px] font-normal">
-                    Impact-driven Product Designer rooted in technical reality.
-                </p>
-                <div className="mt-8 md:mt-12">
-                    <span className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-card-bg-hover border border-card-bg-accent text-[14px] md:text-[16px] font-medium text-text-secondary gap-4">
-                        Currently #OpenToWork
-                        <span className="w-2 h-2 rounded-full bg-green shadow-[0_0_8px_rgba(74,222,128,0.5)] animate-pulse"></span>
-                    </span>
+        <header className="w-full flex flex-col items-center justify-center text-center min-h-[60vh] px-4 md:px-8 pt-40 pb-16 relative overflow-hidden">
+            <ParticleBackground activeCategory={activeCategory} />
+            
+            <div className="flex flex-col items-center max-w-4xl w-full gap-8 relative z-10 pointer-events-none">
+                <div className="flex flex-col items-center gap-2">
+                    <p className="text-[16px] md:text-[20px] text-black font-normal tracking-tight pointer-events-auto">
+                        Hello World! I’m Tommy Agarwal
+                    </p>
+                    <h1 className="text-[28px] md:text-[32px] font-semibold text-black tracking-tight leading-[1.2] pointer-events-auto">
+                        An impact-driven Product Designer who codes
+                    </h1>
                 </div>
+                
+                <p className="text-[14px] md:text-[16px] text-black leading-relaxed max-w-[580px] font-normal pointer-events-auto">
+                    <span 
+                        className={`transition-all duration-200 cursor-default ${activeCategory === 'cs' ? 'font-bold' : ''}`}
+                        onMouseEnter={() => setActiveCategory('cs')}
+                        onMouseLeave={() => setActiveCategory('default')}
+                    >
+                        Rooted in Computer Science
+                    </span>
+                    , with{' '}
+                    <span 
+                        className={`transition-all duration-200 cursor-default ${activeCategory === 'design' ? 'font-bold' : ''}`}
+                        onMouseEnter={() => setActiveCategory('design')}
+                        onMouseLeave={() => setActiveCategory('default')}
+                    >
+                        freelance product design experience
+                    </span>
+                    {' '}and{' '}
+                    <span 
+                        className={`transition-all duration-200 cursor-default ${activeCategory === 'retail' ? 'font-bold' : ''}`}
+                        onMouseEnter={() => setActiveCategory('retail')}
+                        onMouseLeave={() => setActiveCategory('default')}
+                    >
+                        5 years in retail operations
+                    </span>
+                    , I design digital products that help brands translate user needs into{' '}
+                    <span 
+                        className={`transition-all duration-200 cursor-default ${activeCategory === 'business' ? 'font-bold' : ''}`}
+                        onMouseEnter={() => setActiveCategory('business')}
+                        onMouseLeave={() => setActiveCategory('default')}
+                    >
+                        measurable business outcomes
+                    </span>
+                    .
+                </p>
             </div>
         </header>
     );
 }
-

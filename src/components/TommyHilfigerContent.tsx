@@ -12,7 +12,8 @@ import {
     Flag,
     FileText,
     Wrench,
-    Megaphone
+    Megaphone,
+    TrendUp
 } from "@phosphor-icons/react";
 
 function Counter({ value }: { value: number }) {
@@ -45,11 +46,11 @@ export default function TommyHilfigerContent() {
                     <div className="cs-hero-text">
                         <p className="cs-meta">Tommy Hilfiger • Pitched June 2025</p>
                         <h1 className="cs-title">
-                            From Sales Associate to UX Lead: Redesigning Tommy Hilfiger&apos;s Checkout Experience
+                            Redesigned retail Point-of-Sale dashboard to increase transaction speed
                         </h1>
                     </div>
                     <div className="cs-hero-image">
-                        <img src="assets/images/pos/th-thumbnail-2.png" alt="Tommy Hilfiger POS Redesign" />
+                        <img src="assets/images/pos/tommyheroimage.png" alt="Tommy Hilfiger POS Redesign" />
                     </div>
                 </div>
                 <div className="cs-hero-tags">
@@ -80,7 +81,7 @@ export default function TommyHilfigerContent() {
                             <div className="cs-tool-hover">
                                 <span className="cs-tool-name">Figma</span>
                                 <div className="cs-tool-logo">
-                                    <img src="/assets/images/ResumePhotos/toolslogo/figmalogo.png" alt="Figma" />
+                                    <img src="/assets/images/logos/figmalogo.png" alt="Figma" />
                                 </div>
                             </div>
                         </li>
@@ -88,7 +89,7 @@ export default function TommyHilfigerContent() {
                             <div className="cs-tool-hover">
                                 <span className="cs-tool-name">Adobe Photoshop</span>
                                 <div className="cs-tool-logo">
-                                    <img src="/assets/images/ResumePhotos/toolslogo/photoshoplogo.png" alt="Adobe Photoshop" />
+                                    <img src="/assets/images/logos/photoshoplogo.png" alt="Adobe Photoshop" />
                                 </div>
                             </div>
                         </li>
@@ -99,7 +100,7 @@ export default function TommyHilfigerContent() {
                     <ul className="cs-meta-value">
                         <li>5 Sales Associates</li>
                         <li>2 Store Managers</li>
-                        <li>1 HR Director</li>
+                        <li>HR Director</li>
                     </ul>
                 </div>
             </section>
@@ -179,7 +180,7 @@ export default function TommyHilfigerContent() {
                         comically terrible POS.
                     </p>
                     <div className="cs-bg-image-full">
-                        <img src="assets/images/pos/pos-image.png" alt="POS Hardware" className="cs-hardware-img" />
+                        <img src="assets/images/pos/pos-thumbnail.png" alt="POS Hardware" className="cs-hardware-img" />
                     </div>
                     <p className="cs-section-desc-light">
                         A Point of Sale (POS) is the monitor or tablet attached to the cash
@@ -261,9 +262,9 @@ export default function TommyHilfigerContent() {
                                 <h3>Redesign Goals</h3>
                             </div>
                             <ol>
-                                <li>Refine and regroup the menus so that most transactions can be completed with ZERO navigation</li>
-                                <li>Include the bag-fee as part of the core interaction instead of a lengthy detour</li>
-                                <li>Reimagine the checkout flow to accommodate the loyalty program instead of tacking it onto the end</li>
+                                <li>1. Refine and regroup the menus so that most transactions can be completed with ZERO navigation</li>
+                                <li>2. Include the bag-fee as part of the core interaction instead of a lengthy detour</li>
+                                <li>3. Reimagine the checkout flow to accommodate the loyalty program instead of tacking it onto the end</li>
                             </ol>
                         </div>
                     </div>
@@ -301,10 +302,8 @@ export default function TommyHilfigerContent() {
                                     <h4>Smarter layout, less clicks</h4>
                                     <p>Users preferred the menu-less layout which removed unnecessary clicks and negated the need to search for functions.</p>
                                 </div>
-                                <img src="assets/images/pos/testing-smarter-layout.png" alt="Feedback Example 1" className="cs-feedback-img" />
                             </div>
                             <div className="cs-testing-item bg-card-bg">
-                                <img src="assets/images/pos/desktop-12.png" alt="Feedback Example 2" className="cs-feedback-img" />
                                 <div className="cs-testing-text">
                                     <h4>Quick & convenient bag fee</h4>
                                     <p>The built-in bag fee was well received by users and highly preferable to the old system.</p>
@@ -315,7 +314,6 @@ export default function TommyHilfigerContent() {
                                     <h4>Making functions toggleable</h4>
                                     <p>For items missing tags or final sale, cashiers had to manually mark the receipt. That was negated by adding toggleable flags to the item functions.</p>
                                 </div>
-                                <img src="assets/images/pos/image-12.png" alt="Feedback Example 3" className="cs-feedback-img" />
                             </div>
                         </div>
                     </div>
@@ -332,10 +330,8 @@ export default function TommyHilfigerContent() {
                                     <h4>Button Size & Clickability</h4>
                                     <p>Our POS has an 18 inch touchscreen monitor, the buttons needed to be better sized and have increased padding in order to be easily clicked.</p>
                                 </div>
-                                <img src="assets/images/pos/screenshot-15840.png" alt="Improve Example 1" className="cs-feedback-img" />
                             </div>
                             <div className="cs-testing-item bg-card-bg">
-                                <img src="assets/images/pos/rw-1920-2.png" alt="Improve Example 2" className="cs-feedback-img" />
                                 <div className="cs-testing-text">
                                     <h4>Visual Polish</h4>
                                     <p>While users found the mockups functional, the designers I showed had UI-related feedback regarding contrast and spacing.</p>
@@ -346,7 +342,6 @@ export default function TommyHilfigerContent() {
                                     <h4>Friendlier function names</h4>
                                     <p>Some of Tommy Hilfiger’s staff are non-native English speakers and found the names of the functions confusing.</p>
                                 </div>
-                                <img src="assets/images/pos/screenshot-15423.png" alt="Improve Example 3" className="cs-feedback-img" />
                             </div>
                         </div>
                     </div>
@@ -414,7 +409,46 @@ export default function TommyHilfigerContent() {
                     */}
                     <div className="cs-impact-flowchart">
                         <p className="cs-impact-flowchart-title">It’s not about prettier screens, a redesign would provide tangible business impact for Tommy Hilfiger:</p>
-                        <img src="assets/images/pos/flowchart.svg" alt="Impact Flowchart" className="cs-impact-flowchart-img" />
+
+                        {/* Responsive Card-based Flowchart */}
+                        <div className="cs-flow-container">
+                            <div className="cs-flow-node cs-flow-node-main cs-flow-start">
+                                <span>An improved POS would've lead to...</span>
+                            </div>
+
+                            <div className="cs-flow-grid">
+                                {/* Track 1: Business */}
+                                <div className="cs-flow-track">
+                                    <div className="cs-flow-label">FOR THE BUSINESS</div>
+                                    <div className="cs-flow-card">Faster Transactions</div>
+                                    <div className="cs-flow-card">Shorter Lines</div>
+                                    <div className="cs-flow-card">Higher Store Traffic</div>
+                                </div>
+
+                                {/* Track 2: Users */}
+                                <div className="cs-flow-track">
+                                    <div className="cs-flow-label">FOR USERS</div>
+                                    <div className="cs-flow-card">Higher Confidence</div>
+                                    <div className="cs-flow-card">More Cashiers Trained</div>
+                                    <div className="cs-flow-card">More Store Coverage</div>
+                                </div>
+
+                                {/* Track 3: Customers */}
+                                <div className="cs-flow-track">
+                                    <div className="cs-flow-label">FOR CUSTOMERS</div>
+                                    <div className="cs-flow-card">Quicker Checkout</div>
+                                    <div className="cs-flow-card">Better Customer Experience</div>
+                                    <div className="cs-flow-card">Better Brand Reputation</div>
+                                </div>
+                            </div>
+
+                            <div className="cs-flow-node cs-flow-node-main cs-flow-end">
+                                <div className="cs-flow-revenue-content">
+                                    <span>Which all, in turn, would've lead to MORE REVENUE</span>
+                                    <TrendUp size={32} weight="bold" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Bottom Block - Quotes */}
