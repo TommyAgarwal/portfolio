@@ -11,32 +11,43 @@ export default function FeaturedProjects() {
     const [activeProject, setActiveProject] = useState<string | null>(null);
     const [isTommyHovered, setIsTommyHovered] = useState(false);
     const [isGrammyHovered, setIsGrammyHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const tommyVideoRef = useRef<HTMLVideoElement>(null);
     const grammyVideoRef = useRef<HTMLVideoElement>(null);
+
+    // Mobile detection
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     // Tommy Video Control
     useEffect(() => {
         if (tommyVideoRef.current) {
-            if (isTommyHovered) {
-                tommyVideoRef.current.play();
+            if (isMobile || isTommyHovered) {
+                tommyVideoRef.current.play().catch(() => {});
             } else {
                 tommyVideoRef.current.pause();
                 tommyVideoRef.current.currentTime = 0;
             }
         }
-    }, [isTommyHovered]);
+    }, [isMobile, isTommyHovered]);
 
     // Grammy Video Control
     useEffect(() => {
         if (grammyVideoRef.current) {
-            if (isGrammyHovered) {
-                grammyVideoRef.current.play();
+            if (isMobile || isGrammyHovered) {
+                grammyVideoRef.current.play().catch(() => {});
             } else {
                 grammyVideoRef.current.pause();
                 grammyVideoRef.current.currentTime = 0;
             }
         }
-    }, [isGrammyHovered]);
+    }, [isMobile, isGrammyHovered]);
+
+
 
     // Deep linking logic
     useEffect(() => {
@@ -61,12 +72,12 @@ export default function FeaturedProjects() {
             <div className="flex flex-col gap-12">
                 {/* Tommy Hilfiger */}
                 <div
-                    className="group cursor-pointer flex flex-col md:flex-row md:items-end relative rounded-[16px] overflow-hidden h-[680px] md:h-[421px] bg-[#C2DCF3]"
+                    className="group cursor-pointer flex flex-col md:flex-row md:items-end relative rounded-[16px] overflow-hidden h-[680px] md:h-[421px] bg-[#D8E2ED] hover:bg-[#C2CBD5] transition-all duration-300 ease-in-out"
                     onClick={() => setActiveProject("tommy-hilfiger")}
-                    onMouseEnter={() => setIsTommyHovered(true)}
-                    onMouseLeave={() => setIsTommyHovered(false)}
+                    onMouseEnter={() => !isMobile && setIsTommyHovered(true)}
+                    onMouseLeave={() => !isMobile && setIsTommyHovered(false)}
                 >
-                    <div className="flex flex-col gap-1 pt-12 pb-10 md:pb-0 md:pt-0 h-auto md:h-full items-start justify-start md:justify-center px-8 md:px-16 relative z-10 w-full md:w-[45%] transition-all duration-500 ease-in-out group-hover:scale-[0.89] group-hover:md:mr-[-5%] origin-left">
+                    <div className="flex flex-col gap-1 pt-12 pb-10 md:pb-0 md:pt-0 h-auto md:h-full items-start justify-start md:justify-center px-8 md:px-16 relative z-10 w-full md:w-[45%] transition-all duration-500 ease-in-out origin-left">
                         <p className="text-[14px] md:text-[16px] text-black/60 font-medium uppercase tracking-wider">
                             Tommy Hilfiger
                         </p>
@@ -88,12 +99,12 @@ export default function FeaturedProjects() {
 
                 {/* Grammy Artist */}
                 <div
-                    className="group cursor-pointer flex flex-col md:flex-row md:items-end relative rounded-[16px] overflow-hidden h-[680px] md:h-[421px] bg-[#F5D3BD]"
+                    className="group cursor-pointer flex flex-col md:flex-row md:items-end relative rounded-[16px] overflow-hidden h-[680px] md:h-[421px] bg-[#D8E2ED] hover:bg-[#C2CBD5] transition-all duration-300 ease-in-out"
                     onClick={() => setActiveProject("grammy-artist")}
-                    onMouseEnter={() => setIsGrammyHovered(true)}
-                    onMouseLeave={() => setIsGrammyHovered(false)}
+                    onMouseEnter={() => !isMobile && setIsGrammyHovered(true)}
+                    onMouseLeave={() => !isMobile && setIsGrammyHovered(false)}
                 >
-                    <div className="flex flex-col gap-1 pt-12 pb-10 md:pb-0 md:pt-0 h-auto md:h-full items-start justify-start md:justify-center px-8 md:px-16 relative z-10 w-full md:w-[45%] transition-all duration-500 ease-in-out group-hover:scale-[0.89] group-hover:md:mr-[-5%] origin-left">
+                    <div className="flex flex-col gap-1 pt-12 pb-10 md:pb-0 md:pt-0 h-auto md:h-full items-start justify-start md:justify-center px-8 md:px-16 relative z-10 w-full md:w-[45%] transition-all duration-500 ease-in-out origin-left">
                         <p className="text-[14px] md:text-[16px] text-black/60 font-medium uppercase tracking-wider">
                             Freelance
                         </p>
@@ -117,7 +128,7 @@ export default function FeaturedProjects() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                 {/* Bridgegood */}
                 <div
-                    className="group cursor-pointer flex flex-col pt-8 px-8 rounded-[16px] overflow-hidden h-[500px] bg-white border border-border/50"
+                    className="group cursor-pointer flex flex-col pt-8 px-8 rounded-[16px] overflow-hidden h-[540px] bg-[#D8E2ED] border border-border/50 hover:bg-[#C2CBD5] transition-all duration-300 ease-in-out"
                     onClick={() => setActiveProject("bridgegood")}
                 >
                     <div className="flex flex-col gap-1 mb-6">
@@ -128,7 +139,7 @@ export default function FeaturedProjects() {
                             Gamified AI learning tool to help students with social anxiety
                         </h3>
                     </div>
-                    <div className="mt-auto h-[280px] relative rounded-t-[16px] overflow-hidden shadow-sm">
+                    <div className="mt-auto h-[320px] relative rounded-t-[16px] overflow-hidden shadow-sm">
                         <img
                             src="assets/images/bridgegood/bridgegood-thumbnail.png"
                             alt="Bridgegood AI for Social Good"
@@ -139,7 +150,7 @@ export default function FeaturedProjects() {
 
                 {/* StreetCode */}
                 <div
-                    className="group cursor-pointer flex flex-col pt-8 px-8 rounded-[16px] overflow-hidden h-[500px] bg-white border border-border/50"
+                    className="group cursor-pointer flex flex-col pt-8 px-8 rounded-[16px] overflow-hidden h-[540px] bg-[#D8E2ED] border border-border/50 hover:bg-[#C2CBD5] transition-all duration-300 ease-in-out"
                     onClick={() => setActiveProject("streetcode")}
                 >
                     <div className="flex flex-col gap-1 mb-6">
@@ -150,7 +161,7 @@ export default function FeaturedProjects() {
                             Directing development of a speech to ASL translation app for deaf/HoH communities
                         </h3>
                     </div>
-                    <div className="mt-auto h-[280px] relative rounded-t-[16px] overflow-hidden shadow-sm">
+                    <div className="mt-auto h-[320px] relative rounded-t-[16px] overflow-hidden shadow-sm">
                         <img
                             src="assets/images/streetcode/streetcode-thumbnail.png"
                             alt="StreetCode Academy ASL App"

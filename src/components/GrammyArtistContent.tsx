@@ -1,19 +1,202 @@
-import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useTransform, animate, useInView, Variants } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
-    WarningCircle,
-    CheckCircle,
-    ChartLineUp,
     ArrowUpRight,
     ArrowUp,
-    ArrowDown,
-    StarFour,
-    Heart,
-    MagicWand,
-    Code,
-    FigmaLogo,
-    OpenAiLogo
+    ArrowDown
 } from "@phosphor-icons/react";
+
+const AnimatedWarningCircle = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const bobVariants: Variants = {
+    initial: { y: 0 },
+    hover: {
+      y: [0, -6, 0],
+      transition: {
+        delay: 0.4,
+        duration: 1.2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const lineVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const dotVariants: Variants = {
+    initial: { scale: 1, opacity: 1 },
+    hover: {
+      scale: [0, 1.2, 1],
+      opacity: [0, 1],
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Entire Icon Group (Animated Bobbing) */}
+      <motion.g variants={bobVariants}>
+        {/* Circle */}
+        <circle
+          cx="128"
+          cy="128"
+          r="96"
+          fill="none"
+          stroke="currentColor"
+          strokeMiterlimit="10"
+          strokeWidth="16"
+        />
+        {/* Exclamation line */}
+        <motion.line
+          x1="128"
+          y1="136"
+          x2="128"
+          y2="80"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="16"
+          variants={lineVariants}
+        />
+        {/* Exclamation dot */}
+        <motion.circle
+          cx="128"
+          cy="172"
+          r="12"
+          fill="currentColor"
+          variants={dotVariants}
+        />
+      </motion.g>
+    </svg>
+  );
+};
+
+const AnimatedCheckCircle = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const bobVariants: Variants = {
+    initial: { y: 0 },
+    hover: {
+      y: [0, -4, 0],
+      transition: {
+        delay: 0.4,
+        duration: 1.2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const checkVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Entire Icon Group (Animated Bobbing) */}
+      <motion.g variants={bobVariants}>
+        {/* Circle */}
+        <circle
+          cx="128"
+          cy="128"
+          r="96"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="16"
+        />
+        {/* Check */}
+        <motion.polyline
+          points="88 136 112 160 168 104"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="16"
+          variants={checkVariants}
+        />
+      </motion.g>
+    </svg>
+  );
+};
+
+const AnimatedChartLineUp = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const chartVariants: Variants = {
+    initial: {
+      pathLength: 1
+    },
+    hover: {
+      pathLength: [0, 1, 1, 0],
+      transition: {
+        duration: 2.2,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.45, 0.55, 1]
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Axes (Static) */}
+      <polyline
+        points="224 208 32 208 32 48"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      {/* Arrow Segment Combined (Animated) */}
+      <motion.path
+        d="M32 176 L96 112 L128 144 L200 72 M200 112 L200 72 L160 72"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={chartVariants}
+      />
+    </svg>
+  );
+};
 
 function Counter({ value }: { value: number }) {
     const count = useMotionValue(0);
@@ -36,7 +219,521 @@ function Counter({ value }: { value: number }) {
     return <motion.span ref={ref}>{rounded}</motion.span>;
 }
 
+const AnimatedOpenAiLogo = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const createPetalVariants = (delay: number): Variants => ({
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        delay,
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  });
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none"/>
+      <motion.path
+        d="M104,141.86V77.19L148.5,51.5a48,48,0,0,1,66.4,64.08"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPetalVariants(0.0)}
+      />
+      <motion.path
+        d="M128,155.71,72,123.38V72a48,48,0,0,1,88.69-25.47"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPetalVariants(0.1)}
+      />
+      <motion.path
+        d="M152,141.86,96,174.19,51.5,148.5A48,48,0,0,1,73.79,59"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPetalVariants(0.2)}
+      />
+      <motion.path
+        d="M152,114.14v64.67L107.5,204.5a48,48,0,0,1-66.4-64.08"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPetalVariants(0.3)}
+      />
+      <motion.path
+        d="M128,100.29l56,32.33V184a48,48,0,0,1-88.69,25.47"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPetalVariants(0.4)}
+      />
+      <motion.path
+        d="M104,114.14l56-32.33,44.5,25.69a48,48,0,0,1-22.29,89.55"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPetalVariants(0.5)}
+      />
+    </svg>
+  );
+};
+
+const AnimatedFigmaLogo = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const createPartVariants = (delay: number): Variants => ({
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        delay,
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  });
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Top Left Shape */}
+      <motion.path
+        d="M136,32H96a32,32,0,0,0,0,64h40Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPartVariants(0.0)}
+      />
+      {/* Top Right Shape */}
+      <motion.path
+        d="M136,96h32a32,32,0,0,0,0-64H136"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPartVariants(0.15)}
+      />
+      {/* Middle Left Shape */}
+      <motion.path
+        d="M136,96H96a32,32,0,0,0,0,64h40Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPartVariants(0.3)}
+      />
+      {/* Middle Right Circle */}
+      <motion.circle
+        cx="168"
+        cy="128"
+        r="32"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPartVariants(0.45)}
+      />
+      {/* Bottom Left Shape */}
+      <motion.path
+        d="M136,160H100a36,36,0,1,0,36,36Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createPartVariants(0.6)}
+      />
+    </svg>
+  );
+};
+
+const AnimatedCode = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const leftVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const middleVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        delay: 0.25,
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const rightVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        delay: 0.5,
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      <motion.polyline
+        points="64 88 16 128 64 168"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={leftVariants}
+      />
+      <motion.line
+        x1="160"
+        y1="40"
+        x2="96"
+        y2="216"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={middleVariants}
+      />
+      <motion.polyline
+        points="192 88 240 128 192 168"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={rightVariants}
+      />
+    </svg>
+  );
+};
+
+const AnimatedStarFour = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const starVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none"/>
+      <motion.path
+        d="M159.82,159.82l-24.34,66.94a8,8,0,0,1-15,0L96.18,159.82,29.24,135.48a8,8,0,0,1,0-15L96.18,96.18l24.34-66.94a8,8,0,0,1,15,0l24.34,66.94,66.94,24.34a8,8,0,0,1,0,15Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={starVariants}
+      />
+    </svg>
+  );
+};
+
+const AnimatedHeart = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const heartVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none"/>
+      <motion.path
+        d="M128,224S24,168,24,102A54,54,0,0,1,78,48c22.59,0,41.94,12.31,50,32,8.06-19.69,27.41-32,50-32a54,54,0,0,1,54,54C232,168,128,224,128,224Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={heartVariants}
+      />
+    </svg>
+  );
+};
+
+const AnimatedMagicWand = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const wandVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const highlightVariants: Variants = {
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        delay: 0.2,
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const createSparkleVariants = (delay: number): Variants => ({
+    initial: { pathLength: 1 },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        delay,
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  });
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Sparkle 1 (middle right) */}
+      <motion.line
+        x1="216"
+        y1="128"
+        x2="216"
+        y2="176"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createSparkleVariants(0.45)}
+      />
+      <motion.line
+        x1="192"
+        y1="152"
+        x2="240"
+        y2="152"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createSparkleVariants(0.45)}
+      />
+      {/* Sparkle 2 (top left) */}
+      <motion.line
+        x1="80"
+        y1="40"
+        x2="80"
+        y2="88"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createSparkleVariants(0.3)}
+      />
+      <motion.line
+        x1="56"
+        y1="64"
+        x2="104"
+        y2="64"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createSparkleVariants(0.3)}
+      />
+      {/* Sparkle 3 (bottom middle) */}
+      <motion.line
+        x1="168"
+        y1="184"
+        x2="168"
+        y2="216"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createSparkleVariants(0.6)}
+      />
+      <motion.line
+        x1="152"
+        y1="200"
+        x2="184"
+        y2="200"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={createSparkleVariants(0.6)}
+      />
+      {/* Highlight inside wand */}
+      <motion.line
+        x1="144"
+        y1="80"
+        x2="176"
+        y2="112"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={highlightVariants}
+      />
+      {/* Wand Body */}
+      <motion.rect
+        x="21.49"
+        y="105.37"
+        width="213.02"
+        height="45.25"
+        rx="8"
+        transform="translate(-53.02 128) rotate(-45)"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={wandVariants}
+      />
+    </svg>
+  );
+};
+
+function useIsActive(ref: React.RefObject<HTMLElement | null>) {
+    const [isActive, setIsActive] = useState(false);
+
+    useEffect(() => {
+        const element = ref.current;
+        if (!element) return;
+
+        setIsActive(element.classList.contains("is-active"));
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === "class") {
+                    setIsActive(element.classList.contains("is-active"));
+                }
+            });
+        });
+
+        observer.observe(element, { attributes: true });
+        return () => observer.disconnect();
+    }, [ref]);
+
+    return isActive;
+}
+
 export default function GrammyArtistContent() {
+    const problemRef = useRef<HTMLDivElement>(null);
+    const solutionRef = useRef<HTMLDivElement>(null);
+    const outcomeRef = useRef<HTMLDivElement>(null);
+    const workflow1Ref = useRef<HTMLDivElement>(null);
+    const workflow2Ref = useRef<HTMLDivElement>(null);
+    const workflow3Ref = useRef<HTMLDivElement>(null);
+
+    const problemActive = useIsActive(problemRef);
+    const solutionActive = useIsActive(solutionRef);
+    const outcomeActive = useIsActive(outcomeRef);
+    const workflow1Active = useIsActive(workflow1Ref);
+    const workflow2Active = useIsActive(workflow2Ref);
+    const workflow3Active = useIsActive(workflow3Ref);
+
+    const problemAnimate = problemActive ? "hover" : "initial";
+    const solutionAnimate = solutionActive ? "hover" : "initial";
+    const outcomeAnimate = outcomeActive ? "hover" : "initial";
+    const workflow1Animate = workflow1Active ? "hover" : "initial";
+    const workflow2Animate = workflow2Active ? "hover" : "initial";
+    const workflow3Animate = workflow3Active ? "hover" : "initial";
+
+    const takeaway1Ref = useRef<HTMLDivElement>(null);
+    const takeaway2Ref = useRef<HTMLDivElement>(null);
+    const takeaway3Ref = useRef<HTMLDivElement>(null);
+
+    const takeaway1Active = useIsActive(takeaway1Ref);
+    const takeaway2Active = useIsActive(takeaway2Ref);
+    const takeaway3Active = useIsActive(takeaway3Ref);
+
+    const takeaway1Animate = takeaway1Active ? "hover" : "initial";
+    const takeaway2Animate = takeaway2Active ? "hover" : "initial";
+    const takeaway3Animate = takeaway3Active ? "hover" : "initial";
+
     return (
         <div className="cs-wrapper cs-wd-theme">
             {/* Hero Section */}
@@ -111,31 +808,49 @@ export default function GrammyArtistContent() {
                         {/* Left Column: Problem & Solution */}
                         <div className="cs-tldr-col-left">
                             {/* Problem Card */}
-                            <div className="cs-card-problem">
+                            <motion.div
+                                ref={problemRef}
+                                whileHover="hover"
+                                animate={problemAnimate}
+                                initial="initial"
+                                className="cs-card-problem"
+                            >
                                 <div className="cs-card-header">
-                                    <WarningCircle size={24} weight="regular" />
+                                    <AnimatedWarningCircle size={24} />
                                     <h3>Problem</h3>
                                 </div>
                                 <p className="cs-card-text">
                                     Grammy Artist's old website was missing clear CTAs and didn’t mesh visually with his artistic identity.
                                 </p>
-                            </div>
+                            </motion.div>
                             {/* Solution Card */}
-                            <div className="cs-card-solution">
+                            <motion.div
+                                ref={solutionRef}
+                                whileHover="hover"
+                                animate={solutionAnimate}
+                                initial="initial"
+                                className="cs-card-solution"
+                            >
                                 <div className="cs-card-header">
-                                    <CheckCircle size={24} weight="regular" />
+                                    <AnimatedCheckCircle size={24} />
                                     <h3>Solution</h3>
                                 </div>
                                 <p className="cs-card-text">
                                     A custom-built, dynamic website consistent with the artist’s brand aesthetic, a revamped subscriber newsletter, and donation integration.
                                 </p>
-                            </div>
+                            </motion.div>
                         </div>
                         {/* Right Column: Outcome (the blue-er section) */}
                         <div className="cs-tldr-col-right">
-                            <div className="cs-card-outcome h-full">
+                            <motion.div
+                                ref={outcomeRef}
+                                whileHover="hover"
+                                animate={outcomeAnimate}
+                                initial="initial"
+                                className="cs-card-outcome h-full"
+                            >
                                 <div className="cs-card-header">
-                                    <ChartLineUp size={24} weight="regular" />
+                                    <AnimatedChartLineUp size={24} />
                                     <h3>Outcome</h3>
                                 </div>
                                 <div className="cs-stats-row">
@@ -157,7 +872,7 @@ export default function GrammyArtistContent() {
                                 <p className="cs-card-text">
                                     The new site was positively received by the client’s 80,000 followers. Client was extremely satisfied with the final product and anecdotally reported an increase in bookings/inquires.
                                 </p>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                     {/* Walkthrough Video */}
@@ -236,33 +951,51 @@ export default function GrammyArtistContent() {
 
                 <div className="cs-testing-comparison mt-8">
                     <div className="cs-testing-items">
-                        <div className="cs-testing-item cs-workflow-item bg-card-bg-hover border border-border">
-                            <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                                <OpenAiLogo size={40} weight="regular" />
+                        <motion.div
+                            ref={workflow1Ref}
+                            whileHover="hover"
+                            animate={workflow1Animate}
+                            initial="initial"
+                            className="cs-testing-item cs-workflow-item bg-card-bg-hover border border-border"
+                        >
+                            <div className="w-12 h-12 flex items-center justify-center shrink-0 text-text-primary">
+                                <AnimatedOpenAiLogo size={40} />
                             </div>
                             <div className="cs-testing-text">
                                 <h4 className="text-lg! mb-1 font-semibold!">Conversation → PRD</h4>
                                 <p className="text-base! opacity-80 text-text-secondary">Synthesized conversation with client, reference sites, and competitive analysis into a PRD using ChatGPT.</p>
                             </div>
-                        </div>
-                        <div className="cs-testing-item cs-workflow-item bg-card-bg-hover border border-border">
-                            <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                                <FigmaLogo size={40} weight="regular" />
+                        </motion.div>
+                        <motion.div
+                            ref={workflow2Ref}
+                            whileHover="hover"
+                            animate={workflow2Animate}
+                            initial="initial"
+                            className="cs-testing-item cs-workflow-item bg-card-bg-hover border border-border"
+                        >
+                            <div className="w-12 h-12 flex items-center justify-center shrink-0 text-text-primary">
+                                <AnimatedFigmaLogo size={40} />
                             </div>
                             <div className="cs-testing-text">
                                 <h4 className="text-lg! mb-1 font-semibold!">PRD → Figma Make</h4>
                                 <p className="text-base! opacity-80 text-text-secondary">Converted the PRD into a thorough Figma Make prompt.</p>
                             </div>
-                        </div>
-                        <div className="cs-testing-item cs-workflow-item bg-card-bg-hover border border-border">
-                            <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                                <Code size={40} weight="regular" />
+                        </motion.div>
+                        <motion.div
+                            ref={workflow3Ref}
+                            whileHover="hover"
+                            animate={workflow3Animate}
+                            initial="initial"
+                            className="cs-testing-item cs-workflow-item bg-card-bg-hover border border-border"
+                        >
+                            <div className="w-12 h-12 flex items-center justify-center shrink-0 text-text-primary">
+                                <AnimatedCode size={40} />
                             </div>
                             <div className="cs-testing-text">
                                 <h4 className="text-lg! mb-1 font-semibold!">Figma Make → Manual Refining</h4>
                                 <p className="text-base! opacity-80 text-text-secondary">General Troubleshooting, Restyling, CSS Tweaks.</p>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>
@@ -344,33 +1077,51 @@ export default function GrammyArtistContent() {
                     <h2 className="cs-section-title">What I learned from this project</h2>
                 </div>
                 <div className="cs-takeaways-grid text-left">
-                    <div className="cs-takeaway-card">
+                    <motion.div
+                        ref={takeaway1Ref}
+                        whileHover="hover"
+                        animate={takeaway1Animate}
+                        initial="initial"
+                        className="cs-takeaway-card"
+                    >
                         <div className="cs-takeaway-header">
-                            <span className="cs-takeaway-icon">
-                                <StarFour size={24} weight="regular" />
+                            <span className="cs-takeaway-icon text-text-primary">
+                                <AnimatedStarFour size={24} />
                             </span>
                             <h3>Working with AI-Design tools</h3>
                         </div>
                         <p>This project was my introduction to using an AI Design tool. I’m not sure if I would use Figma Make for a 0-1 project again but, I’m excited to lean into my CS background and work with more dev-focused tools like Cursor and Claude.</p>
-                    </div>
-                    <div className="cs-takeaway-card">
+                    </motion.div>
+                    <motion.div
+                        ref={takeaway2Ref}
+                        whileHover="hover"
+                        animate={takeaway2Animate}
+                        initial="initial"
+                        className="cs-takeaway-card"
+                    >
                         <div className="cs-takeaway-header">
-                            <span className="cs-takeaway-icon">
-                                <Heart size={24} weight="regular" />
+                            <span className="cs-takeaway-icon text-text-primary">
+                                <AnimatedHeart size={24} />
                             </span>
                             <h3>Defining the feel</h3>
                         </div>
                         <p>I took my time analyzing references and understanding the client’s vision. Using ChatGPT to prompt Figma Make was incredibly effective in maintaining a consistent aesthetic across the site.</p>
-                    </div>
-                    <div className="cs-takeaway-card">
+                    </motion.div>
+                    <motion.div
+                        ref={takeaway3Ref}
+                        whileHover="hover"
+                        animate={takeaway3Animate}
+                        initial="initial"
+                        className="cs-takeaway-card"
+                    >
                         <div className="cs-takeaway-header">
-                            <span className="cs-takeaway-icon">
-                                <MagicWand size={24} weight="regular" />
+                            <span className="cs-takeaway-icon text-text-primary">
+                                <AnimatedMagicWand size={24} />
                             </span>
                             <h3>Using AI to animate micro interactions</h3>
                         </div>
                         <p>Linking Figma Make with Framer motion made it super easy to inject subtle motion and make the site feel more dynamic.</p>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
         </div>

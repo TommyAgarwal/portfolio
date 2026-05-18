@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Copy, Check, List, X } from "@phosphor-icons/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Check, List, X } from "@phosphor-icons/react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 export default function Navigation() {
     const pathname = usePathname();
@@ -38,10 +38,65 @@ export default function Navigation() {
         { name: "RESUME", href: "/resume" },
     ];
 
+const AnimatedCopy = ({ size = 14, className = "" }: { size?: number; className?: string }) => {
+  const copyVariants: Variants = {
+    initial: {
+      pathLength: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut",
+      }
+    },
+    hover: {
+      pathLength: [0, 1],
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Rear Square (Static) */}
+      <polyline
+        points="168 168 216 168 216 40 88 40 88 88"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      {/* Front Square (Animated) */}
+      <motion.rect
+        x="40"
+        y="88"
+        width="128"
+        height="128"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={copyVariants}
+      />
+    </svg>
+  );
+};
+
     const EmailButton = ({ className = "" }: { className?: string }) => (
-        <button 
+        <motion.button 
             onClick={handleCopy}
-            className={`relative bg-black flex items-center gap-2 px-4 py-2 rounded-[6px] cursor-pointer transition-transform active:scale-95 ${className}`}
+            whileHover="hover"
+            initial="initial"
+            className={`group relative bg-black flex items-center gap-2 px-4 py-2 rounded-[6px] cursor-pointer transition-transform active:scale-95 ${className}`}
         >
             <span className="text-[14px] font-medium text-white whitespace-nowrap">
                 {email}
@@ -50,7 +105,7 @@ export default function Navigation() {
                 {copied ? (
                     <Check size={14} weight="bold" className="text-green-400" />
                 ) : (
-                    <Copy size={14} className="opacity-60" />
+                    <AnimatedCopy size={14} className="text-white opacity-60 group-hover:opacity-100 transition-all duration-300 flex-shrink-0" />
                 )}
             </div>
             {copied && (
@@ -58,7 +113,7 @@ export default function Navigation() {
                     Copied!
                 </div>
             )}
-        </button>
+        </motion.button>
     );
 
     return (

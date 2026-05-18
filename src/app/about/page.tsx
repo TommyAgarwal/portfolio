@@ -6,8 +6,8 @@ export default function AboutPage() {
   return (
     <>
       <Navigation />
-      <div className="max-w-[1440px] mx-auto w-full px-8 md:px-16 relative bg-transparent pt-32">
-        <section id="about" className="py-12">
+      <div className="max-w-[1440px] mx-auto w-full px-8 lb:px-16 relative bg-transparent pt-24 lb:pt-28">
+        <section id="about" className="pb-12">
           <AboutSection />
         </section>
       </div>
