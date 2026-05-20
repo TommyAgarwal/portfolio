@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Host_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const hostGrotesk = Host_Grotesk({
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en" className={hostGrotesk.variable}>
       <body className="antialiased font-sans bg-bg text-text-primary">
         {children}
+        <Analytics />
       </body>
     </html>
   );
