@@ -222,7 +222,7 @@ export default function CaseStudyOverlay({ isOpen, onClose, children, projectId 
             {/* Panel */}
             <div
                 ref={overlayPanelRef}
-                className={`relative bg-bg cs-overlay-theme shadow-none w-full max-w-[1076px] h-[95vh] lg:h-[85vh] rounded-t-[32px] lg:rounded-[32px] border-t border-border lg:border-none flex flex-col overflow-hidden transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] p-2 lg:py-8 lg:px-2 ${isOpen ? "translate-y-0" : "translate-y-full lg:translate-y-8"
+                className={`relative bg-bg cs-overlay-theme shadow-none w-full max-w-[1076px] h-[95vh] lg:h-[85vh] rounded-t-[16px] lg:rounded-[16px] border-t border-border lg:border-none flex flex-col overflow-hidden transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] p-2 lg:py-8 lg:px-2 ${isOpen ? "translate-y-0" : "translate-y-full lg:translate-y-8"
                     }`}
             >
                 {/* Mobile Header elements */}

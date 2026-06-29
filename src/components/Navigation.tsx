@@ -118,43 +118,41 @@ const AnimatedCopy = ({ size = 14, className = "" }: { size?: number; className?
 
     return (
         <>
-            <nav className="fixed top-0 left-0 w-full z-[1001] bg-[#f5f5f5]/80 backdrop-blur-md border-b border-border">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-16 h-20 flex items-center justify-between relative">
-                    {/* Left: Name */}
-                    <div className="flex-1 flex justify-start">
-                        <Link href="/" className="text-lg md:text-xl font-bold text-black no-underline tracking-tight whitespace-nowrap z-[1002]">
-                            TOMMY AGARWAL
-                        </Link>
-                    </div>
-
-                    {/* Middle: Nav Elements (Desktop) */}
-                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className={`text-[15px] transition-all no-underline ${pathname === link.href ? "font-bold text-black" : "font-medium text-black/60 hover:text-black"}`}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                    </div>
-
-                    {/* Right: CTA Button (Desktop) & Mobile Toggle */}
-                    <div className="flex-1 flex justify-end items-center gap-4">
-                        <div className="hidden md:block">
-                            <EmailButton />
-                        </div>
-
-                        {/* Hamburger Button */}
-                        <button 
-                            className="md:hidden z-[1002] p-1 text-black cursor-pointer"
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            aria-label="Toggle menu"
+            {/* Desktop Navbar: narrow centered pill */}
+            <nav className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-[1001] bg-white rounded-[16px] px-8 py-4 items-center justify-between w-[825px] max-w-[calc(100vw-48px)] shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+                {/* Nav Links */}
+                <div className="flex items-center gap-16">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.name}
+                            href={link.href}
+                            className={`text-[16px] transition-all no-underline ${pathname === link.href ? "font-medium text-black" : "font-normal text-black/50 hover:text-black"}`}
                         >
-                            {isMenuOpen ? <X size={28} weight="bold" /> : <List size={28} weight="bold" />}
-                        </button>
-                    </div>
+                            {link.name}
+                        </Link>
+                    ))}
+                </div>
+
+                {/* Email CTA */}
+                <EmailButton />
+            </nav>
+
+            {/* Mobile Navbar: full-width top bar */}
+            <nav className="md:hidden fixed top-0 left-0 w-full z-[1001] bg-[#F1F4FB]/90 backdrop-blur-md border-b border-border">
+                <div className="px-6 h-16 flex items-center justify-between relative">
+                    {/* Left: Name */}
+                    <Link href="/" className="text-base font-bold text-black no-underline tracking-tight whitespace-nowrap z-[1002]">
+                        TOMMY AGARWAL
+                    </Link>
+
+                    {/* Hamburger Button */}
+                    <button 
+                        className="z-[1002] p-1 text-black cursor-pointer"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {isMenuOpen ? <X size={28} weight="bold" /> : <List size={28} weight="bold" />}
+                    </button>
                 </div>
             </nav>
 

@@ -4,10 +4,10 @@ import { ArrowUpRight } from "@phosphor-icons/react";
 export default function StreetcodeContent() {
     const project = {
         title: "StreetCode Academy: Design and Tech",
-        media: "/assets/videos/DSignDemo.mov",
+        media: "/assets/videos/dsignthumbnail.mov",
         type: "video",
         metadata: {
-            timeline: "6 weeks",
+            timeline: "6 Weeks",
             role: "Design Instructor\nProject Manager",
             tools: "Replit",
             collaborators: "6 Students\nDesign Instructor"
@@ -31,6 +31,11 @@ export default function StreetcodeContent() {
                         <h1 className="cs-title">
                             Directing development of a speech to ASL translation app for deaf/HoH communities
                         </h1>
+                        <div className="cs-hero-tags">
+                            <span className="cs-tag">Mentorship</span>
+                            <span className="cs-tag">Accessibility</span>
+                            <span className="cs-tag">Design Thinking</span>
+                        </div>
                     </div>
                     <div className="cs-hero-image">
                         <video
@@ -42,11 +47,6 @@ export default function StreetcodeContent() {
                             className="w-full h-full object-cover rounded-xl"
                         />
                     </div>
-                </div>
-                <div className="cs-hero-tags">
-                    <span className="cs-tag">Accessibility</span>
-                    <span className="cs-tag">AI-Assisted Workflow</span>
-                    <span className="cs-tag">Mentorship</span>
                 </div>
             </header>
 

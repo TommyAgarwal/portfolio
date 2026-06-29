@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Grainient from './Grainient';
+import SplitText from './SplitText';
 
 export default function ShaderHero() {
     return (
-        <section className="w-full max-w-[1440px] mx-auto px-8 md:px-16 pt-24 pb-4 md:pt-28 md:pb-6">
+        <section className="w-full max-w-[1100px] mx-auto px-8 md:px-0 pt-28 pb-4 md:pt-32 md:pb-6">
             <motion.div
                 initial={{ opacity: 0, y: 40, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -13,38 +15,34 @@ export default function ShaderHero() {
                     duration: 1.2,
                     ease: [0.16, 1, 0.3, 1], // easeOutExpo
                 }}
-                className="w-full rounded-[16px] overflow-hidden relative min-h-[75vh] flex flex-col items-center justify-center p-8 md:p-16 text-center isolate shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+                className="w-full rounded-[16px] overflow-hidden relative flex flex-col items-center justify-center px-12 py-24 md:px-[200px] md:py-[144px] text-center isolate shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
             >
                 {/* Hero Gradient Background */}
-                <div className="absolute inset-0 -z-10">
-                    <video 
-                        autoPlay 
-                        muted 
-                        loop 
-                        playsInline 
-                        className="w-full h-full object-cover"
-                    >
-                        <source src="/assets/videos/GradientVideo.mp4" type="video/mp4" />
-                    </video>
-                </div>
+                <Grainient className="absolute inset-0 -z-10" />
 
-                <div className="max-w-4xl w-full flex flex-col items-center gap-6 z-10">
-                    <h1
-                        className="text-[32px] sm:text-[40px] md:text-[48px] font-normal text-white tracking-tight leading-[1.1] md:leading-[1.15]"
-                        style={{ textShadow: '0 2px 20px rgba(0,0,0,0.1)' }}
-                    >
-                        Tommy Agarwal is a Product Designer with a Computer Science background and 5 years of experience in retail operations.
-                    </h1>
+                <div className="max-w-[680px] w-full flex flex-col items-center gap-8 z-10">
+                    <SplitText
+                        text="Tommy Agarwal is a Product (UX) Designer with a Computer Science background and 5 years of experience in retail operations."
+                        className="text-[28px] sm:text-[32px] md:text-[36px] font-normal text-white tracking-tight leading-[1.15]"
+                        style={{ textShadow: '0px 1px 20px rgba(0,0,0,0.1)' }}
+                        delay={250}
+                        duration={1.3}
+                        from={{ opacity: 0, y: 15 }}
+                        ease="power3.out"
+                        threshold={0.1}
+                        rootMargin="0px"
+                        textAlign="center"
+                        tag="h1"
+                        splitType="lines"
+                    />
                     <p
-                        className="text-[16px] md:text-[20px] text-white/95 font-normal mt-2 md:mt-4 max-w-2xl"
+                        className="text-[16px] md:text-[18px] text-white/95 font-normal"
                         style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
                     >
-                        Currently #OpenToWork, let's change that!
+                        Currently #OpenToWork, let&apos;s change that!
                     </p>
                 </div>
             </motion.div>
         </section>
     );
 }
-
-

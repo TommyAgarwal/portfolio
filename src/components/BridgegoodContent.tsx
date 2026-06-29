@@ -4,10 +4,10 @@ import { ArrowUpRight } from "@phosphor-icons/react";
 export default function BridgegoodContent() {
     const project = {
         title: "Bridgegood AI for Social Good Design-a-thon",
-        media: "/assets/videos/BoldStepsDemo.mov",
+        media: "/assets/videos/boldstepsthumbnail-HD 1080p.mov",
         type: "video",
         metadata: {
-            timeline: "48 hours",
+            timeline: "48 Hours",
             role: "UX/UI Design\nUX Research",
             tools: "Figma\nLovable",
             collaborators: "2 Developers\n2 Designers"
@@ -32,6 +32,11 @@ export default function BridgegoodContent() {
                         <h1 className="cs-title">
                             Gamified AI learning tool to help students with social anxiety
                         </h1>
+                        <div className="cs-hero-tags">
+                            <span className="cs-tag">Cross-Functional Collaboration</span>
+                            <span className="cs-tag">AI-Assisted Workflow</span>
+                            <span className="cs-tag">Hackathon</span>
+                        </div>
                     </div>
                     <div className="cs-hero-image">
                         <video
@@ -43,11 +48,6 @@ export default function BridgegoodContent() {
                             className="w-full h-full object-cover rounded-xl"
                         />
                     </div>
-                </div>
-                <div className="cs-hero-tags">
-                    <span className="cs-tag">Cross-functional Collaboration</span>
-                    <span className="cs-tag">Hackathon</span>
-                    <span className="cs-tag">AI-Assisted Workflow</span>
                 </div>
             </header>
 
