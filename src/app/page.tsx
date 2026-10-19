@@ -1,5 +1,5 @@
 import Navigation from "../components/Navigation";
-import ShaderHero from "../components/ShaderHero";
+import Hero from "../components/Hero";
 import FeaturedProjects from "../components/FeaturedProjects";
 import Footer from "../components/Footer";
 
@@ -8,11 +8,11 @@ export default function Home() {
     <>
       <Navigation />
 
-      <ShaderHero />
+      <Hero />
 
       {/* Main Content Area */}
       <div className="w-full mx-auto relative bg-transparent">
-        <section id="work" className="pt-8 pb-24">
+        <section id="work" className="pb-24">
           <FeaturedProjects />
         </section>
       </div>

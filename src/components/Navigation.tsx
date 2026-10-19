@@ -3,8 +3,51 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Check, List, X } from "@phosphor-icons/react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { Check, List, X, Copy } from "@phosphor-icons/react";
+import { motion, AnimatePresence } from "framer-motion";
+import CenterUnderline from "./CenterUnderline";
+import ComesInGoesOutUnderline from "./ComesInGoesOutUnderline";
+
+interface EmailButtonProps {
+    email: string;
+    copied: boolean;
+    handleCopy: () => void;
+    className?: string;
+}
+
+const EmailButton = ({ email, copied, handleCopy, className = "" }: EmailButtonProps) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+        <motion.button 
+            onClick={handleCopy}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className={`group relative bg-[var(--color-text-primary)] flex items-center gap-[12px] px-[16px] py-[8px] rounded-[4px] cursor-pointer transition-transform active:scale-95 ${className}`}
+        >
+            <ComesInGoesOutUnderline
+                isHovered={isHovered}
+                underlineHeightRatio={0.08}
+                underlinePaddingRatio={0.1}
+                className="font-mono text-[12px] text-white tracking-[0.36px] whitespace-nowrap"
+            >
+                {email}
+            </ComesInGoesOutUnderline>
+            <div className="flex items-center justify-center w-4 h-4 text-white">
+                {copied ? (
+                    <Check size={14} weight="bold" className="text-green-400" />
+                ) : (
+                    <Copy size={16} className="text-white opacity-60 group-hover:opacity-100 transition-all duration-300 flex-shrink-0" />
+                )}
+            </div>
+            {copied && (
+                <div className="absolute -bottom-8 right-0 font-mono text-[10px] text-black whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-border">
+                    Copied!
+                </div>
+            )}
+        </motion.button>
+    );
+};
 
 export default function Navigation() {
     const pathname = usePathname();
@@ -20,7 +63,9 @@ export default function Navigation() {
 
     // Close menu when route changes
     useEffect(() => {
-        setIsMenuOpen(false);
+        Promise.resolve().then(() => {
+            setIsMenuOpen(false);
+        });
     }, [pathname]);
 
     // Prevent scroll when menu is open
@@ -38,122 +83,43 @@ export default function Navigation() {
         { name: "RESUME", href: "/resume" },
     ];
 
-const AnimatedCopy = ({ size = 14, className = "" }: { size?: number; className?: string }) => {
-  const copyVariants: Variants = {
-    initial: {
-      pathLength: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      }
-    },
-    hover: {
-      pathLength: [0, 1],
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
 
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 256 256"
-      className={className}
-    >
-      <rect width="256" height="256" fill="none" />
-      {/* Rear Square (Static) */}
-      <polyline
-        points="168 168 216 168 216 40 88 40 88 88"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="16"
-      />
-      {/* Front Square (Animated) */}
-      <motion.rect
-        x="40"
-        y="88"
-        width="128"
-        height="128"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="16"
-        variants={copyVariants}
-      />
-    </svg>
-  );
-};
-
-    const EmailButton = ({ className = "" }: { className?: string }) => (
-        <motion.button 
-            onClick={handleCopy}
-            whileHover="hover"
-            initial="initial"
-            className={`group relative bg-black flex items-center gap-2 px-4 py-2 rounded-[6px] cursor-pointer transition-transform active:scale-95 ${className}`}
-        >
-            <span className="text-[14px] font-medium text-white whitespace-nowrap">
-                {email}
-            </span>
-            <div className="flex items-center justify-center w-4 h-4 text-white">
-                {copied ? (
-                    <Check size={14} weight="bold" className="text-green-400" />
-                ) : (
-                    <AnimatedCopy size={14} className="text-white opacity-60 group-hover:opacity-100 transition-all duration-300 flex-shrink-0" />
-                )}
-            </div>
-            {copied && (
-                <div className="absolute -bottom-8 right-0 text-[11px] font-medium text-black whitespace-nowrap bg-white/80 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-black/5">
-                    Copied!
-                </div>
-            )}
-        </motion.button>
-    );
 
     return (
         <>
-            {/* Desktop Navbar: narrow centered pill */}
-            <nav className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-[1001] bg-white rounded-[16px] px-8 py-4 items-center justify-between w-[825px] max-w-[calc(100vw-48px)] shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+            {/* Desktop Navbar - Full width header */}
+            <nav className="hidden md:flex fixed top-0 left-0 w-full z-[1001] bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-border px-[64px] py-[16px] items-center justify-between">
                 {/* Nav Links */}
-                <div className="flex items-center gap-16">
+                <div className="flex items-center gap-[48px]">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className={`text-[16px] transition-all no-underline ${pathname === link.href ? "font-medium text-black" : "font-normal text-black/50 hover:text-black"}`}
+                            className="font-mono text-[12px] no-underline transition-colors uppercase font-normal text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                         >
-                            {link.name}
+                            <CenterUnderline underlineHeightRatio={0.08} underlinePaddingRatio={0.1}>
+                                {link.name}
+                            </CenterUnderline>
                         </Link>
                     ))}
                 </div>
 
                 {/* Email CTA */}
-                <EmailButton />
+                <EmailButton email={email} copied={copied} handleCopy={handleCopy} />
             </nav>
 
-            {/* Mobile Navbar: full-width top bar */}
-            <nav className="md:hidden fixed top-0 left-0 w-full z-[1001] bg-[#F1F4FB]/90 backdrop-blur-md border-b border-border">
-                <div className="px-6 h-16 flex items-center justify-between relative">
-                    {/* Left: Name */}
-                    <Link href="/" className="text-base font-bold text-black no-underline tracking-tight whitespace-nowrap z-[1002]">
-                        TOMMY AGARWAL
-                    </Link>
-
-                    {/* Hamburger Button */}
-                    <button 
-                        className="z-[1002] p-1 text-black cursor-pointer"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {isMenuOpen ? <X size={28} weight="bold" /> : <List size={28} weight="bold" />}
-                    </button>
-                </div>
+            {/* Mobile Navbar */}
+            <nav className="md:hidden fixed top-0 left-0 w-full z-[1001] bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-border px-6 py-4 flex items-center justify-between">
+                <Link href="/" className="font-sans text-[16px] font-bold text-[var(--color-text-primary)] no-underline tracking-tight">
+                    TOMMY AGARWAL
+                </Link>
+                <button 
+                    className="p-1 text-[var(--color-text-primary)] cursor-pointer"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    {isMenuOpen ? <X size={24} weight="bold" /> : <List size={24} weight="bold" />}
+                </button>
             </nav>
 
             {/* Mobile Menu Overlay */}
@@ -163,38 +129,28 @@ const AnimatedCopy = ({ size = 14, className = "" }: { size?: number; className?
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3, ease: "circOut" }}
-                        className="fixed inset-0 z-[1000] bg-[#f5f5f5] pt-32 px-6 md:hidden flex flex-col"
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        className="fixed inset-0 z-[1000] bg-[var(--color-bg)] pt-24 px-6 md:hidden flex flex-col justify-between pb-8"
                     >
-                        <div className="flex flex-col gap-8">
-                            {navLinks.map((link, i) => (
-                                <motion.div
+                        <div className="flex flex-col gap-6">
+                            {navLinks.map((link) => (
+                                <Link
                                     key={link.name}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.1 + i * 0.1 }}
+                                    href={link.href}
+                                    className="font-mono text-[24px] no-underline uppercase font-normal text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+                                    onClick={() => setIsMenuOpen(false)}
                                 >
-                                    <Link
-                                        href={link.href}
-                                        className={`text-4xl font-bold no-underline tracking-tight ${pathname === link.href ? "text-black" : "text-black/30 hover:text-black transition-colors"}`}
-                                        onClick={() => setIsMenuOpen(false)}
-                                    >
+                                    <CenterUnderline underlineHeightRatio={0.08} underlinePaddingRatio={0.1}>
                                         {link.name}
-                                    </Link>
-                                </motion.div>
+                                    </CenterUnderline>
+                                </Link>
                             ))}
                         </div>
 
-                        {/* Mobile Email Button */}
-                        <motion.div 
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="mt-12"
-                        >
-                            <p className="text-black/40 text-[12px] font-bold mb-4 uppercase tracking-widest">Get in touch</p>
-                            <EmailButton className="w-fit" />
-                        </motion.div>
+                        <div className="flex flex-col gap-3">
+                            <p className="font-mono text-[var(--color-text-secondary)] text-[11px] uppercase tracking-wider">Get in touch</p>
+                            <EmailButton className="w-full justify-between" email={email} copied={copied} handleCopy={handleCopy} />
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

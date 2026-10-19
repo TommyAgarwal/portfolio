@@ -883,7 +883,7 @@ export default function GrammyArtistContent() {
           </div>
           {/* Walkthrough Video */}
           <div
-            className="cs-walkthrough-video relative group w-full cursor-pointer rounded-lg border border-border overflow-hidden"
+            className="cs-walkthrough-video relative group w-full cursor-pointer rounded-[4px] border border-border overflow-hidden"
             onClick={() => window.open('https://kiazimalonga.com/', '_blank')}
           >
             <video
@@ -1031,8 +1031,8 @@ export default function GrammyArtistContent() {
             While the visual revamp was much appreciated, the more important work was in relation to the CTAs that got added across the site. By introducing the client to Mailchimp and PayPal Business, we provided concrete avenues for audience conversion.
           </p>
           <div className="flex flex-col md:flex-row gap-4 w-full">
-            <img src="assets/images/webdesign/Contact.png" alt="Contact Section" className="flex-1 object-cover rounded-lg border border-border min-w-0" />
-            <img src="assets/images/webdesign/Footer.png" alt="Footer Section" className="flex-1 object-cover rounded-lg border border-border min-w-0" />
+            <img src="assets/images/webdesign/Contact.png" alt="Contact Section" className="flex-1 object-cover rounded-[4px] border border-border min-w-0" />
+            <img src="assets/images/webdesign/Footer.png" alt="Footer Section" className="flex-1 object-cover rounded-[4px] border border-border min-w-0" />
           </div>
           <p className="cs-section-desc-light">
             Newsletter subscribers increased by 30% and anecdotally, the client reported an increase in inquiries thanks to the site.
@@ -1049,7 +1049,7 @@ export default function GrammyArtistContent() {
             When my client posted the new website to his 79K social media followers, it garnered an immediate positive reaction and almost 60,000 impressions within the first week.
           </p>
           <div className="cs-bg-image-full w-full">
-            <img src="assets/images/webdesign/Impressions.png" alt="Social Media Impressions" className="w-full h-auto border border-border rounded-lg" />
+            <img src="assets/images/webdesign/Impressions.png" alt="Social Media Impressions" className="w-full h-auto border border-border rounded-[4px]" />
           </div>
         </div>
       </section>
@@ -1062,7 +1062,7 @@ export default function GrammyArtistContent() {
           <p className="cs-section-desc-light">
             Instead of paying a heavy monthly subscription for a Squarespace template, my client now gets a fully custom-built product and pays just $12/year for the domain.
           </p>
-          <div className="w-full bg-card-bg p-8 rounded-lg flex flex-col md:flex-row justify-center gap-8 md:gap-16 items-center border border-border">
+          <div className="w-full bg-card-bg p-8 rounded-[4px] flex flex-col md:flex-row justify-center gap-8 md:gap-16 items-center border border-border">
             <div className="text-center">
               <h4 className="text-3xl font-bold mb-2 text-danger">$<Counter value={240} />/yr</h4>
               <p className="text-base text-text-secondary font-medium">Squarespace Template</p>

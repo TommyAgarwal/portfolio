@@ -2,16 +2,18 @@
 
 import { useState, useEffect, useRef } from "react";
 import CaseStudyOverlay from "./CaseStudyOverlay";
-import TommyHilfigerContent from "./TommyHilfigerContent";
+import StorySlideshowOverlay from "./StorySlideshowOverlay";
+import TommyHilfigerSlideshow, { SLIDE_LABELS as TOMMY_SLIDE_LABELS } from "./TommyHilfigerSlideshow";
 import GrammyArtistContent from "./GrammyArtistContent";
 import BridgegoodContent from "./BridgegoodContent";
 import StreetcodeContent from "./StreetcodeContent";
+import RalphLaurenContent from "./RalphLaurenContent";
 
 // Tag pill component
 function Tag({ label }: { label: string }) {
     return (
-        <div className="border border-[#555555] flex items-center justify-center px-3 py-2 rounded-[8px] shrink-0">
-            <p className="text-[#555555] text-[12px] font-normal whitespace-nowrap">
+        <div className="border border-[var(--color-text-secondary)] flex items-center justify-center px-[12px] py-[8px] rounded-[4px] shrink-0 bg-transparent">
+            <p className="text-[var(--color-text-secondary)] font-mono text-[12px] font-normal uppercase whitespace-nowrap">
                 {label}
             </p>
         </div>
@@ -20,11 +22,12 @@ function Tag({ label }: { label: string }) {
 
 export default function FeaturedProjects() {
     const [activeProject, setActiveProject] = useState<string | null>(null);
+    const [tommySlideIndex, setTommySlideIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
     const tommyVideoRef = useRef<HTMLVideoElement>(null);
     const grammyVideoRef = useRef<HTMLVideoElement>(null);
     const streetcodeVideoRef = useRef<HTMLVideoElement>(null);
-    const bridgegoodVideoRef = useRef<HTMLVideoElement>(null);
+    const ralphVideoRef = useRef<HTMLVideoElement>(null);
 
     // Mobile detection
     useEffect(() => {
@@ -34,13 +37,12 @@ export default function FeaturedProjects() {
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
-    // Auto-play videos on mobile
     useEffect(() => {
         if (isMobile) {
             tommyVideoRef.current?.play().catch(() => { });
             grammyVideoRef.current?.play().catch(() => { });
             streetcodeVideoRef.current?.play().catch(() => { });
-            bridgegoodVideoRef.current?.play().catch(() => { });
+            ralphVideoRef.current?.play().catch(() => { });
         }
     }, [isMobile]);
 
@@ -52,6 +54,7 @@ export default function FeaturedProjects() {
             else if (hash === "grammy-artist") setActiveProject("grammy-artist");
             else if (hash === "bridgegood") setActiveProject("bridgegood");
             else if (hash === "streetcode") setActiveProject("streetcode");
+            else if (hash === "ralph-lauren") setActiveProject("ralph-lauren");
             else if (!hash) setActiveProject(null);
         };
         handleHashChange();
@@ -60,150 +63,240 @@ export default function FeaturedProjects() {
     }, []);
 
     return (
-        <div className="max-w-[1100px] mx-auto w-full px-8 md:px-0 flex flex-col gap-8">
+        <div className="max-w-[1100px] mx-auto w-full px-4 md:px-0 flex flex-col gap-16 mt-16 pb-24">
 
-            {/* Main Featured Projects — full-width horizontal cards */}
-            <div className="flex flex-col gap-8">
+            {/* Selected Work Section */}
+            <div className="flex flex-col gap-[32px] w-full">
+                <p className="font-mono text-[12px] font-normal text-[var(--color-text-primary)] uppercase tracking-wider">
+                    SELECTED WORK
+                </p>
 
-                {/* Tommy Hilfiger */}
-                <div
-                    className="cursor-pointer bg-white flex flex-col md:flex-row items-center gap-12 p-6 rounded-[16px] w-full"
-                    onClick={() => setActiveProject("tommy-hilfiger")}
-                >
-                    {/* Text side */}
-                    <div className="flex flex-col gap-5 items-start justify-center shrink-0 w-full md:w-[493px]">
-                        <p className="text-[#555555] text-[16px] font-normal uppercase tracking-wider">
-                            Tommy Hilfiger
-                        </p>
-                        <h2 className="text-[32px] font-normal text-black leading-[1.1] tracking-tight">
-                            Redesigned POS dashboard to increase retail transaction speed
-                        </h2>
-                        <div className="flex gap-4 items-center flex-wrap">
-                            <Tag label="Internal Tool" />
-                            <Tag label="B2B Product Design" />
-                            <Tag label="UX Audit" />
+                {/* Case Studies Grids */}
+                <div className="flex flex-col gap-[16px] w-full">
+
+                    {/* Row 1: Ralph Lauren (Narrow) & Tommy Hilfiger (Wide) */}
+                    <div className="flex flex-col md:flex-row gap-[16px] items-stretch w-full">
+
+                        {/* Ralph Lauren Card */}
+                        <div
+                            className="cursor-pointer border border-border flex flex-col gap-[48px] justify-between p-[24px] rounded-[4px] w-full md:w-[33.5%] min-h-[500px] md:h-[873px] transition-colors"
+                            onClick={() => setActiveProject("ralph-lauren")}
+                        >
+                            {/* Thumbnail */}
+                            <div className="w-full rounded-[2px] overflow-hidden flex-grow relative aspect-[305/465] md:aspect-auto md:h-0">
+                                <video
+                                    ref={ralphVideoRef}
+                                    src="assets/videos/poloconnectthumbnail.mov"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="w-full h-full object-cover rounded-[2px]"
+                                />
+                            </div>
+
+                            {/* Text Info */}
+                            <div className="flex flex-col gap-[20px] items-start w-full">
+                                <p className="font-mono text-[var(--color-text-secondary)] text-[14px] md:text-[16px] uppercase tracking-wider">
+                                    RALPH LAUREN
+                                </p>
+                                <h3 className="font-sans text-[24px] sm:text-[28px] md:text-[32px] font-normal text-[var(--color-text-primary)] leading-[1.1] tracking-tight">
+                                    Streamlining retail loyalty sign up process
+                                </h3>
+                                <div className="flex gap-[16px] items-center flex-wrap">
+                                    <Tag label="MOBILE ONBOARDING" />
+                                    <Tag label="CUSTOMER LOYALTY" />
+                                </div>
+                            </div>
                         </div>
+
+                        {/* Tommy Hilfiger Card */}
+                        <div
+                            className="cursor-pointer border border-border flex flex-col gap-[48px] justify-between p-[24px] rounded-[4px] w-full md:w-[66.5%] min-h-[500px] md:h-[873px] transition-colors"
+                            onClick={() => setActiveProject("tommy-hilfiger")}
+                        >
+                            {/* Thumbnail */}
+                            <div className="w-full rounded-[2px] overflow-hidden flex-grow relative aspect-[683/465] md:aspect-auto md:h-0">
+                                <video
+                                    ref={tommyVideoRef}
+                                    src="assets/videos/posthumbnail-HD 1080p.mov"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="w-full h-full object-cover rounded-[2px]"
+                                />
+                            </div>
+
+                            {/* Text Info */}
+                            <div className="flex flex-col gap-[20px] items-start w-full">
+                                <p className="font-mono text-[var(--color-text-secondary)] text-[14px] md:text-[16px] uppercase tracking-wider">
+                                    TOMMY HILFIGER
+                                </p>
+                                <h3 className="font-sans text-[24px] sm:text-[28px] md:text-[32px] font-normal text-[var(--color-text-primary)] leading-[1.1] tracking-tight">
+                                    Redesigned POS dashboard to increase retail transaction speed
+                                </h3>
+                                <div className="flex gap-[16px] items-center flex-wrap">
+                                    <Tag label="Internal Tool" />
+                                    <Tag label="B2B Product Design" />
+                                    <Tag label="UX Audit" />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    {/* Thumbnail side */}
-                    <div className="flex-1 min-w-0 h-[292px] rounded-[8px] overflow-hidden">
-                        <video
-                            src="assets/videos/posthumbnail-HD 1080p.mov"
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover"
-                        />
+
+                    {/* Row 2: Freelance (Narrow) & Streetcode Academy (Wide) */}
+                    <div className="flex flex-col md:flex-row gap-[16px] items-stretch w-full">
+
+                        {/* Freelance Card */}
+                        <div
+                            className="cursor-pointer border border-border flex flex-col gap-[48px] justify-between p-[24px] rounded-[4px] w-full md:w-[45%] min-h-[450px] md:h-[565px] transition-colors"
+                            onClick={() => setActiveProject("grammy-artist")}
+                        >
+                            {/* Thumbnail */}
+                            <div className="w-full rounded-[2px] overflow-hidden flex-grow relative aspect-[448/157] md:aspect-auto md:h-0">
+                                <video
+                                    ref={grammyVideoRef}
+                                    src="assets/videos/webdesignthumbnail-HD 1080p.mov"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="w-full h-full object-cover rounded-[2px]"
+                                />
+                            </div>
+
+                            {/* Text Info */}
+                            <div className="flex flex-col gap-[20px] items-start w-full">
+                                <p className="font-mono text-[var(--color-text-secondary)] text-[14px] md:text-[16px] uppercase tracking-wider">
+                                    FREELANCE
+                                </p>
+                                <h3 className="font-sans text-[24px] sm:text-[28px] md:text-[32px] font-normal text-[var(--color-text-primary)] leading-[1.1] tracking-tight">
+                                    Boosting Grammy Artist’s audience conversion through a website redesign
+                                </h3>
+                                <div className="flex gap-[16px] items-center flex-wrap">
+                                    <Tag label="Web Development" />
+                                    <Tag label="Brand Design" />
+                                    <Tag label="Client Work" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Streetcode Academy Card */}
+                        <div
+                            className="cursor-pointer border border-border flex flex-col gap-[48px] justify-between p-[24px] rounded-[4px] w-full md:w-[55%] min-h-[450px] md:h-[565px] transition-colors"
+                            onClick={() => setActiveProject("streetcode")}
+                        >
+                            {/* Thumbnail */}
+                            <div className="w-full rounded-[2px] overflow-hidden flex-grow relative aspect-[536/157] md:aspect-auto md:h-0">
+                                <video
+                                    ref={streetcodeVideoRef}
+                                    src="assets/videos/dsignthumbnail.mov"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="w-full h-full object-cover rounded-[2px]"
+                                />
+                            </div>
+
+                            {/* Text Info */}
+                            <div className="flex flex-col gap-[20px] items-start w-full">
+                                <p className="font-mono text-[var(--color-text-secondary)] text-[14px] md:text-[16px] uppercase tracking-wider">
+                                    STREETCODE ACADEMY
+                                </p>
+                                <h3 className="font-sans text-[24px] sm:text-[28px] md:text-[32px] font-normal text-[var(--color-text-primary)] leading-[1.1] tracking-tight">
+                                    Directing development of an AI speech to ASL translation app for deaf/HoH communities
+                                </h3>
+                                <div className="flex gap-[16px] items-center flex-wrap">
+                                    <Tag label="MENTORSHIP" />
+                                    <Tag label="ACCESSIBILITY" />
+                                    <Tag label="DESIGN THINKING" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            {/* Other Projects Section */}
+            <div className="flex flex-col gap-[32px] w-full">
+                <p className="font-mono text-[12px] font-normal text-[var(--color-text-primary)] uppercase tracking-wider">
+                    OTHER PROJECTS & EXPERIMENTS
+                </p>
+
+                {/* 3 Columns Desktop / 2 Columns Mobile masonry grid */}
+                <div className="hidden md:flex gap-[16px] w-full items-start">
+                    {/* Column 1 */}
+                    <div className="flex flex-col gap-[16px] flex-1">
+                        <div className="bg-[#396EFF] border border-border h-[318px] rounded-[4px] w-full animate-pulse-slow" />
+                        <div className="bg-[#396EFF] border border-border h-[199px] rounded-[4px] w-full animate-pulse-slow" />
+                        <div className="bg-[#396EFF] border border-border h-[229px] rounded-[4px] w-full animate-pulse-slow" />
+                    </div>
+                    {/* Column 2 */}
+                    <div className="flex flex-col gap-[14px] flex-1">
+                        <div className="bg-[#396EFF] border border-border h-[153px] rounded-[4px] w-full animate-pulse-slow" />
+                        <div className="bg-[#396EFF] border border-border h-[446px] rounded-[4px] w-full animate-pulse-slow" />
+                        <div className="bg-[#396EFF] border border-border h-[151px] rounded-[4px] w-full animate-pulse-slow" />
+                    </div>
+                    {/* Column 3 */}
+                    <div className="flex flex-col gap-[16px] flex-1">
+                        <div className="bg-[#396EFF] border border-border h-[226px] rounded-[4px] w-full animate-pulse-slow" />
+                        <div className="bg-[#396EFF] border border-border h-[164px] rounded-[4px] w-full animate-pulse-slow" />
+                        <div className="bg-[#396EFF] border border-border h-[356px] rounded-[4px] w-full animate-pulse-slow" />
                     </div>
                 </div>
 
-                {/* Grammy Artist */}
-                <div
-                    className="cursor-pointer bg-white flex flex-col md:flex-row items-center gap-12 p-6 rounded-[16px] w-full"
-                    onClick={() => setActiveProject("grammy-artist")}
-                >
-                    {/* Text side */}
-                    <div className="flex flex-col gap-5 items-start justify-center shrink-0 w-full md:w-[493px]">
-                        <p className="text-[#555555] text-[16px] font-normal uppercase tracking-wider">
-                            Freelance
-                        </p>
-                        <h2 className="text-[32px] font-normal text-black leading-[1.1] tracking-tight">
-                            Boosting Grammy Artist&apos;s audience conversion through a website redesign
-                        </h2>
-                        <div className="flex gap-4 items-center flex-wrap">
-                            <Tag label="Web Development" />
-                            <Tag label="Brand Design" />
-                            <Tag label="Client Work" />
-                        </div>
+                {/* Mobile / Tablet 2-column fallback */}
+                <div className="flex md:hidden gap-[16px] w-full items-start">
+                    {/* Column 1 */}
+                    <div className="flex flex-col gap-[16px] flex-1">
+                        <div className="bg-[#396EFF] border border-border h-[318px] rounded-[4px] w-full" />
+                        <div className="bg-[#396EFF] border border-border h-[229px] rounded-[4px] w-full" />
+                        <div className="bg-[#396EFF] border border-border h-[446px] rounded-[4px] w-full" />
+                        <div className="bg-[#396EFF] border border-border h-[164px] rounded-[4px] w-full" />
                     </div>
-                    {/* Thumbnail side */}
-                    <div className="flex-1 min-w-0 h-[292px] rounded-[8px] overflow-hidden">
-                        <video
-                            src="assets/videos/webdesignthumbnail-HD 1080p.mov"
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover"
-                        />
+                    {/* Column 2 */}
+                    <div className="flex flex-col gap-[16px] flex-1">
+                        <div className="bg-[#396EFF] border border-border h-[199px] rounded-[4px] w-full" />
+                        <div className="bg-[#396EFF] border border-border h-[153px] rounded-[4px] w-full" />
+                        <div className="bg-[#396EFF] border border-border h-[151px] rounded-[4px] w-full" />
+                        <div className="bg-[#396EFF] border border-border h-[226px] rounded-[4px] w-full" />
+                        <div className="bg-[#396EFF] border border-border h-[356px] rounded-[4px] w-full" />
                     </div>
                 </div>
             </div>
 
-            {/* Other Projects — same card style but stacked vertically (two columns on desktop) */}
-            <div className="flex flex-col md:flex-row gap-8">
-
-                {/* StreetCode */}
-                <div
-                    className="cursor-pointer bg-white flex flex-col gap-12 p-6 rounded-[16px] flex-1"
-                    onClick={() => setActiveProject("streetcode")}
+            {/* Overlays */}
+            {activeProject === "tommy-hilfiger" ? (
+                <StorySlideshowOverlay
+                    isOpen={activeProject === "tommy-hilfiger"}
+                    onClose={() => setActiveProject(null)}
+                    totalSlides={8}
+                    currentSlide={tommySlideIndex}
+                    onSlideChange={setTommySlideIndex}
+                    slideLabels={TOMMY_SLIDE_LABELS}
                 >
-                    <div className="flex flex-col gap-5 items-start justify-center">
-                        <p className="text-[#555555] text-[16px] font-normal uppercase tracking-wider">
-                            StreetCode Academy
-                        </p>
-                        <h3 className="text-[32px] font-normal text-black leading-[1.1] tracking-tight">
-                            Directing development of an AI speech to ASL translation app for deaf/HoH communities
-                        </h3>
-                        <div className="flex gap-4 items-center flex-wrap">
-                            <Tag label="Mentorship" />
-                            <Tag label="Accessibility" />
-                            <Tag label="Design Thinking" />
-                        </div>
-                    </div>
-                    <div className="h-[292px] rounded-[8px] overflow-hidden w-full">
-                        <video
-                            src="assets/videos/dsignthumbnail.mov"
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                </div>
-
-                {/* Bridgegood */}
-                <div
-                    className="cursor-pointer bg-white flex flex-col gap-12 p-6 rounded-[16px] flex-1"
-                    onClick={() => setActiveProject("bridgegood")}
+                    <TommyHilfigerSlideshow
+                        currentSlide={tommySlideIndex}
+                        onSelectProject={(projId) => setActiveProject(projId)}
+                    />
+                </StorySlideshowOverlay>
+            ) : (
+                <CaseStudyOverlay
+                    isOpen={activeProject !== null}
+                    onClose={() => setActiveProject(null)}
+                    projectId={activeProject || undefined}
                 >
-                    <div className="flex flex-col gap-5 items-start justify-center">
-                        <p className="text-[#555555] text-[16px] font-normal uppercase tracking-wider">
-                            Bridgegood Hackathon
-                        </p>
-                        <h3 className="text-[32px] font-normal text-black leading-[1.1] tracking-tight">
-                            Pitching an AI learning tool for students with anxiety in a social good hackathon
-                        </h3>
-                        <div className="flex gap-4 items-center flex-wrap">
-                            <Tag label="Cross-Functional Collaboration" />
-                            <Tag label="AI-Assisted Workflow" />
-                            <Tag label="Hackathon" />
-                        </div>
-                    </div>
-                    <div className="h-[292px] rounded-[8px] overflow-hidden w-full">
-                        <video
-                            src="assets/videos/boldstepsthumbnail-HD 1080p.mov"
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <CaseStudyOverlay
-                isOpen={activeProject !== null}
-                onClose={() => setActiveProject(null)}
-                projectId={activeProject || undefined}
-            >
-                {activeProject === "tommy-hilfiger" && <TommyHilfigerContent />}
-                {activeProject === "grammy-artist" && <GrammyArtistContent />}
-                {activeProject === "bridgegood" && <BridgegoodContent />}
-                {activeProject === "streetcode" && <StreetcodeContent />}
-            </CaseStudyOverlay>
+                    {activeProject === "grammy-artist" && <GrammyArtistContent />}
+                    {activeProject === "bridgegood" && <BridgegoodContent />}
+                    {activeProject === "streetcode" && <StreetcodeContent />}
+                    {activeProject === "ralph-lauren" && <RalphLaurenContent />}
+                </CaseStudyOverlay>
+            )}
         </div>
     );
 }

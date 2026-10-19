@@ -1,76 +1,108 @@
 "use client";
-import { LinkedinLogo, EnvelopeSimple, CalendarBlank } from "@phosphor-icons/react";
+
+import React from "react";
+import Link from "next/link";
+import { ArrowUpRight, Copyright } from "@phosphor-icons/react";
+import lastUpdated from "../generated/last-updated.json";
 
 export default function Footer() {
+    const socialLinks = [
+        { name: "LINKEDIN", href: "https://www.linkedin.com/in/tommyagarwal/" },
+        { name: "CALENDAR", href: "https://calendar.app.google/FYbb8Ja6KmRCbH5M8" },
+        { name: "EMAIL", href: "mailto:tommyagarwalwork@gmail.com" },
+    ];
+
+    const mobileNavLinks = [
+        { name: "WORK", href: "/" },
+        { name: "ABOUT", href: "/about" },
+        { name: "RESUME", href: "/resume" },
+    ];
+
     return (
-        <footer className="w-full border-t border-border bg-bg pt-16 pb-16 md:py-8 px-8 md:px-16 mt-20 relative overflow-hidden h-auto md:h-[136px] flex md:items-center">
-            {/* Background Decor */}
-            <div className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-card-bg-accent/5 rounded-full blur-[80px] -translate-y-1/2 pointer-events-none" />
+        <footer className="w-full border-t border-border bg-[var(--color-bg)]">
+            {/* Top Footer Section */}
+            <div className="max-w-[1100px] mx-auto px-4 md:px-0">
+                <div className="w-full border-l border-r border-border pt-6 pb-12 md:py-12 px-6 flex flex-col gap-10 relative">
 
-            <div className="max-w-[1440px] mx-auto w-full flex flex-col md:flex-row items-center md:items-end justify-between gap-10 md:gap-12 relative z-10">
-                {/* Left Section: Message */}
-                <div className="flex-1 text-center md:text-left w-full">
-                    <p className="text-text-secondary text-[11px] font-bold uppercase tracking-[0.25em] mb-2 opacity-70">
-                        Thanks for stopping by!
-                    </p>
-                    <p className="text-base font-medium text-text-primary tracking-tight m-0">
-                        Like what you saw?{" "}
-                        <a
-                            href="https://www.linkedin.com/in/tommyagarwal/"
-                            target="_blank"
-                            className="text-text-primary hover:text-text-secondary transition-all duration-300 underline decoration-border-subtle underline-offset-4"
-                        >
-                            Let&apos;s get in touch.
-                        </a>
-                    </p>
-                </div>
-
-                {/* Navigation Gap: Reserved for the fixed Navbar at scroll-end */}
-                {/* 72px matches the navigation pill height (h-14 + p-2) */}
-                <div className="hidden md:block w-[480px] h-[72px] pointer-events-none" aria-hidden="true" />
-
-                {/* Right Section: Copyright & Socials */}
-                <div className="flex-1 flex flex-col items-center md:items-end justify-end w-full">
-                    {/* Social Icons */}
-                    <div className="flex items-center gap-6 mb-4">
-                        <a 
-                            href="https://www.linkedin.com/in/tommyagarwal/" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-text-secondary hover:text-text-primary transition-all duration-300"
-                            aria-label="LinkedIn"
-                        >
-                            <LinkedinLogo size={22} weight="regular" />
-                        </a>
-                        <a 
-                            href="mailto:tommyagarwalwork@gmail.com" 
-                            className="text-text-secondary hover:text-text-primary transition-all duration-300"
-                            aria-label="Email"
-                        >
-                            <EnvelopeSimple size={22} weight="regular" />
-                        </a>
-                        <a 
-                            href="https://calendar.app.google/FYbb8Ja6KmRCbH5M8" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-text-secondary hover:text-text-primary transition-all duration-300"
-                            aria-label="Calendar"
-                        >
-                            <CalendarBlank size={22} weight="regular" />
-                        </a>
+                    {/* Mobile Only: Repeated Navigation Links */}
+                    <div className="flex md:hidden items-center justify-between -mx-6 px-6 pb-6 border-b border-border">
+                        {mobileNavLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className="font-mono text-[12px] font-normal text-[var(--color-text-primary)] uppercase tracking-wider no-underline"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
                     </div>
-                    <p className="text-text-secondary/80 text-[14px] font-medium m-0">
-                        &copy; {new Date().getFullYear()} Tommy Agarwal
-                    </p>
+
+                    {/* Row 1: Core Message and Contact Info */}
+                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 w-full">
+                        {/* Message block */}
+                        <div className="flex flex-col gap-2 items-start max-w-[450px]">
+                            <h4 className="font-sans text-[24px] font-normal text-[var(--color-text-primary)] leading-tight tracking-tight">
+                                Thanks for visiting!
+                            </h4>
+                            <p className="font-mono text-[var(--color-text-secondary)] text-[12px] uppercase tracking-wider leading-relaxed">
+                                Like what you saw? Let&apos;s chat!
+                            </p>
+                        </div>
+
+                        {/* Social/Call Links */}
+                        <div className="flex flex-col gap-3 items-start md:items-end">
+                            {socialLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group font-mono text-[12px] font-normal text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] uppercase tracking-wider no-underline transition-colors flex items-center gap-1"
+                                >
+                                    {link.name}
+                                    <ArrowUpRight
+                                        size={14}
+                                        className="opacity-70 transition-all duration-300 transform md:opacity-0 md:-translate-x-1 md:translate-y-1 group-hover:opacity-70 group-hover:translate-x-0 group-hover:translate-y-0"
+                                    />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            {/* Fine line highlight at the very bottom */}
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-border/20 to-transparent" />
+            {/* Full-Width Separator Stroke */}
+            <div className="w-full border-b border-border" />
+
+            {/* Bottom Footer Section */}
+            <div className="max-w-[1100px] mx-auto px-4 md:px-0">
+                <div className="w-full border-l border-r border-border py-8 px-6 flex flex-col gap-10 relative">
+
+                    {/* Row 2: Copyright & Meta Info */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
+                        {/* Copyright and framework credits */}
+                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 items-start sm:items-center">
+                            <p className="font-mono text-[var(--color-text-secondary)] text-[12px] uppercase tracking-wider flex items-center gap-1">
+                                <Copyright size={14} className="opacity-70" />
+                                2026 Tommy Agarwal
+                            </p>
+                            <span className="hidden sm:inline text-border font-mono text-[12px]">|</span>
+                            <p className="font-mono text-[var(--color-text-secondary)] text-[12px] uppercase tracking-wider">
+                                Designed & built in Next.js
+                            </p>
+                        </div>
+
+                        {/* Last Updated Label */}
+                        <div className="flex items-center">
+                            <p className="font-mono text-[12px] font-normal text-[var(--color-text-secondary)] uppercase tracking-wider">
+                                LAST UPDATED: {lastUpdated.date}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </footer>
     );
 }
-
-
-
-

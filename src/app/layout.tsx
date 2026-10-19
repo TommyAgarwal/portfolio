@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Host_Grotesk } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const hostGrotesk = Host_Grotesk({
-  variable: "--font-host-grotesk",
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={hostGrotesk.variable}>
+    <html lang="en" className={robotoMono.variable}>
       <body className="antialiased font-sans bg-bg text-text-primary">
         {children}
         <Analytics />

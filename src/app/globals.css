@@ -1,21 +1,25 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   /* Colors - Light Mode Gallery */
-  --color-bg: #F1F4FB;
+  --color-bg: #E7ECF9;
   --color-bg-mesh: rgba(255, 255, 255, 0.4);
 
   --color-card-bg: #D8E2ED;
   --color-card-bg-hover: #F1F2F4;
   --color-card-bg-accent: #f0f0f0;
 
-  --color-text-primary: #000000;
-  --color-text-secondary: #555555;
+  --color-text-primary: #2C2F3A;
+  --color-text-secondary: #616475;
 
-  --color-button-bg: #000000;
+  --color-button-bg: #2C2F3A;
   --color-button-text: #ffffff;
 
-  --color-border: #e5e5e5;
+  --color-border: #BFC2D1;
   --color-border-subtle: #f0f0f0;
 
   /* Status Colors */
@@ -30,7 +34,9 @@
   --spacing-margin-x: 32px;
 
   /* Typography */
-  --font-sans: var(--font-host-grotesk);
+  --font-sans: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-roboto-mono), monospace;
+  --font-heading: var(--font-sans);
 }
 
 body {
@@ -41,7 +47,6 @@ body {
   position: relative;
   min-height: 100vh;
 }
-
 
 /* Custom overlay scrollbar - inherited from legacy */
 .custom-scrollbar::-webkit-scrollbar {
@@ -129,6 +134,10 @@ body.body-fixed {
   --color-accent: #3C88DB;
 }
 
+.cs-rl-theme {
+  --color-accent: #0A1B38;
+}
+
 .cs-wd-theme {
   --color-accent: #FE6603;
 }
@@ -162,8 +171,9 @@ body.body-fixed {
 
 /* Typography Hierarchy */
 .cs-section-subtitle {
+  font-family: var(--font-mono);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -200,7 +210,7 @@ body.body-fixed {
 
 /* Card Common */
 .cs-card {
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 32px;
 }
 
@@ -247,16 +257,18 @@ body.body-fixed {
 }
 
 .cs-tag {
+  font-family: var(--font-mono);
   border: 1px solid #555555;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 4px;
   color: #555555;
   font-size: 12px;
   font-weight: 400;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
 .cs-tool-hover {
@@ -299,9 +311,11 @@ body.body-fixed {
 }
 
 .cs-meta {
-  font-size: 20px;
+  font-family: var(--font-mono);
+  font-size: 16px;
   color: var(--color-text-secondary);
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 .cs-title {
@@ -312,7 +326,7 @@ body.body-fixed {
 
 .cs-hero-image {
   flex: 1.5;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -341,6 +355,7 @@ body.body-fixed {
 }
 
 .cs-meta-label {
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
   color: var(--color-text-secondary);
@@ -397,7 +412,7 @@ body.body-fixed {
 .cs-card-problem {
   background-color: var(--color-card-bg);
   padding: 16px 32px;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -407,7 +422,7 @@ body.body-fixed {
 .cs-card-outcome {
   background-color: var(--color-card-bg-hover);
   padding: 24px 32px;
-  border-radius: 8px;
+  border-radius: 4px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -419,7 +434,7 @@ body.body-fixed {
 .cs-card-solution {
   background-color: var(--color-card-bg);
   padding: 24px 32px;
-  border-radius: 8px;
+  border-radius: 4px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -464,7 +479,6 @@ body.body-fixed {
 .cs-card-solution.is-active .cs-card-header svg {
   color: var(--color-accent);
 }
-
 
 .cs-card-header h3 {
   font-size: 16px;
@@ -526,17 +540,19 @@ body.body-fixed {
 }
 
 .cs-stat-value {
+  font-family: var(--font-mono);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
   font-size: 56px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--color-text-primary);
   line-height: 1;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   min-width: 160px;
+  text-transform: uppercase;
   /* Ensure container is wide enough for 2 digits + arrow */
 }
 
@@ -559,8 +575,9 @@ body.body-fixed {
 }
 
 .cs-stat-label {
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -575,7 +592,7 @@ body.body-fixed {
 
 .cs-solution-img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
   display: block;
 }
 
@@ -597,7 +614,7 @@ body.body-fixed {
 
 .cs-bg-image-full {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -656,7 +673,7 @@ body.body-fixed {
   background-color: var(--color-card-bg);
   flex: 1;
   padding: 24px 32px;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -697,8 +714,6 @@ body.body-fixed {
   line-height: normal;
 }
 
-
-
 .cs-audit-card p {
   font-size: 16px;
   color: var(--color-text-secondary);
@@ -718,7 +733,7 @@ body.body-fixed {
   align-items: center;
   padding: 0px;
   gap: 8px;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .cs-lofi-card p {
@@ -729,7 +744,7 @@ body.body-fixed {
 .cs-lofi-card img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid var(--color-text-secondary);
 
 }
@@ -751,7 +766,7 @@ body.body-fixed {
   gap: 16px;
   background-color: var(--color-card-bg);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid var(--color-border);
 }
 
@@ -774,7 +789,7 @@ body.body-fixed {
 .cs-goals-card li {
   background-color: var(--color-card-bg-hover);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 16px;
   color: var(--color-text-secondary);
   line-height: normal;
@@ -803,7 +818,7 @@ body.body-fixed {
 .cs-lofi-sketches {
   border: 1px solid var(--color-text-secondary);
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 /* ---- Testing ---- */
@@ -822,7 +837,7 @@ body.body-fixed {
 .cs-testing-success {
   background-color: var(--color-card-bg);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   gap: 16px;
   display: flex;
   flex-direction: column;
@@ -834,7 +849,7 @@ body.body-fixed {
   background-color: var(--color-card-bg);
   border: 1px solid var(--color-border);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   gap: 16px;
   display: flex;
   flex-direction: column;
@@ -854,7 +869,7 @@ body.body-fixed {
 
 .cs-testing-item {
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   gap: 16px;
   align-items: center;
@@ -906,7 +921,7 @@ body.body-fixed {
 
 .cs-feedback-img {
   width: 150px;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 /* ---- Flowchart ---- */
@@ -920,7 +935,7 @@ body.body-fixed {
 
 .cs-flow-node {
   padding: 24px 16px;
-  border-radius: 12px;
+  border-radius: 4px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -960,13 +975,14 @@ body.body-fixed {
 }
 
 .cs-flow-label {
+  font-family: var(--font-mono);
   display: flex;
   align-items: center;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text-secondary);
-  font-weight: 500;
+  font-weight: 400;
   width: 120px;
   flex-shrink: 0;
 }
@@ -975,7 +991,7 @@ body.body-fixed {
   background-color: var(--color-card-bg);
   border: 1px solid var(--color-border);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1042,7 +1058,7 @@ body.body-fixed {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid var(--color-border);
 }
 
@@ -1068,7 +1084,7 @@ body.body-fixed {
 
 .cs-flow-step img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .cs-flow-step p {
@@ -1086,7 +1102,7 @@ body.body-fixed {
 
 .cs-final-hero-image img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 /* Media Queries */
@@ -1183,7 +1199,7 @@ body.body-fixed {
 
 .cs-impact-top-block {
   background-color: var(--color-card-bg);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 16px;
   display: flex;
   gap: 32px;
@@ -1202,7 +1218,7 @@ body.body-fixed {
 .cs-impact-card {
   background-color: var(--color-card-bg-hover);
   border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -1284,7 +1300,7 @@ body.body-fixed {
 .cs-impact-bottom-block {
   background-color: var(--color-card-bg);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -1302,7 +1318,7 @@ body.body-fixed {
 .cs-impact-outcome-text {
   background-color: var(--color-card-bg-hover);
   border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 32px;
   display: flex;
   align-items: center;
@@ -1327,7 +1343,7 @@ body.body-fixed {
 .cs-impact-quote-box {
   background-color: var(--color-card-bg-hover);
   border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -1357,7 +1373,7 @@ body.body-fixed {
 .cs-impact-email {
   width: 286px;
   height: 141px;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -1412,7 +1428,7 @@ body.body-fixed {
 .cs-takeaway-card {
   background-color: var(--color-card-bg);
   padding: 24px;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1536,7 +1552,7 @@ body.body-fixed {
   background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1.5' cy='1.5' r='1' fill='%23D1D5DB' fill-opacity='0.6'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-attachment: local;
-  border-radius: 32px;
+  border-radius: 8px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   /* Hide overflow so rounded corners mask scrollbar */
@@ -1632,7 +1648,7 @@ body.body-fixed {
     width: 100%;
     max-width: 100%;
     height: 95vh;
-    border-radius: 32px 32px 0 0;
+    border-radius: 8px 8px 0 0;
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
     padding: 8px;
@@ -1765,7 +1781,6 @@ body.body-fixed {
   color: #333;
 }
 
-
 /* Interactive Version Tweaks */
 .interactive-version .experience-date {
   color: var(--color-text-primary);
@@ -1786,7 +1801,6 @@ body.body-fixed {
   background-color: var(--color-bg-mesh);
   transform: translateX(4px);
 }
-
 
 /* Bento-style Resume Refinements */
 .resume-section-title {
@@ -1849,5 +1863,126 @@ body.body-fixed {
   .project-card-content {
     padding-left: 12px !important;
     padding-right: 12px !important;
+  }
+}
+
+@theme inline {
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
