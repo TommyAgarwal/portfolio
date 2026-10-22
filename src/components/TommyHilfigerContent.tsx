@@ -979,14 +979,21 @@ export default function TommyHilfigerContent() {
             </div>
           </div>
           <div className="cs-hero-image">
-            <video
-              src="assets/videos/posthumbnail-HD 1080p.mov"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover block"
-            />
+            <div
+              className="w-full h-[280px] sm:h-[320px] rounded-[4px] p-5 flex items-center justify-center overflow-hidden"
+              style={{ backgroundColor: "rgba(70, 124, 182, 0.25)" }}
+            >
+              <div
+                className="relative overflow-hidden rounded-[8px] shadow-sm transform-gpu will-change-transform aspect-[2880/2088] h-full w-auto max-w-full flex items-center justify-center"
+                style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)" }}
+              >
+                <img
+                  src="/assets/images/pos/main-4.png"
+                  alt="Tommy Hilfiger POS Dashboard"
+                  className="w-full h-full object-cover rounded-[8px]"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </header>

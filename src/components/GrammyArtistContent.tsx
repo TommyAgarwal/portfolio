@@ -745,20 +745,30 @@ export default function GrammyArtistContent() {
               Boosting Grammy Artist's audience conversion through a website redesign
             </h1>
             <div className="cs-hero-tags">
-              <span className="cs-tag">Web Development</span>
+              <span className="cs-tag">Web Design</span>
               <span className="cs-tag">Brand Design</span>
               <span className="cs-tag">Client Work</span>
             </div>
           </div>
           <div className="cs-hero-image">
-            <video
-              src="assets/videos/webdesignthumbnail-HD 1080p.mov"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover block"
-            />
+            <div
+              className="w-full h-[280px] sm:h-[320px] rounded-[4px] p-5 flex items-center justify-center overflow-hidden"
+              style={{ backgroundColor: "rgba(255, 141, 1, 0.25)" }}
+            >
+              <div
+                className="relative overflow-hidden rounded-[8px] shadow-sm transform-gpu will-change-transform aspect-[960/488] w-full h-auto max-h-full flex items-center justify-center"
+                style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)" }}
+              >
+                <video
+                  src="/assets/videos/grammythumbnailflow_card.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover rounded-[8px] transform-gpu will-change-transform backface-hidden"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </header>

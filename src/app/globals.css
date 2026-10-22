@@ -142,6 +142,10 @@ body.body-fixed {
   --color-accent: #FE6603;
 }
 
+.cs-ek-theme {
+  --color-accent: #FC5605;
+}
+
 .cs-bg-theme {
   --color-accent: #00BFA5;
 }
@@ -1985,4 +1989,19 @@ body.body-fixed {
   html {
     @apply font-sans;
   }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
 }

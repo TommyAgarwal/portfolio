@@ -140,7 +140,41 @@ const AnimatedCheckCircle = ({ size = 24, className = "" }: { size?: number; cla
   );
 };
 
-const AnimatedChartLineUp = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+/* Problem Section: Animated Warning Triangle with Trace */
+const AnimatedWarningTriangle = ({ size = 28, className = "" }: { size?: number; className?: string }) => {
+  const triangleVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const lineVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        delay: 0.25,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const dotVariants: Variants = {
+    animate: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -150,24 +184,484 @@ const AnimatedChartLineUp = ({ size = 24, className = "" }: { size?: number; cla
       className={className}
     >
       <rect width="256" height="256" fill="none" />
-      <line
-        x1="32"
-        y1="208"
-        x2="224"
-        y2="208"
+      <motion.path
+        d="M142.41,40.22l87.46,151.87C236,202.79,228.08,216,215.46,216H40.54C27.92,216,20,202.79,26.13,192.09L113.59,40.22C119.89,29.26,136.11,29.26,142.41,40.22Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={triangleVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      <motion.line
+        x1="128"
+        y1="144"
+        x2="128"
+        y2="104"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={lineVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      <motion.circle
+        cx="128"
+        cy="180"
+        r="12"
+        fill="currentColor"
+        variants={dotVariants}
+        initial={{ scale: 0, opacity: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+    </svg>
+  );
+};
+
+/* Problem Section: Animated Clock with Trace */
+const AnimatedClock = ({ size = 28, className = "" }: { size?: number; className?: string }) => {
+  const circleVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        duration: 0.9,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const handsVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        delay: 0.35,
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      <motion.circle
+        cx="128"
+        cy="128"
+        r="104"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={circleVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      <motion.polyline
+        points="128 72 128 128 184 128"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={handsVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+    </svg>
+  );
+};
+
+/* Constraints Section: Animated Barcode with Trace */
+const AnimatedBarcode = ({ size = 32, className = "" }: { size?: number; className?: string }) => {
+  const cornerVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const barVariants = (delay: number): Variants => ({
+    animate: {
+      pathLength: 1,
+      transition: {
+        delay,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  });
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Top Left Corner */}
+      <motion.path
+        d="M32,88V56a8,8,0,0,1,8-8H72"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={cornerVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Top Right Corner */}
+      <motion.path
+        d="M184,48h32a8,8,0,0,1,8,8V88"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={cornerVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Bottom Left Corner */}
+      <motion.path
+        d="M32,168v32a8,8,0,0,0,8,8H72"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={cornerVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Bottom Right Corner */}
+      <motion.path
+        d="M224,168v32a8,8,0,0,1-8,8H184"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={cornerVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Barcode Vertical Bars */}
+      <motion.line
+        x1="80"
+        y1="84"
+        x2="80"
+        y2="172"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="16"
+        variants={barVariants(0.15)}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      <motion.line
+        x1="112"
+        y1="84"
+        x2="112"
+        y2="172"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="16"
+        variants={barVariants(0.25)}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      <motion.line
+        x1="144"
+        y1="84"
+        x2="144"
+        y2="172"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="16"
+        variants={barVariants(0.35)}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      <motion.line
+        x1="176"
+        y1="84"
+        x2="176"
+        y2="172"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="16"
+        variants={barVariants(0.45)}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+    </svg>
+  );
+};
+
+/* Constraints Section: Animated Device Mobile with Trace */
+const AnimatedDeviceMobile = ({ size = 32, className = "" }: { size?: number; className?: string }) => {
+  const phoneVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const lineVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        delay: 0.3,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Phone Outline */}
+      <motion.rect
+        x="64"
+        y="24"
+        width="128"
+        height="208"
+        rx="24"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={phoneVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Screen Division / Speaker Top */}
+      <motion.line
+        x1="112"
+        y1="56"
+        x2="144"
+        y2="56"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="16"
+        variants={lineVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Bottom Home Indicator */}
+      <motion.line
+        x1="116"
+        y1="200"
+        x2="140"
+        y2="200"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="16"
+        variants={lineVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+    </svg>
+  );
+};
+
+/* Constraints Section: Animated Globe (Standard Phosphor Globe) with Trace */
+const AnimatedGlobe = ({ size = 32, className = "" }: { size?: number; className?: string }) => {
+  const circleVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const latitudeVariants = (delay: number): Variants => ({
+    animate: {
+      pathLength: 1,
+      transition: {
+        delay,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  });
+
+  const longitudeVariants: Variants = {
+    animate: {
+      pathLength: 1,
+      transition: {
+        delay: 0.35,
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Outer Circumference Circle */}
+      <motion.circle
+        cx="128"
+        cy="128"
+        r="104"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={circleVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Top Latitude line curve */}
+      <motion.path
+        d="M48,88H208"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={latitudeVariants(0.2)}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Bottom Latitude line curve */}
+      <motion.path
+        d="M48,168H208"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={latitudeVariants(0.28)}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+      {/* Center Ellipse Longitude */}
+      <motion.ellipse
+        cx="128"
+        cy="128"
+        rx="40"
+        ry="104"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        variants={longitudeVariants}
+        initial={{ pathLength: 0 }}
+        whileInView="animate"
+        viewport={{ once: false, amount: 0.2 }}
+      />
+    </svg>
+  );
+};
+
+const AnimatedChartLineUp = ({ size = 24, className = "" }: { size?: number; className?: string }) => {
+  const chartVariants: Variants = {
+    initial: {
+      pathLength: 1
+    },
+    hover: {
+      pathLength: [0, 1, 1, 0],
+      transition: {
+        duration: 2.2,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.45, 0.55, 1]
+      }
+    }
+  };
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      className={className}
+    >
+      <rect width="256" height="256" fill="none" />
+      {/* Axes (Static) */}
+      <polyline
+        points="224 208 32 208 32 48"
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="16"
       />
-      <polyline
-        points="96 144 136 104 184 152 224 88"
+      {/* Arrow Segment Combined (Animated) */}
+      <motion.path
+        d="M32 176 L96 112 L128 144 L200 72 M200 112 L200 72 L160 72"
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="16"
+        variants={chartVariants}
       />
     </svg>
   );
@@ -216,20 +710,35 @@ export default function RalphLaurenContent() {
       <header className="cs-hero">
         <div className="cs-hero-content">
           <div className="cs-hero-text">
-            <p className="cs-meta">Ralph Lauren • Pitched July 2026</p>
+            <p className="cs-meta">Ralph Lauren • Pitched October 2026</p>
             <h1 className="cs-title">
               Reducing friction in Ralph Lauren&rsquo;s customer loyalty signup
             </h1>
             <div className="cs-hero-tags">
+              <span className="cs-tag">Onboarding</span>
               <span className="cs-tag">Service Design</span>
-              <span className="cs-tag">Mobile Onboarding</span>
               <span className="cs-tag">Customer Loyalty</span>
             </div>
           </div>
-          {/* Blue Rectangle image placeholder */}
+          {/* Thumbnail as Hero Image with colored background frame */}
           <div className="cs-hero-image">
-            <div className="w-full h-full bg-[#396EFF] flex items-center justify-center text-white font-mono text-[14px] uppercase tracking-wider min-h-[300px]">
-              [Hero Visual Placeholder]
+            <div
+              className="w-full h-[280px] sm:h-[320px] rounded-[4px] p-5 flex items-center justify-center overflow-hidden"
+              style={{ backgroundColor: "rgba(32, 62, 94, 0.25)" }}
+            >
+              <div
+                className="relative overflow-hidden rounded-[8px] shadow-sm transform-gpu will-change-transform aspect-[444/960] h-full w-auto max-w-full flex items-center justify-center"
+                style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)" }}
+              >
+                <video
+                  src="/assets/videos/PoloConnectDemo_card.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover rounded-[8px] transform-gpu will-change-transform backface-hidden"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -239,7 +748,7 @@ export default function RalphLaurenContent() {
       <section className="cs-metadata">
         <div className="cs-meta-col">
           <h3 className="cs-meta-label">Timeline</h3>
-          <p className="cs-meta-value">2 Weeks</p>
+          <p className="cs-meta-value">3 Weeks</p>
         </div>
         <div className="cs-meta-col">
           <h3 className="cs-meta-label">Role</h3>
@@ -252,12 +761,22 @@ export default function RalphLaurenContent() {
         <div className="cs-meta-col">
           <h3 className="cs-meta-label">Tools</h3>
           <ul className="cs-meta-value">
-            <li>Antigravity</li>
+            <li>
+              <div className="cs-tool-hover">
+                <span className="cs-tool-name">Antigravity</span>
+                <div className="cs-tool-logo">
+                  <img src="/assets/images/logos/antigravitylogo.png" alt="Antigravity" />
+                </div>
+              </div>
+            </li>
           </ul>
         </div>
         <div className="cs-meta-col">
           <h3 className="cs-meta-label">Collaborators</h3>
-          <p className="cs-meta-value">_______</p>
+          <ul className="cs-meta-value">
+            <li>Brand Ambassadors</li>
+            <li>Store Manager</li>
+          </ul>
         </div>
       </section>
 
@@ -298,22 +817,14 @@ export default function RalphLaurenContent() {
               </div>
               <div className="cs-stats-row">
                 <div className="cs-stat">
-                  <div className="cs-stat-value">
-                    <ArrowDown size={40} weight="regular" />
-                    <span>TBD</span>
+                  <div className="cs-stat-value !normal-case">
+                    <span><Counter value={29} /><span className="lowercase">s</span></span>
                   </div>
-                  <span className="cs-stat-label">Statistic #1</span>
-                </div>
-                <div className="cs-stat">
-                  <div className="cs-stat-value">
-                    <TrendUp size={40} weight="regular" />
-                    <span>TBD</span>
-                  </div>
-                  <span className="cs-stat-label">Statistic #2</span>
+                  <span className="cs-stat-label">Average sign up time</span>
                 </div>
               </div>
               <p className="cs-card-text">
-                Pitched concept and redesign flows to Ralph Lauren Management and/or Wyng to reduce transaction overhead and optimize customer self-signup.
+                The store manager supported the redesign and expressed interest in sharing it with a broader audience. A report was sent to the regional manager and I&apos;m waiting to hear back, check back for updates!
               </p>
             </motion.div>
           </div>
@@ -335,9 +846,11 @@ export default function RalphLaurenContent() {
                 A streamlined onboarding flow which allows signups to be completed independently and more efficiently.
               </p>
               <div className="cs-solution-image-container">
-                <div className="w-full h-[220px] bg-[#396EFF] flex items-center justify-center text-white font-mono text-[12px] uppercase tracking-wider rounded-[4px]">
-                  [Solution Concept Image]
-                </div>
+                <img
+                  src="assets/images/ralphlauren/badgeandform.png"
+                  alt="Ralph Lauren badge and form preview"
+                  className="w-full h-auto object-contain rounded-[4px]"
+                />
               </div>
             </motion.div>
           </div>
@@ -379,7 +892,7 @@ export default function RalphLaurenContent() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <div className="cs-card p-6 border border-border bg-card-bg rounded-[4px]">
             <div className="flex items-center gap-3 mb-4 text-[#FF4D4D]">
-              <Warning size={28} />
+              <AnimatedWarningTriangle size={28} className="flex-shrink-0" />
               <h3 className="font-sans text-[18px] font-bold text-black">Complex Multi-App Journey</h3>
             </div>
             <p className="text-text-secondary leading-relaxed">
@@ -389,11 +902,11 @@ export default function RalphLaurenContent() {
 
           <div className="cs-card p-6 border border-border bg-card-bg rounded-[4px]">
             <div className="flex items-center gap-3 mb-4 text-[#FF4D4D]">
-              <Clock size={28} />
+              <AnimatedClock size={28} className="flex-shrink-0" />
               <h3 className="font-sans text-[18px] font-bold text-black">High Transaction Overhead</h3>
             </div>
             <p className="text-text-secondary leading-relaxed">
-              <strong>50% of signups</strong> take over 2 minutes, stalling checkout lines and frustrating guests.
+              <strong>Most signups take longer than a minute</strong>, stalling checkout lines and frustrating guests.
             </p>
           </div>
         </div>
@@ -405,7 +918,7 @@ export default function RalphLaurenContent() {
         {/* Floor vs Register Card */}
         <div className="cs-card border border-border bg-card-bg rounded-[4px] p-6 mt-8">
           <h3 className="font-sans text-[20px] font-bold text-black mb-6 border-b border-border pb-3">
-            2 minutes on the sales floor &ne; 2 minutes at the register
+            1 minute on the sales floor &ne; 1 minute at the register
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
@@ -427,9 +940,6 @@ export default function RalphLaurenContent() {
           <p className="cs-section-desc-light">
             Every additional minute spent enrolling a customer at checkout extends the transaction, occupies an associate, and increases wait times for everyone else in line.
           </p>
-          <div className="w-full h-[280px] bg-[#396EFF] flex items-center justify-center text-white font-mono text-[14px] uppercase tracking-wider rounded-[4px] mt-6">
-            [Friction context / Register Line congestion visual]
-          </div>
         </div>
       </section>
 
@@ -452,15 +962,15 @@ export default function RalphLaurenContent() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-3">
-            <div className="text-[#396EFF]"><Devices size={32} /></div>
-            <h4 className="font-sans font-bold text-black text-[16px]">Legacy Framework</h4>
+            <div className="text-[#396EFF]"><AnimatedBarcode size={32} /></div>
+            <h4 className="font-sans font-bold text-black text-[16px]">Identical Coupon Policy</h4>
             <p className="text-[14px] text-text-secondary leading-relaxed">
-              Existing backend integrations, security requirements, and loyalty program rules remain unchanged.
+              The customer is still in charge of their own coupons and must receive them either by text or email.
             </p>
           </div>
 
           <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-3">
-            <div className="text-[#396EFF]"><DeviceMobile size={32} /></div>
+            <div className="text-[#396EFF]"><AnimatedDeviceMobile size={32} /></div>
             <h4 className="font-sans font-bold text-black text-[16px]">No Mandatory SMS replies</h4>
             <p className="text-[14px] text-text-secondary leading-relaxed">
               Wyng&rsquo;s data collection service can work without requiring SMS replies during the onboarding flow.
@@ -468,16 +978,12 @@ export default function RalphLaurenContent() {
           </div>
 
           <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-3">
-            <div className="text-[#396EFF]"><Globe size={32} /></div>
+            <div className="text-[#396EFF]"><AnimatedGlobe size={32} /></div>
             <h4 className="font-sans font-bold text-black text-[16px]">Global Compatibility</h4>
             <p className="text-[14px] text-text-secondary leading-relaxed">
               International customers' data can be collected using the same QR-code as local customers.
             </p>
           </div>
-        </div>
-
-        <div className="w-full h-[240px] bg-[#396EFF] flex items-center justify-center text-white font-mono text-[14px] uppercase tracking-wider rounded-[4px] mt-8">
-          [System Architecture / API flow diagram placeholder]
         </div>
       </section>
 
@@ -514,9 +1020,6 @@ export default function RalphLaurenContent() {
                   </li>
                 ))}
               </ol>
-              <div className="w-full h-[150px] bg-[#396EFF]/80 flex items-center justify-center text-white font-mono text-[12px] uppercase tracking-wider rounded-[4px] mt-4">
-                [Old Flow Diagrams / Mockups Placeholder]
-              </div>
             </div>
 
             {/* New Flow Column */}
@@ -540,9 +1043,6 @@ export default function RalphLaurenContent() {
                   </li>
                 ))}
               </ol>
-              <div className="w-full h-[150px] bg-[#396EFF] flex items-center justify-center text-white font-mono text-[12px] uppercase tracking-wider rounded-[4px] mt-4">
-                [New Flow Screenshots Placeholder]
-              </div>
             </div>
           </div>
         </div>
@@ -553,57 +1053,62 @@ export default function RalphLaurenContent() {
         <h3 className="cs-section-subtitle">Testing</h3>
         <h2 className="cs-section-title">Validating that users can sign up faster and without guidance</h2>
         <div className="cs-bg-content-container">
-          <p className="cs-section-desc-light">
-            I conducted usability testing with 25 participants recording completion time and confidence level.
-          </p>
-          <div className="w-full h-[300px] bg-[#396EFF] flex items-center justify-center text-white font-mono text-[14px] uppercase tracking-wider rounded-[4px] mt-6">
-            [Usability testing data / Confidence score chart visual]
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-2">
+              <span className="font-mono text-[12px] uppercase text-[#396EFF] font-bold">Average Completion Time</span>
+              <div className="font-sans text-[36px] font-bold text-black flex items-center gap-1">
+                <span>29s</span>
+              </div>
+              <p className="text-[14px] text-text-secondary leading-relaxed">
+                Total average duration across all tested signups.
+              </p>
+            </div>
+
+            <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-2">
+              <span className="font-mono text-[12px] uppercase text-[#396EFF] font-bold">Ease Score</span>
+              <div className="font-sans text-[36px] font-bold text-black flex items-center gap-1">
+                <span>4/5</span>
+              </div>
+              <p className="text-[14px] text-text-secondary leading-relaxed">
+                Self-reported usability rating after onboarding completion.
+              </p>
+            </div>
+
+            <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-2">
+              <span className="font-mono text-[12px] uppercase text-[#396EFF] font-bold">Confidence</span>
+              <div className="font-sans text-[36px] font-bold text-black flex items-center gap-1">
+                <span>3/5</span>
+              </div>
+              <p className="text-[14px] text-text-secondary leading-relaxed">
+                Participant self-assurance during independent completion.
+              </p>
+            </div>
           </div>
+
+          <p className="cs-section-desc-light mt-6 text-[14px] italic">
+            Participants were given the test with no guidance and limited context, the surveys indicated that the lower confidence and ease scores were mostly due to a lack of understanding of what they were completing, a fault on my part for not providing ample context.
+          </p>
         </div>
       </section>
 
       {/* Impact Section */}
       <section className="cs-section cs-impact !mb-20">
         <h3 className="cs-section-subtitle">Impact</h3>
-        <h2 className="cs-section-title">What changed for customers?</h2>
+        <h2 className="cs-section-title">Did this work go anywhere?</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-2">
-            <span className="font-mono text-[12px] uppercase text-[#396EFF] font-bold">Time Reduction</span>
-            <div className="font-sans text-[36px] font-bold text-black flex items-center gap-1">
-              <ArrowDown size={32} className="text-[#FF4D4D]" />
-              <span>TBD%</span>
-            </div>
-            <p className="text-[14px] text-text-secondary leading-relaxed">
-              Comparison of onboarding completion speed.
-            </p>
-          </div>
-
-          <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-2">
-            <span className="font-mono text-[12px] uppercase text-[#396EFF] font-bold">Prompt Reduction</span>
-            <div className="font-sans text-[36px] font-bold text-black flex items-center gap-1">
-              <ArrowDown size={32} className="text-[#FF4D4D]" />
-              <span>TBD%</span>
-            </div>
-            <p className="text-[14px] text-text-secondary leading-relaxed">
-              Fewer app prompts and permission dialog overlays.
-            </p>
-          </div>
-
-          <div className="p-6 border border-border rounded-[4px] bg-card-bg flex flex-col gap-2">
-            <span className="font-mono text-[12px] uppercase text-[#396EFF] font-bold">Apps Used</span>
-            <div className="font-sans text-[36px] font-bold text-black flex items-center gap-1">
-              <ArrowDown size={32} className="text-[#FF4D4D]" />
-              <span>TBD%</span>
-            </div>
-            <p className="text-[14px] text-text-secondary leading-relaxed">
-              Eliminated switching between browser and messaging client.
-            </p>
-          </div>
+        <div className="bg-[#0A1B38] rounded-[8px] py-16 px-8 md:px-16 flex flex-col items-center justify-center text-center w-full my-8">
+          <blockquote className="font-sans text-[18px] md:text-[22px] font-normal leading-[1.5] text-white max-w-[800px] mx-auto italic">
+            &ldquo;I was impressed by Tommy&apos;s initiative in identifying a real operational issue and turning it into a thoughtful, user-tested solution. I&apos;d love to see his recommendations reviewed for potential implementation.&rdquo;
+          </blockquote>
+          <p className="font-mono text-[13px] text-white/70 uppercase tracking-wider mt-6">
+            — Josh Valdes, Store Manager
+          </p>
         </div>
 
-        <div className="w-full h-[280px] bg-[#396EFF] flex items-center justify-center text-white font-mono text-[14px] uppercase tracking-wider rounded-[4px] mt-8">
-          [Impact Summary Graph Visual]
+        <div className="cs-card border border-border bg-card-bg rounded-[4px] p-6 mt-6">
+          <p className="text-text-secondary leading-relaxed text-[15px]">
+            A report has been sent to the regional manager and we are currently waiting on a response. After hearing back from the regional manager, I intend to send the report to the corporate operations team for feedback and discuss possible implementation.
+          </p>
         </div>
       </section>
     </div>

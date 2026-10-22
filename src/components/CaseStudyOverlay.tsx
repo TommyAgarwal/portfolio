@@ -119,7 +119,7 @@ export default function CaseStudyOverlay({ isOpen, onClose, children, projectId 
 
         const deltaY = dragCurrentY.current - dragStartY.current;
         if (deltaY > swipeThreshold) {
-            onClose();
+            handleClose();
             // Wait for out animation to finish before resetting transform
             setTimeout(() => {
                 if (overlayPanelRef.current) overlayPanelRef.current.style.transform = "";
@@ -170,18 +170,7 @@ export default function CaseStudyOverlay({ isOpen, onClose, children, projectId 
         };
     }, [isDragging]);
 
-    // Escape Key to close
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "Escape" && isOpen) {
-                onClose();
-            }
-        };
-        document.addEventListener("keydown", handleKeyDown);
-        return () => document.removeEventListener("keydown", handleKeyDown);
-    }, [isOpen, onClose]);
-
-    // Browser Back Button history logic
+    // Browser Back Button & URL hash management
     useEffect(() => {
         if (isOpen && projectId) {
             const hash = `#${projectId}`;
@@ -190,6 +179,30 @@ export default function CaseStudyOverlay({ isOpen, onClose, children, projectId 
             }
         }
     }, [isOpen, projectId]);
+
+    const handleClose = () => {
+        // If an overlay state or hash is active in the URL, remove hash
+        if (window.location.hash) {
+            // If history state indicates we pushed it, history.back() cleanly unwinds
+            if (window.history.state && window.history.state.isOverlay) {
+                window.history.back();
+            } else {
+                window.history.replaceState(null, "", window.location.pathname + window.location.search);
+            }
+        }
+        onClose();
+    };
+
+    // Escape Key to close
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape" && isOpen) {
+                handleClose();
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, onClose]);
 
     useEffect(() => {
         const handlePopState = (e: PopStateEvent) => {
@@ -214,7 +227,7 @@ export default function CaseStudyOverlay({ isOpen, onClose, children, projectId 
                 className="absolute inset-0 bg-black/15 transition-opacity"
                 onClick={() => {
                     if (isOpen) {
-                        window.history.back(); // Use history back to naturally trigger close via popstate
+                        handleClose();
                     }
                 }}
             ></div>
@@ -229,7 +242,7 @@ export default function CaseStudyOverlay({ isOpen, onClose, children, projectId 
                 <div className="cs-overlay-header-mobile flex lg:hidden justify-center items-center h-8 shrink-0 w-full relative pt-2 pb-4 cursor-grab active:cursor-grabbing">
                     <div className="cs-overlay-grabber w-16 h-1.5 bg-card-bg-accent rounded-[3px]"></div>
                     <button
-                        onClick={() => window.history.back()}
+                        onClick={handleClose}
                         className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-card-bg-hover rounded-full border-none cursor-pointer text-text-secondary"
                         aria-label="Close Case Study"
                     >
