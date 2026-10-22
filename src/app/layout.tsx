@@ -9,8 +9,8 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tommy Agarwal — Product Designer",
-  description: "Impact-driven Product Designer rooted in technical reality.",
+  title: "Tommy Agarwal",
+  description: "Hello world! Welcome to my portfolio.",
 };
 
 
