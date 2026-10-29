@@ -589,7 +589,7 @@ export default function NewPortfolioPage() {
                 {/* Bio / Background Blurb Card */}
                 <article className="bg-[#e7ecf9] border border-[#bfc2d1] rounded-[4px] p-5 sm:p-6 flex flex-col gap-5">
                   <p className="font-sans text-[20px] sm:text-[16px] text-[#2c2f3a] leading-relaxed">
-                    I’m a designer with a technical lens and a background in service roles. I love figuring out what isn't working and finding ways to make it better. Currently building client products with AI workflows & customer servicing at Ralph Lauren.
+                    I’m a designer with a technical lens and a background in service roles. I love figuring out what isn't working and finding ways to make it better.
                   </p>
 
                   <div className="border-t border-[#bfc2d1]/60 pt-4 flex flex-col gap-3">
