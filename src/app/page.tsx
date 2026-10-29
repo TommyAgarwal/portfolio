@@ -581,15 +581,15 @@ export default function NewPortfolioPage() {
 
           {/* About Me Tab */}
           {activeTab === "about" && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[7.15fr_4.85fr] gap-6 w-full items-start">
 
               {/* Left Column: Background Blurb, Experience Card, Education Card */}
-              <div className="lg:col-span-7 flex flex-col gap-6">
+              <div className="flex flex-col gap-6">
 
                 {/* Bio / Background Blurb Card */}
                 <article className="bg-[#e7ecf9] border border-[#bfc2d1] rounded-[4px] p-5 sm:p-6 flex flex-col gap-5">
                   <p className="font-sans text-[20px] sm:text-[16px] text-[#2c2f3a] leading-relaxed">
-                    I’m a designer with a technical lens and a background in service roles. Problem solving is my jam, especially systems thinking and product strategy.
+                    I’m a designer with a technical lens and a background in service roles. I love figuring out what isn't working and finding ways to make it better. Currently building client products with AI workflows & customer servicing at Ralph Lauren.
                   </p>
 
                   <div className="border-t border-[#bfc2d1]/60 pt-4 flex flex-col gap-3">
@@ -703,7 +703,7 @@ export default function NewPortfolioPage() {
               </div>
 
               {/* Right Column: Image 1, Toolkit Card (replacing Image 2), Image 3 */}
-              <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-6">
                 {/* Two Equal Rectangular Containers for Vertical Photos */}
                 <div className="grid grid-cols-2 gap-4 sm:gap-6">
                   {/* Photo 1: aboutimage.png */}
