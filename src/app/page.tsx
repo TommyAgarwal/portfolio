@@ -40,7 +40,7 @@ const PROJECTS: ProjectCardData[] = [
     metricsHighlight: "Loyalty conversion optimized",
     mediaType: "video",
     mediaSrc: "/assets/videos/PoloConnectDemo_card.mp4",
-    bgColor: "rgba(32, 62, 94, 0.25)", // #203E5E 25% opacity
+    bgColor: "rgba(32, 62, 94, 0.15)", // #203E5E 15% opacity
     aspectRatioClass: "aspect-[444/960]",
     fitMode: "height",
     category: "work",
@@ -53,7 +53,7 @@ const PROJECTS: ProjectCardData[] = [
     metricsHighlight: "50% faster checkout",
     mediaType: "image",
     mediaSrc: "/assets/images/pos/main-4.png",
-    bgColor: "rgba(70, 124, 182, 0.25)", // #467CB6 25% opacity
+    bgColor: "rgba(70, 124, 182, 0.15)", // #467CB6 15% opacity
     aspectRatioClass: "aspect-[2880/2088]",
     fitMode: "height",
     category: "work",
@@ -66,7 +66,7 @@ const PROJECTS: ProjectCardData[] = [
     metricsHighlight: "+30% subscribers",
     mediaType: "video",
     mediaSrc: "/assets/videos/grammythumbnailflow_card.mp4",
-    bgColor: "rgba(255, 141, 1, 0.25)", // #FF8D01 25% opacity
+    bgColor: "rgba(255, 141, 1, 0.15)", // #FF8D01 15% opacity
     aspectRatioClass: "aspect-[960/488]",
     fitMode: "width",
     category: "work",
@@ -79,7 +79,7 @@ const PROJECTS: ProjectCardData[] = [
     metricsHighlight: "Web design & development",
     mediaType: "video",
     mediaSrc: "/assets/videos/embracekongolanding_card.mp4",
-    bgColor: "rgba(252, 86, 5, 0.25)", // #FC5605 25% opacity
+    bgColor: "rgba(252, 86, 5, 0.15)", // #FC5605 15% opacity
     aspectRatioClass: "aspect-[960/468]",
     fitMode: "width",
     category: "work",
@@ -108,9 +108,9 @@ const SIDE_PROJECTS: SideProjectCardData[] = [
     mediaType: "video",
     videoSrc: "/assets/videos/dsign_card.mp4",
     videoAspectClass: "aspect-[960/472]",
-    bgColor: "rgba(133, 82, 219, 0.25)", // #8552DB 25%
+    bgColor: "rgba(133, 82, 219, 0.15)", // #8552DB 15%
     colSpanClass: "md:col-span-5",
-    thumbnailHeightClass: "h-[320px] sm:h-[350px]",
+    thumbnailHeightClass: "h-[300px] sm:h-[330px]",
   },
   {
     id: "amazon-music",
@@ -122,9 +122,9 @@ const SIDE_PROJECTS: SideProjectCardData[] = [
       "/assets/images/amazon2.png",
       "/assets/images/amazon3.png",
     ],
-    bgColor: "rgba(37, 209, 219, 0.25)", // #25D1DB 25%
+    bgColor: "rgba(37, 209, 219, 0.15)", // #25D1DB 15%
     colSpanClass: "md:col-span-7",
-    thumbnailHeightClass: "h-[320px] sm:h-[350px]",
+    thumbnailHeightClass: "h-[300px] sm:h-[330px]",
   },
   {
     id: "bridgegood",
@@ -133,9 +133,9 @@ const SIDE_PROJECTS: SideProjectCardData[] = [
     mediaType: "video",
     videoSrc: "/assets/videos/boldstepss_card.mp4",
     videoAspectClass: "aspect-[960/468]",
-    bgColor: "rgba(34, 197, 95, 0.25)", // #22C55F 25%
+    bgColor: "rgba(34, 197, 95, 0.15)", // #22C55F 15%
     colSpanClass: "md:col-span-7",
-    thumbnailHeightClass: "h-[275px] sm:h-[300px]",
+    thumbnailHeightClass: "h-[300px] sm:h-[330px]",
   },
   {
     id: "konference",
@@ -144,9 +144,9 @@ const SIDE_PROJECTS: SideProjectCardData[] = [
     mediaType: "video",
     videoSrc: "/assets/videos/KonferenceSite-HD 720p_card.mp4",
     videoAspectClass: "aspect-[960/492]",
-    bgColor: "rgba(208, 119, 220, 0.25)", // #D077DC 25%
+    bgColor: "rgba(208, 119, 220, 0.15)", // #D077DC 15%
     colSpanClass: "md:col-span-5",
-    thumbnailHeightClass: "h-[275px] sm:h-[300px]",
+    thumbnailHeightClass: "h-[300px] sm:h-[330px]",
     isInProgress: true,
   },
   {
@@ -156,9 +156,9 @@ const SIDE_PROJECTS: SideProjectCardData[] = [
     mediaType: "video",
     videoSrc: "/assets/videos/AltonTheChefFirstDraft_card.mp4",
     videoAspectClass: "aspect-[960/480]",
-    bgColor: "rgba(43, 60, 79, 0.25)", // #2B3C4F 25%
-    colSpanClass: "md:col-span-8",
-    thumbnailHeightClass: "h-[235px] sm:h-[260px]",
+    bgColor: "rgba(43, 60, 79, 0.15)", // #2B3C4F 15%
+    colSpanClass: "md:col-span-7",
+    thumbnailHeightClass: "h-[300px] sm:h-[330px]",
   },
   {
     id: "loubayi",
@@ -167,9 +167,9 @@ const SIDE_PROJECTS: SideProjectCardData[] = [
     mediaType: "video",
     videoSrc: "/assets/videos/LoubayiSiteVideo-HD 720p_card.mp4",
     videoAspectClass: "aspect-[960/492]",
-    bgColor: "rgba(226, 166, 23, 0.25)", // #E2A617 25%
-    colSpanClass: "md:col-span-4",
-    thumbnailHeightClass: "h-[235px] sm:h-[260px]",
+    bgColor: "rgba(226, 166, 23, 0.15)", // #E2A617 15%
+    colSpanClass: "md:col-span-5",
+    thumbnailHeightClass: "h-[300px] sm:h-[330px]",
   },
 ];
 
@@ -325,7 +325,7 @@ export default function NewPortfolioPage() {
             <div className="flex flex-col gap-4">
               <div className="flex items-start gap-2">
                 <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse mt-1 shrink-0" />
-                <p className="font-mono text-[12px] leading-relaxed text-[#616475]">
+                <p className="font-mono text-[12px] leading-relaxed text-[#4b4f63]">
                   Currently looking for a full time, entry-level UX/Product design role. Know of one? Let&apos;s connect!
                 </p>
               </div>
@@ -336,20 +336,20 @@ export default function NewPortfolioPage() {
                   href="https://www.linkedin.com/in/tommyagarwal/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-[4px] border border-[#bfc2d1] bg-white/30 hover:bg-white/80 transition-colors text-[#2c2f3a]"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-[4px] border border-[#bfc2d1] bg-white/30 hover:bg-white/80 transition-colors text-[#2c2f3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] focus-visible:ring-offset-2"
                 >
                   <div className="flex items-center gap-2.5 font-mono text-[12.5px]">
                     <LinkedinLogo size={18} className="text-[#0a66c2]" weight="fill" />
                     <span>LinkedIn</span>
                   </div>
-                  <ArrowUpRight size={15} className="text-[#616475]" />
+                  <ArrowUpRight size={15} className="text-[#4b4f63]" />
                 </a>
 
                 {/* Copy Email Button */}
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-[4px] border border-[#bfc2d1] bg-white/30 hover:bg-white/80 transition-colors text-[#2c2f3a] text-left cursor-pointer"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-[4px] border border-[#bfc2d1] bg-white/30 hover:bg-white/80 transition-colors text-[#2c2f3a] text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] focus-visible:ring-offset-2"
                 >
                   <div className="flex items-center gap-2.5 font-mono text-[12.5px]">
                     <EnvelopeSimple size={18} className="text-[#2c2f3a]" />
@@ -359,7 +359,7 @@ export default function NewPortfolioPage() {
                       <span className="truncate max-w-[210px]">{email}</span>
                     )}
                   </div>
-                  <Copy size={15} className="text-[#616475]" />
+                  <Copy size={15} className="text-[#4b4f63]" />
                 </button>
               </div>
             </div>
@@ -367,12 +367,12 @@ export default function NewPortfolioPage() {
           </div>
 
           {/* Footer of Left Column: Palo Alto, CA with Phosphor Pin & HH:MM AM with blinking colon */}
-          <div className="pt-6 mt-8 flex items-center justify-between font-mono text-[11px] text-[#616475]">
+          <div className="pt-6 mt-8 flex items-center justify-between font-mono text-[11px] text-[#4b4f63]">
             <div className="flex items-center gap-1.5">
-              <MapPin size={15} weight="bold" className="text-[#616475]" />
+              <MapPin size={15} weight="bold" className="text-[#4b4f63]" />
               <span>Palo Alto, CA</span>
             </div>
-            <div className="tabular-nums font-normal text-[#616475] flex items-center">
+            <div className="tabular-nums font-normal text-[#4b4f63] flex items-center">
               {timeState.hours ? (
                 <>
                   <span>{timeState.hours}</span>
@@ -404,9 +404,9 @@ export default function NewPortfolioPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("work")}
-                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer ${activeTab === "work"
+                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] ${activeTab === "work"
                   ? "bg-[#bfc2d1]/60 text-[#2c2f3a] font-medium"
-                  : "text-[#616475] hover:text-[#2c2f3a]"
+                  : "text-[#4b4f63] hover:text-[#2c2f3a]"
                   }`}
               >
                 Selected Work
@@ -415,9 +415,9 @@ export default function NewPortfolioPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("side-projects")}
-                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer ${activeTab === "side-projects"
+                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] ${activeTab === "side-projects"
                   ? "bg-[#bfc2d1]/60 text-[#2c2f3a] font-medium"
-                  : "text-[#616475] hover:text-[#2c2f3a]"
+                  : "text-[#4b4f63] hover:text-[#2c2f3a]"
                   }`}
               >
                 Side Projects
@@ -426,16 +426,16 @@ export default function NewPortfolioPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("about")}
-                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer ${activeTab === "about"
+                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] ${activeTab === "about"
                   ? "bg-[#bfc2d1]/60 text-[#2c2f3a] font-medium"
-                  : "text-[#616475] hover:text-[#2c2f3a]"
+                  : "text-[#4b4f63] hover:text-[#2c2f3a]"
                   }`}
               >
                 About Me
               </button>
             </nav>
 
-            <span className="hidden md:inline-block font-mono text-[12px] text-[#616475]">
+            <span className="hidden md:inline-block font-mono text-[12px] text-[#4b4f63]">
               Last Updated: {lastUpdated.date}
             </span>
           </header>
@@ -447,7 +447,14 @@ export default function NewPortfolioPage() {
                 <article
                   key={project.id}
                   onClick={() => setActiveProject(project.id)}
-                  className="group cursor-pointer bg-[#e7ecf9] border border-[#bfc2d1] hover:border-[#2c2f3a] rounded-[4px] p-5 flex flex-col gap-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveProject(project.id);
+                    }
+                  }}
+                  className="group cursor-pointer bg-[#e7ecf9] border border-[#bfc2d1] hover:border-[#2c2f3a] rounded-[4px] p-5 flex flex-col gap-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] focus-visible:ring-offset-2"
                 >
                   {/* Thumbnail: Fixed size background container with 4px border radius */}
                   <div
@@ -491,10 +498,10 @@ export default function NewPortfolioPage() {
                           aria-hidden="true"
                         />
                       </h2>
-                      <ArrowUpRight size={18} className="text-[#616475] group-hover:text-[#2c2f3a] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                      <ArrowUpRight size={18} className="text-[#4b4f63] group-hover:text-[#2c2f3a] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                     </div>
 
-                    <p className="font-mono text-[12.5px] leading-relaxed text-[#616475]">
+                    <p className="font-mono text-[12.5px] leading-relaxed text-[#4b4f63]">
                       {project.description}
                     </p>
                   </div>
@@ -570,7 +577,7 @@ export default function NewPortfolioPage() {
                       )}
                     </div>
 
-                    <p className="font-mono text-[12.5px] leading-relaxed text-[#616475]">
+                    <p className="font-mono text-[12.5px] leading-relaxed text-[#4b4f63]">
                       {project.description}
                     </p>
                   </div>
@@ -581,7 +588,8 @@ export default function NewPortfolioPage() {
 
           {/* About Me Tab */}
           {activeTab === "about" && (
-            <div className="grid grid-cols-1 lg:grid-cols-[7.15fr_4.85fr] gap-6 w-full items-start">
+            <div className="flex flex-col gap-6 w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-[7.15fr_4.85fr] gap-6 w-full items-start">
 
               {/* Left Column: Background Blurb, Experience Card, Education Card */}
               <div className="flex flex-col gap-6">
@@ -617,7 +625,7 @@ export default function NewPortfolioPage() {
                 <article className="bg-[#e7ecf9] border border-[#bfc2d1] rounded-[4px] p-5 sm:p-6 flex flex-col gap-6">
                   {/* Main Work Experience */}
                   <div className="flex flex-col gap-3">
-                    <h2 className="font-mono text-[12px] uppercase tracking-wider text-[#616475]">
+                    <h2 className="font-mono text-[12px] uppercase tracking-wider text-[#4b4f63]">
                       Experience
                     </h2>
                     <div className="flex flex-col">
@@ -631,11 +639,11 @@ export default function NewPortfolioPage() {
                             <span className="font-sans font-normal text-[#2c2f3a] text-[15px]">
                               {row.role}
                             </span>
-                            <span className="font-mono text-[#616475] text-[11.5px] uppercase tracking-wider">
+                            <span className="font-mono text-[#4b4f63] text-[11.5px] uppercase tracking-wider">
                               {row.company}
                             </span>
                           </div>
-                          <span className="font-mono text-[#616475] text-[11.5px] uppercase tracking-wider whitespace-nowrap">
+                          <span className="font-mono text-[#4b4f63] text-[11.5px] uppercase tracking-wider whitespace-nowrap">
                             {row.date}
                           </span>
                         </div>
@@ -645,7 +653,7 @@ export default function NewPortfolioPage() {
 
                   {/* Secondary Experience */}
                   <div className="flex flex-col gap-3">
-                    <h2 className="font-mono text-[12px] uppercase tracking-wider text-[#616475]">
+                    <h2 className="font-mono text-[12px] uppercase tracking-wider text-[#4b4f63]">
                       Other Experience
                     </h2>
                     <div className="flex flex-col">
@@ -659,11 +667,11 @@ export default function NewPortfolioPage() {
                             <span className="font-sans font-normal text-[#2c2f3a] text-[15px]">
                               {row.role}
                             </span>
-                            <span className="font-mono text-[#616475] text-[11.5px] uppercase tracking-wider">
+                            <span className="font-mono text-[#4b4f63] text-[11.5px] uppercase tracking-wider">
                               {row.company}
                             </span>
                           </div>
-                          <span className="font-mono text-[#616475] text-[11.5px] uppercase tracking-wider whitespace-nowrap">
+                          <span className="font-mono text-[#4b4f63] text-[11.5px] uppercase tracking-wider whitespace-nowrap">
                             {row.date}
                           </span>
                         </div>
@@ -674,7 +682,7 @@ export default function NewPortfolioPage() {
 
                 {/* Education Card */}
                 <article className="bg-[#e7ecf9] border border-[#bfc2d1] rounded-[4px] p-5 sm:p-6 flex flex-col gap-3">
-                  <h2 className="font-mono text-[12px] uppercase tracking-wider text-[#616475]">
+                  <h2 className="font-mono text-[12px] uppercase tracking-wider text-[#4b4f63]">
                     Education & Certifications
                   </h2>
                   <div className="flex flex-col">
@@ -688,11 +696,11 @@ export default function NewPortfolioPage() {
                           <span className="font-sans font-normal text-[#2c2f3a] text-[15px]">
                             {row.title}
                           </span>
-                          <span className="font-mono text-[#616475] text-[11.5px] uppercase tracking-wider">
+                          <span className="font-mono text-[#4b4f63] text-[11.5px] uppercase tracking-wider">
                             {row.institution}
                           </span>
                         </div>
-                        <span className="font-mono text-[#616475] text-[11.5px] uppercase tracking-wider whitespace-nowrap">
+                        <span className="font-mono text-[#4b4f63] text-[11.5px] uppercase tracking-wider whitespace-nowrap">
                           {row.date}
                         </span>
                       </div>
@@ -702,12 +710,12 @@ export default function NewPortfolioPage() {
 
               </div>
 
-              {/* Right Column: Image 1, Toolkit Card (replacing Image 2), Image 3 */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-6">
+              {/* Right Column: Photography Gallery */}
+              <div className="flex flex-col gap-4 sm:gap-6">
                 {/* Two Equal Rectangular Containers for Vertical Photos */}
                 <div className="grid grid-cols-2 gap-4 sm:gap-6">
                   {/* Photo 1: aboutimage.png */}
-                  <div className="w-full h-[220px] sm:h-[260px] lg:h-[300px] rounded-[4px] border border-[#bfc2d1] overflow-hidden bg-[#bfc2d1]/20 relative">
+                  <div className="w-full h-[220px] sm:h-[260px] lg:h-[290px] rounded-[4px] border border-[#bfc2d1] overflow-hidden bg-[#bfc2d1]/20 relative">
                     <img
                       src="/assets/images/about/aboutimage.png"
                       alt="Tommy Agarwal"
@@ -716,7 +724,7 @@ export default function NewPortfolioPage() {
                   </div>
 
                   {/* Photo 2: config2025.png */}
-                  <div className="w-full h-[220px] sm:h-[260px] lg:h-[300px] rounded-[4px] border border-[#bfc2d1] overflow-hidden bg-[#bfc2d1]/20 relative">
+                  <div className="w-full h-[220px] sm:h-[260px] lg:h-[290px] rounded-[4px] border border-[#bfc2d1] overflow-hidden bg-[#bfc2d1]/20 relative">
                     <img
                       src="/assets/images/about/config2025.png"
                       alt="Config 2025"
@@ -725,56 +733,8 @@ export default function NewPortfolioPage() {
                   </div>
                 </div>
 
-                {/* Toolkit Card (Image 02 replacement) */}
-                <article className="w-full rounded-[4px] border border-[#bfc2d1] bg-[#e7ecf9] p-5 sm:p-6 flex flex-col gap-4 overflow-hidden relative">
-                  <div className="flex items-center justify-between">
-                    <h2 className="font-mono text-[12px] uppercase tracking-wider text-[#616475]">
-                      TOOLKIT
-                    </h2>
-                  </div>
-
-                  {/* Infinite Scrolling Logo Marquee with gradient masks */}
-                  <div className="relative w-full overflow-hidden py-1">
-                    {/* Left & Right gradient fade masks */}
-                    <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-12 z-10 bg-gradient-to-r from-[#e7ecf9] to-transparent" />
-                    <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-12 z-10 bg-gradient-to-l from-[#e7ecf9] to-transparent" />
-
-                    <div className="animate-marquee flex items-center gap-5 sm:gap-6 pointer-events-none select-none">
-                      {/* First set of logos */}
-                      {TOOLKIT_LOGOS.map((tool, idx) => (
-                        <div
-                          key={`first-${idx}`}
-                          className="flex items-center justify-center shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-[6px] bg-white/40 border border-[#bfc2d1]/50 p-2 shadow-2xs"
-                          title={tool.name}
-                        >
-                          <img
-                            src={tool.src}
-                            alt={tool.name}
-                            className="w-full h-full object-contain filter drop-shadow-2xs"
-                          />
-                        </div>
-                      ))}
-
-                      {/* Duplicate set for seamless continuous loop */}
-                      {TOOLKIT_LOGOS.map((tool, idx) => (
-                        <div
-                          key={`second-${idx}`}
-                          className="flex items-center justify-center shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-[6px] bg-white/40 border border-[#bfc2d1]/50 p-2 shadow-2xs"
-                          title={tool.name}
-                        >
-                          <img
-                            src={tool.src}
-                            alt={tool.name}
-                            className="w-full h-full object-contain filter drop-shadow-2xs"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </article>
-
-                {/* Image 03 */}
-                <div className="w-full h-[220px] sm:h-[250px] lg:h-[280px] rounded-[4px] border border-[#bfc2d1] overflow-hidden bg-[#bfc2d1]/20 relative">
+                {/* Photo 3: aboutimage2.jpg */}
+                <div className="w-full h-[240px] sm:h-[280px] lg:h-[320px] rounded-[4px] border border-[#bfc2d1] overflow-hidden bg-[#bfc2d1]/20 relative">
                   <img
                     src="/assets/images/about/aboutimage2.jpg"
                     alt="Tommy Agarwal"
@@ -784,10 +744,55 @@ export default function NewPortfolioPage() {
               </div>
 
             </div>
-          )}
+
+            {/* Toolkit Card: Anchors full width beneath the dual-column layout */}
+            <article className="w-full rounded-[4px] border border-[#bfc2d1] bg-[#e7ecf9] p-5 sm:p-6 flex flex-col gap-4 overflow-hidden relative mt-6">
+              <div className="flex items-center justify-between">
+                <h2 className="font-mono text-[12px] uppercase tracking-wider text-[#4b4f63]">
+                  TOOLKIT
+                </h2>
+              </div>
+
+              {/* Infinite Scrolling Logo Marquee with gradient masks */}
+              <div className="relative w-full overflow-hidden py-1">
+                <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-16 z-10 bg-gradient-to-r from-[#e7ecf9] to-transparent" />
+                <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-16 z-10 bg-gradient-to-l from-[#e7ecf9] to-transparent" />
+
+                <div className="animate-marquee flex items-center gap-5 sm:gap-6 pointer-events-none select-none">
+                  {TOOLKIT_LOGOS.map((tool, idx) => (
+                    <div
+                      key={`first-${idx}`}
+                      className="flex items-center justify-center shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-[6px] bg-white/40 border border-[#bfc2d1]/50 p-2 shadow-2xs"
+                      title={tool.name}
+                    >
+                      <img
+                        src={tool.src}
+                        alt={tool.name}
+                        className="w-full h-full object-contain filter drop-shadow-2xs"
+                      />
+                    </div>
+                  ))}
+                  {TOOLKIT_LOGOS.map((tool, idx) => (
+                    <div
+                      key={`second-${idx}`}
+                      className="flex items-center justify-center shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-[6px] bg-white/40 border border-[#bfc2d1]/50 p-2 shadow-2xs"
+                      title={tool.name}
+                    >
+                      <img
+                        src={tool.src}
+                        alt={tool.name}
+                        className="w-full h-full object-contain filter drop-shadow-2xs"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          </div>
+        )}
 
           {/* Bottom footer */}
-          <footer className="pt-6 flex justify-end font-mono text-[11px] text-[#616475]">
+          <footer className="pt-6 flex justify-end font-mono text-[11px] text-[#4b4f63]">
             <p>© {new Date().getFullYear()} Tommy Agarwal</p>
           </footer>
 
