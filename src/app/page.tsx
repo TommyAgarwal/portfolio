@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Copy,
@@ -400,39 +401,40 @@ export default function NewPortfolioPage() {
 
           {/* Top Navigation Bar: Pill Tabs */}
           <header className="flex items-center justify-between pb-2">
-            <nav className="flex items-center gap-1.5 sm:gap-2 p-1 bg-white/40 border border-[#bfc2d1] rounded-full backdrop-blur-xs">
-              <button
-                type="button"
-                onClick={() => setActiveTab("work")}
-                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] ${activeTab === "work"
-                  ? "bg-[#bfc2d1]/60 text-[#2c2f3a] font-medium"
-                  : "text-[#4b4f63] hover:text-[#2c2f3a]"
-                  }`}
-              >
-                Selected Work
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab("side-projects")}
-                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] ${activeTab === "side-projects"
-                  ? "bg-[#bfc2d1]/60 text-[#2c2f3a] font-medium"
-                  : "text-[#4b4f63] hover:text-[#2c2f3a]"
-                  }`}
-              >
-                Side Projects
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab("about")}
-                className={`px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] ${activeTab === "about"
-                  ? "bg-[#bfc2d1]/60 text-[#2c2f3a] font-medium"
-                  : "text-[#4b4f63] hover:text-[#2c2f3a]"
-                  }`}
-              >
-                About Me
-              </button>
+            <nav className="relative flex items-center gap-1 sm:gap-1.5 p-1 bg-white/40 border border-[#bfc2d1] rounded-full backdrop-blur-xs">
+              {[
+                { id: "work", label: "Selected Work" },
+                { id: "side-projects", label: "Side Projects" },
+                { id: "about", label: "About Me" },
+              ].map((tab) => {
+                const isSelected = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveTab(tab.id as "work" | "side-projects" | "about")}
+                    className={`relative px-4 sm:px-5 py-2 rounded-full font-mono text-[12px] uppercase tracking-wider transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c2f3a] ${
+                      isSelected
+                        ? "text-[#2c2f3a] font-medium"
+                        : "text-[#4b4f63] hover:text-[#2c2f3a]"
+                    }`}
+                  >
+                    {isSelected && (
+                      <motion.div
+                        layoutId="activeTabPill"
+                        className="absolute inset-0 bg-[#bfc2d1]/60 rounded-full"
+                        transition={{
+                          type: "spring",
+                          stiffness: 450,
+                          damping: 35,
+                          mass: 0.8,
+                        }}
+                      />
+                    )}
+                    <span className="relative z-10">{tab.label}</span>
+                  </button>
+                );
+              })}
             </nav>
 
             <span className="hidden md:inline-block font-mono text-[12px] text-[#4b4f63]">
